@@ -1,0 +1,19 @@
+{
+  "name": "front-end-capstone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marble-systems/front-end-capstone.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marble-systems/front-end-capstone/issues"
+  },
+  "homepage": "https://github.com/marble-systems/front-end-capstone#readme"
+}
