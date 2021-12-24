@@ -1,3 +1,5 @@
+// import css from './client/src/components/ProductDetails/prodStyles.css';
+
 module.exports = {
   entry: __dirname + '/client/src/index.jsx',
   devtool: "source-map",
@@ -13,7 +15,12 @@ module.exports = {
             presets: ['@babel/preset-react', '@babel/preset-env']
           }
         }
-      }
+      },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
+
     ]
   },
    output: {
