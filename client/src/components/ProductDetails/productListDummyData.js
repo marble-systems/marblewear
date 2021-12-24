@@ -30,7 +30,7 @@ const productStyles = {
     ],
     "skus": {
         "37": {
-          "quantity": 8,
+          "quantity": 8,``
           "size": "XS"
         },
         "38": {
