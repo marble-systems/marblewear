@@ -1,6 +1,12 @@
 import React from 'react';
 import css from './prodStyles.css';
+import productListDummyData  from './productListDummyData.js';
 
+//
+// module.exports.products = products;
+// module.exports.productToDisplay = productToDisplay;
+// module.exports.productStyles = productStyles;
+// module.exports.productInfo = productInfo;
 // products={this.state.productList}
 // currentProductID={this.state.currentProductID}/
 
