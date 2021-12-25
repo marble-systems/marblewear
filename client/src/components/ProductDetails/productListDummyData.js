@@ -20,7 +20,7 @@ const productStyles = {
     "default?": true,
     "photos": [
       {
-      "thumbnail_url": "urlplaceholder/style_1_photo_number_thumbnail.jpg",
+      "thumbnail_url": "client/src/components/ProductDetails/imageedit_7_5779174664.jpg",
       "url": "urlplaceholder/style_1_photo_number.jpg"
       },
       {
@@ -30,7 +30,7 @@ const productStyles = {
     ],
     "skus": {
         "37": {
-          "quantity": 8,``
+          "quantity": 8,
           "size": "XS"
         },
         "38": {

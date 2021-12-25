@@ -1,12 +1,25 @@
 import React from 'react';
 import css from './prodStyles.css';
-import productListDummyData  from './productListDummyData.js';
+import ProductImage from './ProductImage.jsx';
+import ProductStylesList  from './ProductStylesList.jsx';
 
-//
-// module.exports.products = products;
-// module.exports.productToDisplay = productToDisplay;
-// module.exports.productStyles = productStyles;
-// module.exports.productInfo = productInfo;
+
+
+
+/*
+products.products
+   array of Objects
+
+products.productToDisplay
+
+
+
+products.productStyles
+
+products.productInfo
+  Object
+*/
+
 // products={this.state.productList}
 // currentProductID={this.state.currentProductID}/
 
@@ -15,13 +28,13 @@ import productListDummyData  from './productListDummyData.js';
 function ProductOverview ({products, currentProductID}) {
   return (
     <div>
-      <h2>_________________START OF PROD OVERVIEW_____________</h2>
+      <h2>__________START OF PROD OVERVIEW__________</h2>
 
      <p> Image Gallery Component + thumbnails(top left of page) </p>
 
-      <h4>{products.productToDisplay.name}</h4>
-      <p>styles will go here. on click, will change images</p>
-
+     <p>{`$${products.productToDisplay.name}`} Top right of pg</p>
+     <p>{`${products.productToDisplay.default_price}`} Top right of pg</p>
+    <ProductStylesList styles={products.productStyles.results}/>
 
       <select
         className="select"
@@ -64,7 +77,7 @@ function ProductOverview ({products, currentProductID}) {
 
       <h5>{products.productToDisplay.slogan}</h5>
       <h5>{products.productToDisplay.description}</h5>
-      <h2>_________________END OF PROD OVERVIEW_____________</h2>
+      <h2>__________END OF PROD OVERVIEW__________</h2>
 
 
 
