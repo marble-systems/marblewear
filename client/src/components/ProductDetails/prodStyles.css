@@ -14,7 +14,6 @@
   background-color:#4eb5f1;
   text-align:center;
   transition: all 0.2s;
-  float: right;
 
   }
   .button:hover{
@@ -28,7 +27,6 @@
 }
 
 .select {
-  float: right;
   display: block;
   width: 5em;
   height: 2em;
@@ -37,3 +35,27 @@
   border-radius: .25em;
   padding-bottom: 10px;
 }
+
+.mainImage {
+  width: 200px;
+  height: auto;
+  float: center;
+}
+
+.imageThumbnail {
+  width: 50px;
+  height: auto;
+  border-radius: 50%;
+  float: left;
+}
+
+
+.styleThumbnail {
+  width: 100px;
+  height: auto;
+  border-radius: 50%;
+}
+/*
+.styleThumbnails {
+  float: left;
+} */

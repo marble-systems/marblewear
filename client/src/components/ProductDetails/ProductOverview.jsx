@@ -1,41 +1,39 @@
 import React from 'react';
 import css from './prodStyles.css';
-import ProductImage from './ProductImage.jsx';
-import ProductStylesList  from './ProductStylesList.jsx';
+import ImageGallery from './ImageGallery.jsx';
+import StyleSelector  from './StyleSelector.jsx';
+import sampleImage from './sampleData/cat.png';
+import sampleImage2 from './sampleData/fish-thumbnail.jpeg';
+import sampleThumbnails from './sampleData/imageThumbnailsArray.js'
 
 
 
-
-/*
-products.products
-   array of Objects
-
-products.productToDisplay
-
-
-
-products.productStyles
-
-products.productInfo
-  Object
-*/
-
-// products={this.state.productList}
-// currentProductID={this.state.currentProductID}/
-
-//will render Current product
 
 function ProductOverview ({products, currentProductID}) {
   return (
     <div>
-      <h2>__________START OF PROD OVERVIEW__________</h2>
+      <h2>__________START OF PRODUCT OVERVIEW__________</h2>
 
-     <p> Image Gallery Component + thumbnails(top left of page) </p>
+      <h3>__________Title, Price, Category__________</h3>
+     <h4>{products.productToDisplay.category}</h4>
+     <h3>{products.productToDisplay.name}</h3>
+     <h4>{`$${products.productToDisplay.default_price}`}</h4>
 
-     <p>{`$${products.productToDisplay.name}`} Top right of pg</p>
-     <p>{`${products.productToDisplay.default_price}`} Top right of pg</p>
-    <ProductStylesList styles={products.productStyles.results}/>
 
+     <h3>___________________________________</h3>
+
+     <h3>__________ImageGallery__________</h3>
+     <ImageGallery images={sampleThumbnails}/>
+     <h3>___________________________________</h3>
+
+
+     <h3>__________StyleSelector__________</h3>
+     <StyleSelector
+       styles={products.productStyles.results}
+       sampleImg={sampleImage2}/>
+      <h3>___________________________________</h3>
+
+     <h3>__________Drop downs and Buttons__________</h3>
       <select
         className="select"
         name ="size"
@@ -57,30 +55,29 @@ function ProductOverview ({products, currentProductID}) {
         <option value="5"> 5 </option>
       </select>
 
-
       <button
         className = "button"
         type="submit"
-        onClick={e => alert(`you have favorited ${products.productToDisplay.name}`)}>
+        onClick={e => alert(`${products.productToDisplay.name} added to Favorites`)}>
         ADD TO BAG
       </button>
-
 
       <button
         className = "button"
         id="favorite"
         type="submit"
-        onClick={e => alert(`you have added ${products.productToDisplay.name} to your card`)}>
+        onClick={e => alert(`${products.productToDisplay.name} added to Cart`)}>
         Favorite
       </button>
+      <h3>___________________________________</h3>
 
+      <h3>__________Slogan, Description__________</h3>
 
       <h5>{products.productToDisplay.slogan}</h5>
       <h5>{products.productToDisplay.description}</h5>
-      <h2>__________END OF PROD OVERVIEW__________</h2>
+      <h3>___________________________________</h3>
 
-
-
+      <h2>__________END OF PRODUCT OVERVIEW__________</h2>
 
     </div>
   )

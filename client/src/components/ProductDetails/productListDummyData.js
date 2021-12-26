@@ -8,7 +8,6 @@ const productToDisplay = {
   "category": "Jackets",
   "default_price": "140"
 };
-
 const productStyles = {
   "product_id": "1",
   "results": [
@@ -20,9 +19,9 @@ const productStyles = {
     "default?": true,
     "photos": [
       {
-      "thumbnail_url": "client/src/components/ProductDetails/imageedit_7_5779174664.jpg",
-      "url": "urlplaceholder/style_1_photo_number.jpg"
-      },
+        "thumbnail_url": "urlplaceholder/style_1_photo_number_thumbnail.jpg",
+        "url": "urlplaceholder/style_1_photo_number.jpg"
+        },
       {
       "thumbnail_url": "urlplaceholder/style_1_photo_number_thumbnail.jpg",
       "url": "urlplaceholder/style_1_photo_number.jpg"
