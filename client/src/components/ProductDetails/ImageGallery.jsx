@@ -1,15 +1,19 @@
 import React from 'react';
 import './prodStyles.css';
-import ImageThumbnail from './ImageThumbnail.jsx'
 
 //clicking thumbnail will set it to main & highlight thumbnail on side bar
 
-function ImageGallery ({images}) {
+function ImageGallery ({imageGallery, currentMainImage, updateCurrentImage}) {
+
   return (
     <div>
-      <img class="mainImage" src={images[0]}/>
-      {images.map((image) =>
-        <ImageThumbnail image={image}/>
+      <img class="mainImage" src={currentMainImage}/>
+      {imageGallery.map((image) =>
+      <img
+        class="imageThumbnail"
+        src={image}
+        onClick={(e)=>updateCurrentImage(image)}/>
+
       )}
     </div>
   )

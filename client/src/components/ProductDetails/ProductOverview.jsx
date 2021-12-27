@@ -6,7 +6,7 @@ import sampleImage2 from './sampleData/fish-thumbnail.jpeg';
 import sampleThumbnails from './sampleData/imageThumbnailsArray.js'
 
 
-function ProductOverview ({products, currentProductID}) {
+function ProductOverview ({products, currentProductID, imageGallery, currentMainImage, updateCurrentImage}) {
   return (
     <div>
       <h2>__________START OF PRODUCT OVERVIEW__________</h2>
@@ -20,7 +20,10 @@ function ProductOverview ({products, currentProductID}) {
      <h3>___________________________________</h3>
 
      <h3>__________ImageGallery__________</h3>
-     <ImageGallery images={sampleThumbnails}/>
+     <ImageGallery
+       imageGallery={imageGallery}
+       currentMainImage={currentMainImage}
+       updateCurrentImage={updateCurrentImage}/>
      <h3>___________________________________</h3>
 
 

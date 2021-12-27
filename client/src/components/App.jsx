@@ -8,7 +8,9 @@ import RelatedItems from './relatedItems/RelatedItems.jsx';
 import Reviewsdata from './Reviews/reviewsData.js';
 import QuestionListdata from './Q&A/Q&AlistData.js';
 import relatedItemsdata from './relatedItems/relatedItemsData.js';
+
 import productListDummyData  from './ProductDetails/productListDummyData.js';
+import sampleThumbnails from './ProductDetails/sampleData/imageThumbnailsArray.js'
 
 
 class App extends React.Component {
@@ -19,11 +21,18 @@ class App extends React.Component {
       productList: productListDummyData,
       reviews: [],
       questionList: [],
-      relatedItems: []
+      relatedItems: [],
+      imageGallery: sampleThumbnails,
+      currentMainImage: sampleThumbnails[0]
     }
+    this.updateCurrentImage = this.updateCurrentImage.bind(this)
   }
 
-
+  updateCurrentImage(newMainImage) {
+    if(this.state.currentMainImage !== newMainImage) {
+      this.setState({currentMainImage: newMainImage})
+    }
+  }
 
   render () {
     return (
@@ -31,7 +40,11 @@ class App extends React.Component {
         <h1> Hello World </h1>
         <ProductOverview
           products={this.state.productList}
-          currentProductID={this.state.currentProductID}/>
+          currentProductID={this.state.currentProductID}
+          imageGallery={this.state.imageGallery}
+          currentMainImage={this.state.currentMainImage}
+          updateCurrentImage={this.updateCurrentImage}
+          />
         <Reviews productId={Reviewsdata}/>
         <QuestionList data={QuestionListdata}/>
         <RelatedItems data={relatedItemsdata}/>
