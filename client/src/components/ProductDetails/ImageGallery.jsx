@@ -1,27 +1,25 @@
 import React, { useState } from "react";
 import './prodStyles.css';
 
-//clicking thumbnail will set it to main & highlight thumbnail on side bar
-
 function ImageGallery ({imageGallery}) {
 
-  const [currentImage, setStyle2] = useState(imageGallery[0])
-  const updateMainImage = (image) => {
-      setStyle2(image)
+  const [currentImage, updateMainImage] = useState(imageGallery[0])
+
+  const setThumbnailClass = (image) => {
+    return image === currentImage ? "imageThumbnailMain" : "imageThumbnail"
   }
 
   return (
     <div>
       <img class="mainImage" src={currentImage}/>
+
       {imageGallery.map((image) =>
       <img
-        class={"imageThumbnail"}
+        class={setThumbnailClass(image)}
         src={image}
-        onClick={(e) => {
-          updateMainImage(image)
-        }}/>
-
+        onClick={(e) => updateMainImage(image)}/>
       )}
+
     </div>
   )
 }

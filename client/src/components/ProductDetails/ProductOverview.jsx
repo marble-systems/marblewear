@@ -3,10 +3,9 @@ import './prodStyles.css';
 import ImageGallery from './ImageGallery.jsx';
 import StyleSelector  from './StyleSelector.jsx';
 import sampleImage2 from './sampleData/fish-thumbnail.jpeg';
-import sampleThumbnails from './sampleData/imageThumbnailsArray.js'
 
 
-function ProductOverview ({products, currentProductID, imageGallery, currentMainImage, updateCurrentImage}) {
+function ProductOverview ({products, currentProductID, imageGallery}) {
   return (
     <div>
       <h2>__________START OF PRODUCT OVERVIEW__________</h2>
@@ -20,10 +19,7 @@ function ProductOverview ({products, currentProductID, imageGallery, currentMain
      <h3>___________________________________</h3>
 
      <h3>__________ImageGallery__________</h3>
-     <ImageGallery
-       imageGallery={imageGallery}
-       currentMainImage={currentMainImage}
-       updateCurrentImage={updateCurrentImage}/>
+     <ImageGallery imageGallery={imageGallery}/>
      <h3>___________________________________</h3>
 
 

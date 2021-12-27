@@ -9,7 +9,7 @@ import Reviewsdata from './Reviews/reviewsData.js';
 import QuestionListdata from './Q&A/Q&AlistData.js';
 import relatedItemsdata from './relatedItems/relatedItemsData.js';
 
-import productListDummyData  from './ProductDetails/productListDummyData.js';
+import productListDummyData  from './ProductDetails/sampledata/productListDummyData.js';
 import sampleThumbnails from './ProductDetails/sampleData/imageThumbnailsArray.js'
 
 
