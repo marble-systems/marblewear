@@ -8,6 +8,9 @@ function ImageGallery ({imageGallery}) {
   const setThumbnailClass = (image) => {
     return image === currentImage ? "imageThumbnailMain" : "imageThumbnail"
   }
+  const enterExpandedView = () => {
+
+  }
 
   return (
     <div>

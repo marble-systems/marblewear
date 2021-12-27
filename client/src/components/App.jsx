@@ -1,14 +1,11 @@
 import React from 'react';
-
 import Reviews from './Reviews/Reviews.jsx';
 import ProductOverview from './ProductDetails/ProductOverview.jsx';
 import QuestionList from './Q&A/Q&Alist.jsx';
 import RelatedItems from './relatedItems/RelatedItems.jsx';
-
 import Reviewsdata from './Reviews/reviewsData.js';
 import QuestionListdata from './Q&A/Q&AlistData.js';
 import relatedItemsdata from './relatedItems/relatedItemsData.js';
-
 import productListDummyData  from './ProductDetails/sampledata/productListDummyData.js';
 import sampleThumbnails from './ProductDetails/sampleData/imageThumbnailsArray.js'
 
@@ -25,7 +22,6 @@ class App extends React.Component {
       imageGallery: sampleThumbnails,
     }
   }
-
 
 
   render () {
