@@ -23,16 +23,10 @@ class App extends React.Component {
       questionList: [],
       relatedItems: [],
       imageGallery: sampleThumbnails,
-      currentMainImage: sampleThumbnails[0]
     }
-    this.updateCurrentImage = this.updateCurrentImage.bind(this)
   }
 
-  updateCurrentImage(newMainImage) {
-    if(this.state.currentMainImage !== newMainImage) {
-      this.setState({currentMainImage: newMainImage})
-    }
-  }
+
 
   render () {
     return (
@@ -42,8 +36,6 @@ class App extends React.Component {
           products={this.state.productList}
           currentProductID={this.state.currentProductID}
           imageGallery={this.state.imageGallery}
-          currentMainImage={this.state.currentMainImage}
-          updateCurrentImage={this.updateCurrentImage}
           />
         <Reviews productId={Reviewsdata}/>
         <QuestionList data={QuestionListdata}/>

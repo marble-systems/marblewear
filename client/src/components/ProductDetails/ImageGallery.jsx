@@ -3,9 +3,9 @@ import './prodStyles.css';
 
 //clicking thumbnail will set it to main & highlight thumbnail on side bar
 
-function ImageGallery ({imageGallery, currentMainImage, updateCurrentImage}) {
+function ImageGallery ({imageGallery}) {
 
-  const [currentImage, setStyle2] = useState(currentMainImage)
+  const [currentImage, setStyle2] = useState(imageGallery[0])
   const updateMainImage = (image) => {
       setStyle2(image)
   }
