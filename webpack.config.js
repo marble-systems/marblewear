@@ -1,4 +1,3 @@
-// import css from './client/src/components/ProductDetails/prodStyles.css';
 
 module.exports = {
   entry: __dirname + '/client/src/index.jsx',

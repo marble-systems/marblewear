@@ -1,7 +1,5 @@
 import React from 'react';
 
-
-//props.. aka style is an object, an individual style
 function StyleThumbnail ({image, style}) {
   return (
     <div class="styleThumbnails" >

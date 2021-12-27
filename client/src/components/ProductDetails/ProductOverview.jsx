@@ -1,12 +1,9 @@
 import React from 'react';
-import css from './prodStyles.css';
+import './prodStyles.css';
 import ImageGallery from './ImageGallery.jsx';
 import StyleSelector  from './StyleSelector.jsx';
-import sampleImage from './sampleData/cat.png';
 import sampleImage2 from './sampleData/fish-thumbnail.jpeg';
 import sampleThumbnails from './sampleData/imageThumbnailsArray.js'
-
-
 
 
 function ProductOverview ({products, currentProductID}) {
