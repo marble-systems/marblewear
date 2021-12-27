@@ -2,7 +2,7 @@ import React from 'react';
 
 function StyleThumbnail ({image, style}) {
   return (
-    <div class="styleThumbnails" >
+    <div  >
       Style #: {style.style_id}
       <img
         class="styleThumbnail"

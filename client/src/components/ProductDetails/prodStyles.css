@@ -49,13 +49,17 @@
   float: left;
 }
 
+.imageThumbnailMain {
+  width: 5px;
+  height: auto;
+  border-radius: 50%;
+  float: left;
+}
+
 
 .styleThumbnail {
   width: 100px;
   height: auto;
   border-radius: 50%;
 }
-/*
-.styleThumbnails {
-  float: left;
-} */
+
