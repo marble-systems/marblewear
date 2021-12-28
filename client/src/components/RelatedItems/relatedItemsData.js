@@ -124,7 +124,7 @@ const relatedItemsdata = {
       ]
     }
   ],
-  outfitProductInfo: [
+  outfitProductsInfo: [
   ]
 };
 

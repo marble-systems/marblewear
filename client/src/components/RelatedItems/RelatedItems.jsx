@@ -8,12 +8,12 @@ function RelatedItems({relatedItemsdata}) {
     currentProductInfo,
     relatedProducts,
     relatedProductsInfo,
-    outfitProductInfo
+    outfitProductsInfo
   } = relatedItemsdata;
   return (
     <div>
       <RelatedProducts currentProductInfo={currentProductInfo} relatedProductsInfo={relatedProductsInfo}/>
-      <YourOutfit outfitProductInfo={outfitProductInfo}/>
+      <YourOutfit outfitProductsInfo={outfitProductsInfo}/>
     </div>
   )
 }
