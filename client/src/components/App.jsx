@@ -14,7 +14,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentProductID: 0,
+      currentProductID: 39337,
       productList: productListDummyData,
       reviews: [],
       questionList: [],
@@ -29,7 +29,7 @@ class App extends React.Component {
       <div>
         <h1> Hello World </h1>
         <ProductOverview
-          products={this.state.productList}
+          productList={this.state.productList}
           currentProductID={this.state.currentProductID}
           imageGallery={this.state.imageGallery}
           />

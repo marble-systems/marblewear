@@ -5,15 +5,15 @@ import StyleSelector  from './StyleSelector.jsx';
 import sampleImage2 from './sampleData/fish-thumbnail.jpeg';
 
 
-function ProductOverview ({products, currentProductID, imageGallery}) {
+function ProductOverview ({productList, currentProductID, imageGallery}) {
   return (
     <div>
       <h2>__________START OF PRODUCT OVERVIEW__________</h2>
 
       <h3>__________Title, Price, Category__________</h3>
-     <h4>{products.productToDisplay.category}</h4>
-     <h3>{products.productToDisplay.name}</h3>
-     <h4>{`$${products.productToDisplay.default_price}`}</h4>
+     <h4>{productList.productToDisplay.category}</h4>
+     <h3>{productList.productToDisplay.name}</h3>
+     <h4>{`$${productList.productToDisplay.default_price}`}</h4>
 
 
      <h3>___________________________________</h3>
@@ -25,7 +25,7 @@ function ProductOverview ({products, currentProductID, imageGallery}) {
 
      <h3>__________StyleSelector__________</h3>
      <StyleSelector
-       styles={products.productStyles.results}
+       styles={productList.productStyles[0]['results']}
        sampleImg={sampleImage2}/>
       <h3>___________________________________</h3>
 
@@ -54,7 +54,7 @@ function ProductOverview ({products, currentProductID, imageGallery}) {
       <button
         className = "button"
         type="submit"
-        onClick={e => alert(`${products.productToDisplay.name} added to Favorites`)}>
+        onClick={e => alert(`${productList.productToDisplay.name} added to Favorites`)}>
         ADD TO BAG
       </button>
 
@@ -62,15 +62,15 @@ function ProductOverview ({products, currentProductID, imageGallery}) {
         className = "button"
         id="favorite"
         type="submit"
-        onClick={e => alert(`${products.productToDisplay.name} added to Cart`)}>
+        onClick={e => alert(`${productList.productToDisplay.name} added to Cart`)}>
         Favorite
       </button>
       <h3>___________________________________</h3>
 
       <h3>__________Slogan, Description__________</h3>
 
-      <h5>{products.productToDisplay.slogan}</h5>
-      <h5>{products.productToDisplay.description}</h5>
+      <h5>{productList.productToDisplay.slogan}</h5>
+      <h5>{productList.productToDisplay.description}</h5>
       <h3>___________________________________</h3>
 
       <h2>__________END OF PRODUCT OVERVIEW__________</h2>
