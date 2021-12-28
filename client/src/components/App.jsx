@@ -7,7 +7,7 @@ import RelatedItems from './relatedItems/RelatedItems.jsx';
 
 import Reviewsdata from './Reviews/reviewsData.js';
 import QuestionListdata from './Q&A/Q&AlistData.js';
-import relatedItemsdata from './relatedItems/relatedItemsData.js';
+import relatedItemsdata from './RelatedItems/relatedItemsData.js';
 import productListDummyData  from './ProductDetails/productListDummyData.js';
 
 
@@ -19,7 +19,7 @@ class App extends React.Component {
       productList: productListDummyData,
       reviews: [],
       questionList: [],
-      relatedItems: []
+      relatedItems: relatedItemsdata
     }
   }
 
@@ -34,7 +34,7 @@ class App extends React.Component {
           currentProductID={this.state.currentProductID}/>
         <Reviews productId={Reviewsdata}/>
         <QuestionList data={QuestionListdata}/>
-        <RelatedItems data={relatedItemsdata}/>
+        <RelatedItems relatedItemsdata={this.state.relatedItems}/>
       </div>
     )
   }
