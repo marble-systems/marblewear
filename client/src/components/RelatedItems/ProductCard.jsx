@@ -7,7 +7,7 @@ function ProductCard({relatedProductInfo}) {
       <p>--- Action Button ---</p>
       <p>{relatedProductInfo.category}</p>
       <h4>{relatedProductInfo.name}</h4>
-      <p>{relatedProductInfo['default_price']}</p>
+      <p>{relatedProductInfo.default_price}</p>
       <p>*** Star Ratings ***</p>
     </div>
   )
