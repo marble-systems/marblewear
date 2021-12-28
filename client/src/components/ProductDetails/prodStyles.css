@@ -37,29 +37,27 @@
 }
 
 .mainImage {
-  width: 200px;
+  width: 250px;
   height: auto;
   float: center;
 }
 
 .imageThumbnail {
-  width: 50px;
+  width: 80px;
   height: auto;
-  border-radius: 50%;
   float: left;
 }
 
 .imageThumbnailMain {
-  width: 50px;
+  width: 80px;
   height: auto;
-  border-radius: 50%;
   float: left;
-  border: 5px solid #555;
+  border: 5px solid rgb(233, 12, 12);
 }
 
 
 .styleThumbnail {
-  width: 100px;
+  width: 80px;
   height: auto;
 }
 

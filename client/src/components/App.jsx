@@ -7,7 +7,6 @@ import Reviewsdata from './Reviews/reviewsData.js';
 import QuestionListdata from './Q&A/Q&AlistData.js';
 import relatedItemsdata from './relatedItems/relatedItemsData.js';
 import productListDummyData  from './ProductDetails/sampledata/productListDummyData.js';
-import sampleThumbnails from './ProductDetails/sampleData/imageThumbnailsArray.js'
 
 
 class App extends React.Component {
@@ -20,15 +19,15 @@ class App extends React.Component {
       reviews: [],
       questionList: [],
       relatedItems: [],
-      imageGallery: sampleThumbnails,
     }
     this.changeCurrentStyle = this.changeCurrentStyle.bind(this)
+
   }
 
   changeCurrentStyle(id) {
     this.setState({currentStyleID: id})
-
   }
+
 
   render () {
     return (
@@ -38,7 +37,6 @@ class App extends React.Component {
           productList={this.state.productList}
           currentProductID={this.state.currentProductID}
           currentStyleID={this.state.currentStyleID}
-          imageGallery={this.state.imageGallery}
           changeCurrentStyle={this.changeCurrentStyle}
           />
         <Reviews productId={Reviewsdata}/>
