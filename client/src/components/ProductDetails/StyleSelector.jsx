@@ -3,7 +3,6 @@ import './prodStyles.css';
 
 
 function StyleSelector ({styles, currentStyleID, currentProductID, changeCurrentStyle}) {
-  // const [currentImage, updateMainImage] = useState(imageGallery2[0])
   const getCurrentProductObject = (targetId, allProducts) => {
     return allProducts.filter((product) => {
       return product.product_id === targetId

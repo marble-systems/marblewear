@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './prodStyles.css';
+import { Button } from 'react-bootstrap';
 
 
-function DropDownsAndButtons ({styles, currentProductID, currentStyleID}) {
+
+function DropDownsAndButtons ({productStyles, currentProductID, currentStyleID}) {
 
   const [inventory, updateInventory] = useState(5)
 
@@ -13,7 +15,7 @@ function DropDownsAndButtons ({styles, currentProductID, currentStyleID}) {
     })
   }
 
-  const currentProductObject = getCurrentProductObject(currentProductID, styles);
+  const currentProductObject = getCurrentProductObject(currentProductID, productStyles);
 
   const getStylesArray = (targetStyleId, stylesArray) => {
     return stylesArray.filter((style) => {
@@ -45,6 +47,8 @@ for(var i = 1; i <inventory+1; i++){
 return inventoryArray
 }
 
+
+
   return (
     <div>
       <select
@@ -68,9 +72,9 @@ return inventoryArray
       </select>
 
       <button
-        className = "button"
         type="submit"
-        onClick={e => alert(`${productList.productToDisplay.name} added to Favorites`)}>
+        className = "button"
+        onClick={e => alert(`${productStyles.name} added to Favorites`)}>
         ADD TO BAG
       </button>
 
@@ -78,7 +82,7 @@ return inventoryArray
         className = "button"
         id="favorite"
         type="submit"
-        onClick={e => alert(`${productList.productToDisplay.name} added to Cart`)}>
+        onClick={e => alert(`${productStyles.name} added to Cart`)}>
         Favorite
       </button>
 

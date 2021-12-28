@@ -23,7 +23,7 @@ function ProductOverview ({productList, currentProductID, currentStyleID, change
        changeCurrentStyle={changeCurrentStyle}
        />
       <DropDownsAndButtons
-         styles={productList.productStyles}
+         productStyles={productList.productStyles}
          currentStyleID={currentStyleID}
          currentProductID={currentProductID}/>
 
