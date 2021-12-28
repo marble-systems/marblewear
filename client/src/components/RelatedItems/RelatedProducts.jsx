@@ -1,9 +1,15 @@
 import React from 'react';
 
-function RelatedProducts(props) {
+import ProductCard from './ProductCard.jsx';
+import ComparisonModal from './ComparisonModal.jsx';
+
+function RelatedProducts({currentProductInfo, relatedProductsInfo}) {
   return (
     <div>
-    RelatedProducts
+      {relatedProductsInfo.map(relatedProductInfo => {
+        return <ProductCard relatedProductInfo={relatedProductInfo}/>
+      })}
+      <ComparisonModal />
     </div>
   )
 }
