@@ -1,9 +1,15 @@
 import React from 'react';
 
-function YourOutfit(props) {
+import AddOutfit from './AddOutfit.jsx';
+import ProductCard from './ProductCard.jsx';
+
+function YourOutfit({outfitProductsInfo}) {
   return (
     <div>
-    YourOutfit
+      <AddOutfit />
+      {outfitProductsInfo.map(outfitProductInfo => {
+        return <ProductCard outfitProductInfo={outfitProductInfo} />
+      })}
     </div>
   )
 }
