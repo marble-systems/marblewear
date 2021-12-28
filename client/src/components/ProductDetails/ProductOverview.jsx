@@ -2,10 +2,9 @@ import React from 'react';
 import './prodStyles.css';
 import ImageGallery from './ImageGallery.jsx';
 import StyleSelector  from './StyleSelector.jsx';
-import sampleImage2 from './sampleData/fish-thumbnail.jpeg';
 
 
-function ProductOverview ({productList, currentProductID, imageGallery}) {
+function ProductOverview ({productList, currentProductID, currentStyleID, changeCurrentStyle, imageGallery}) {
   return (
     <div>
       <h2>__________START OF PRODUCT OVERVIEW__________</h2>
@@ -23,7 +22,8 @@ function ProductOverview ({productList, currentProductID, imageGallery}) {
      <h3>__________StyleSelector__________</h3>
      <StyleSelector
        styles={productList.productStyles}
-       sampleImg={sampleImage2}/>
+       currentStyleID={currentStyleID}
+       changeCurrentStyle={changeCurrentStyle}/>
 
      <h3>__________Drop downs and Buttons__________</h3>
       <select

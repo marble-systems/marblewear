@@ -15,14 +15,19 @@ class App extends React.Component {
     super(props);
     this.state = {
       currentProductID: 39337,
+      currentStyleID: 234004,
       productList: productListDummyData,
       reviews: [],
       questionList: [],
       relatedItems: [],
       imageGallery: sampleThumbnails,
     }
+    this.changeCurrentStyle = this.changeCurrentStyle.bind(this)
   }
 
+  changeCurrentStyle(id) {
+    this.setState({currentStyleID: id})
+  }
 
   render () {
     return (
@@ -31,7 +36,9 @@ class App extends React.Component {
         <ProductOverview
           productList={this.state.productList}
           currentProductID={this.state.currentProductID}
+          currentStyleID={this.state.currentStyleID}
           imageGallery={this.state.imageGallery}
+          changeCurrentStyle={this.changeCurrentStyle}
           />
         <Reviews productId={Reviewsdata}/>
         <QuestionList data={QuestionListdata}/>
