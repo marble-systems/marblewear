@@ -17,12 +17,14 @@ class QuestionList extends React.Component {
 
   render() {
     return (
-      <div className="questionlist">I am a robot</div>
-      // <ol>
-      //   this.state.questions.map((question) => {
-      //     return <li id="questionItem" value={question.data}>I am a question</li>
-      //   })
-      // </ol>
+      <div className="container bg-dark text-white gap-3">Questions and Answers dark background white text
+        <div className="row">
+          <div className="col-3 border border-5 rounded-pill text-center">Hi</div>
+          <div className="col-4 border border-4 rounded-circle text-end">Hello</div>
+          <div className="col-3 border border-3 text-start">Sup</div>
+          <div className="col-2 text-center">I'm boring</div>
+        </div>
+      </div>
     )
   }
 }
