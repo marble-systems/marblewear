@@ -3,11 +3,11 @@ import React from 'react';
 import Reviews from './Reviews/Reviews.jsx';
 import ProductOverview from './ProductDetails/ProductOverview.jsx';
 import QuestionList from './Q&A/Q&Alist.jsx';
-import RelatedItems from './relatedItems/RelatedItems.jsx';
+import RelatedItems from './RelatedItems/RelatedItems.jsx';
 
 import Reviewsdata from './Reviews/reviewsData.js';
 import QuestionListdata from './Q&A/Q&AlistData.js';
-import relatedItemsdata from './relatedItems/relatedItemsData.js';
+import relatedItemsdata from './RelatedItems/relatedItemsData.js';
 import productListDummyData  from './ProductDetails/productListDummyData.js';
 
 
