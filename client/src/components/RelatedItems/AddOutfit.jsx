@@ -3,7 +3,8 @@ import React from 'react';
 function AddOutfit(props) {
   return (
     <div>
-    AddOutfit
+      Add to Outfit
+      <button>+</button>
     </div>
   )
 }
