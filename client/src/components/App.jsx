@@ -14,7 +14,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentProductID: 39337,
+      currentProductID: '39333',
       currentStyleID: 234004,
       productList: productListDummyData,
       reviews: [],
@@ -27,6 +27,7 @@ class App extends React.Component {
 
   changeCurrentStyle(id) {
     this.setState({currentStyleID: id})
+
   }
 
   render () {

@@ -4,7 +4,6 @@ import './prodStyles.css';
 
 function StyleSelector ({styles, currentStyleID, changeCurrentStyle}) {
 
-
   return (
     <div>
       <h4>Current Style -> {currentStyleID}</h4>

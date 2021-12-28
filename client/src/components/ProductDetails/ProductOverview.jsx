@@ -11,7 +11,12 @@ function ProductOverview ({productList, currentProductID, currentStyleID, change
 
 
      <h3>__________ImageGallery__________</h3>
-     <ImageGallery imageGallery={imageGallery}/>
+     <ImageGallery
+       imageGallery={imageGallery}
+       styles={productList.productStyles}
+       currentProductID={currentProductID}
+       currentStyleID={currentStyleID}
+       />
 
 
       <h3>__________Title, Price, Category__________</h3>
