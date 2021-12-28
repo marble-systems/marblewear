@@ -10,24 +10,20 @@ function ProductOverview ({productList, currentProductID, imageGallery}) {
     <div>
       <h2>__________START OF PRODUCT OVERVIEW__________</h2>
 
+
+     <h3>__________ImageGallery__________</h3>
+     <ImageGallery imageGallery={imageGallery}/>
+
+
       <h3>__________Title, Price, Category__________</h3>
      <h4>{productList.productToDisplay.category}</h4>
      <h3>{productList.productToDisplay.name}</h3>
      <h4>{`$${productList.productToDisplay.default_price}`}</h4>
 
-
-     <h3>___________________________________</h3>
-
-     <h3>__________ImageGallery__________</h3>
-     <ImageGallery imageGallery={imageGallery}/>
-     <h3>___________________________________</h3>
-
-
      <h3>__________StyleSelector__________</h3>
      <StyleSelector
-       styles={productList.productStyles[0]['results']}
+       styles={productList.productStyles}
        sampleImg={sampleImage2}/>
-      <h3>___________________________________</h3>
 
      <h3>__________Drop downs and Buttons__________</h3>
       <select
