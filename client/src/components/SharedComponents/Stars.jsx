@@ -50,7 +50,7 @@ const Stars = ({ rating, handleClick, fillColor='#696969' }) => {
 };
 
 Stars.propTypes = {
-  rating: PropTypes.number,
+  rating: PropTypes.number.isRequired,
   handleClick: PropTypes.func,
   fillColor: PropTypes.string,
 };
