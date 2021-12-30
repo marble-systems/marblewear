@@ -6,14 +6,22 @@ class Reviews extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
+      productId: null,
+      selectedFilters: []
     };
+  }
+
+  updateFilters (selectedFilters) {
+    this.setState({selectedFilters});
   }
 
   render() {
     return (
       <div>
-        <h3>RATINGS &#38; REVIEWS</h3>
-        <ReviewSummary reviewsMetadata={sampleData.reviewsMetadata}/>
+        <h3 style={{fontSize: '2em'}}>RATINGS &#38; REVIEWS</h3>
+        <ReviewSummary
+          reviewsMetadata={sampleData.reviewsMetadata}
+          updateFilters={this.updateFilters.bind(this)}/>
       </div>
     );
   }
