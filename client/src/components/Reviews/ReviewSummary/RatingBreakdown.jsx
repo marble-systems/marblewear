@@ -27,6 +27,12 @@ class RatingBreakdown extends React.Component {
     updateFilters(selectedFilters);
   }
 
+  handleMouseOver(starCount, isHovered) {
+    const StarRatingBarElement = document.getElementById(`star-rating-bar-${starCount}`);
+    StarRatingBarElement.style.background = (isHovered ? '#0080278c' : 'transparent');
+    StarRatingBarElement.style.cursor = 'pointer';
+  }
+
   render() {
     const { starsCount, ratingsCount } = this.props;
     const { selectedFilters } = this.state;
@@ -55,16 +61,21 @@ class RatingBreakdown extends React.Component {
         </div>
         {Array(5).fill(0)
           .map((val, idx) => { return 5 - idx; })
-          .map(idx => {
-            let reviews = starsCount[idx] === undefined ? 0 : starsCount[idx];
+          .map(starCount => {
+            let reviews = starsCount[starCount] === undefined ? 0 : starsCount[starCount];
             let percentage = Math.floor(reviews / ratingsCount * 100);
             return (
-              <StarRatingBar
-                key={idx}
-                stars={idx}
-                reviews={reviews}
-                handleClick={this.updateFilters.bind(this)}
-                percentage={percentage} />
+              <div
+                id={`star-rating-bar-${starCount}`}
+                key={starCount}
+                onClick={() => { this.updateFilters.call(this, starCount); }}
+                onMouseEnter={() => { this.handleMouseOver(starCount, true); }}
+                onMouseLeave={() => { this.handleMouseOver(starCount, false); }}>
+                <StarRatingBar
+                  stars={starCount}
+                  reviews={reviews}
+                  percentage={percentage} />
+              </div>
             );
           })}
       </div>

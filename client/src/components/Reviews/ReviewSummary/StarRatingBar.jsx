@@ -1,14 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const PercentageOfStars = ({ stars, percentage, reviews, handleClick }) => {
+const PercentageOfStars = ({ stars, percentage, reviews }) => {
   return (
-    <div
-      onClick={() => { handleClick(stars); }}
-      style={{cursor: 'pointer'}}
-      //TODO: update background color on hover
-      onMouseOver={() => {}}
-      onMouseOut={() => {}}>
+    <div>
       <span><u>{stars} {stars === 1 ? 'star' : 'stars'}</u></span>
       <div
         style={{
@@ -38,7 +33,6 @@ PercentageOfStars.propTypes = {
   stars: PropTypes.number.isRequired,
   percentage: PropTypes.number.isRequired,
   reviews: PropTypes.number.isRequired,
-  handleClick: PropTypes.func
 };
 
 export default PercentageOfStars;
