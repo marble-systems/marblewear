@@ -10,7 +10,7 @@ class RatingBreakdown extends React.Component {
     };
   }
 
-  updateFilters(filter) {
+  updateFiltersArray(filter) {
     let { selectedFilters } = this.state;
     const { updateFilters } = this.props;
     const filterIdx = selectedFilters.indexOf(filter);
@@ -38,7 +38,7 @@ class RatingBreakdown extends React.Component {
     const { selectedFilters } = this.state;
     return (
       <div style={{ width: '14em' }}>
-        <h3 style={{ fontSize: '2em' }}>Rating Breakdown</h3>
+        <h3 style={{ fontSize: '1em' }}>Rating Breakdown</h3>
         <div style={{ fontSize: '0.8em' }}>
           {selectedFilters.length === 0
             ? '\xa0'// non-breaking space
@@ -54,7 +54,7 @@ class RatingBreakdown extends React.Component {
             ? '\xa0'// non-breaking space
             : <span
               style={{ cursor: 'pointer', fontSize: '0.8em' }}
-              onClick={() => { this.updateFilters(); }}>
+              onClick={() => { this.updateFiltersArray(); }}>
               Remove all filters
             </span>
           }
@@ -68,7 +68,7 @@ class RatingBreakdown extends React.Component {
               <div
                 id={`star-rating-bar-${starCount}`}
                 key={starCount}
-                onClick={() => { this.updateFilters.call(this, starCount); }}
+                onClick={() => { this.updateFiltersArray.call(this, starCount); }}
                 onMouseEnter={() => { this.handleMouseOver(starCount, true); }}
                 onMouseLeave={() => { this.handleMouseOver(starCount, false); }}>
                 <StarRatingBar
