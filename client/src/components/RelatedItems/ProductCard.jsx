@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 function ProductCard({relatedProductInfo}) {
   return (
     <div className="card" style={{width: '20em'}}>
-      <img className="card-img-top" src="..." alt="Card image"></img>
+      <img className="card-img-top" src={relatedProductInfo.style.photos[0].thumbnail_url} alt="Card image"></img>
       <p>--- Action Button ---</p>
       <div className="card-body">
         <p className="card-text">{relatedProductInfo.category}</p>
