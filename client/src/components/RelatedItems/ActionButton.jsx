@@ -4,15 +4,10 @@ import starButton from './images/starButton.png';
 import deleteButton from './images/deleteButton.png';
 
 function ActionButton({productCardSetType}) {
-  if (productCardSetType === 'RelatedProducts') {
-    return (
-      <img src={starButton} style={{width: '10%', height: '10%'}}></img>
-    );
-  } else {
-    return (
-      <img src={deleteButton} style={{width: '10%', height: '10%'}}></img>
-    );
-  }
+  let buttonImageSrc = productCardSetType === 'RelatedProducts' ? starButton : deleteButton;
+  return (
+    <input type="image" src={buttonImageSrc} style={{width: 'auto', height: '5%', position: 'absolute', top: '10px', right: '10px', backgroundColor: 'lightGrey', borderRadius: '50%'}}></input>
+  );
 }
 
 ActionButton.propTypes = {

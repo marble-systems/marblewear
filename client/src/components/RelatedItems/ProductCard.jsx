@@ -7,7 +7,7 @@ function ProductCard({relatedProductInfo}) {
   const imageSource = relatedProductInfo.style.photos[0].url ? relatedProductInfo.style.photos[0].url : noImageAvailable;
   const productprice = Number(relatedProductInfo.default_price);
   return (
-    <div className="card border-dark" style={{width: '20em', margin: '1em'}}>
+    <div className="card border-dark" style={{width: '20em', margin: '1em', position: 'relative'}}>
       <img className="card-img-top" src={imageSource} style={{width: 'auto', height: '20vw', objectFit: 'cover'}} alt="Product image"></img>
       <ActionButton productCardSetType={'RelatedProducts'}/>
       <div className="card-body">
