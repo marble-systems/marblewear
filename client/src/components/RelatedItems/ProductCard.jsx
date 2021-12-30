@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import noImageAvailable from './noImageAvailable.jpeg';
 
 function ProductCard({relatedProductInfo}) {
+  const imageSource = relatedProductInfo.style.photos[0].url ? relatedProductInfo.style.photos[0].url : noImageAvailable;
   return (
     <div className="card" style={{width: '20em'}}>
-      <img className="card-img-top" src={relatedProductInfo.style.photos[0].url} style={{width: 'auto', height: '30vw', objectFit: 'cover'}} alt="Product image"></img>
+      <img className="card-img-top" src={imageSource} style={{width: 'auto', height: '35vw', objectFit: 'cover'}} alt="Product image"></img>
       <p>--- Action Button ---</p>
       <div className="card-body">
         <p className="card-text">{relatedProductInfo.category}</p>
