@@ -18,9 +18,9 @@ class App extends React.Component {
       currentProductID: 0,
       productList: productListDummyData,
       reviews: [],
-      questionList: [],
+      questionList: QuestionListdata,
       relatedItems: relatedItemsdata
-    }
+    };
   }
 
 
@@ -33,10 +33,13 @@ class App extends React.Component {
           products={this.state.productList}
           currentProductID={this.state.currentProductID}/>
         <Reviews productId={Reviewsdata}/>
-        <QuestionList data={QuestionListdata}/>
+        <QuestionList
+          data={this.state.questionList.QuestionListdata.QuestionList}
+          currentProductID={this.state.currentProductID}
+          answerParser={this.state.questionList.QuestionListdata.answerParser}/>
         <RelatedItems relatedItemsdata={this.state.relatedItems}/>
       </div>
-    )
+    );
   }
 }
 
