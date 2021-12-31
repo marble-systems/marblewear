@@ -108,6 +108,7 @@ class ReviewListEntry extends React.Component {
           }
         </div>
 
+        {/* FULL-RES IMAGE MODAL */}
         <Modal
           show={modalShowing}
           body={modalImage}
@@ -117,9 +118,9 @@ class ReviewListEntry extends React.Component {
         <span>
           Helpful? &nbsp;
           <a style={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={this.handleHelpfulClick.bind(this)}>
-            Yes &nbsp;
+            Yes
           </a>
-          {`(${helpfulness}) | `}
+          {` (${helpfulness}) | `}
           <a style={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={this.handleReportClick.bind(this)}>
             Report
           </a>
@@ -130,10 +131,9 @@ class ReviewListEntry extends React.Component {
 }
 
 /* TODO:
- if user made transaction -> Verified purchaser
- prevent users from clicking buttons more than once
+ if user made transaction -> Verified purchaser (pending transaction API)
+ prevent users from clicking buttons more than once (pending cookie/token implementation)
 */
-
 
 ReviewListEntry.propTypes = {
   review: PropTypes.object.isRequired,
