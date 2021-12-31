@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const PercentageOfStars = ({ stars, percentage, reviews }) => {
+const StarRatingBar = ({ stars, percentage, reviews }) => {
   return (
     <div>
       <span><u>{stars} {stars === 1 ? 'star' : 'stars'}</u></span>
@@ -29,10 +29,10 @@ const PercentageOfStars = ({ stars, percentage, reviews }) => {
   );
 };
 
-PercentageOfStars.propTypes = {
+StarRatingBar.propTypes = {
   stars: PropTypes.number.isRequired,
   percentage: PropTypes.number.isRequired,
   reviews: PropTypes.number.isRequired,
 };
 
-export default PercentageOfStars;
+export default StarRatingBar;
