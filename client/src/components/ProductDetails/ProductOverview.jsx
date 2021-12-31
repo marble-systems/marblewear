@@ -4,12 +4,13 @@ import './prodStyles.css';
 import ImageGallery from './ImageGallery.jsx';
 import StyleSelector from './StyleSelector.jsx';
 import DropDownsAndButtons from './DropDownsAndButtons.jsx';
+import SloganDescription from './SloganDescription.jsx';
 
 
 function ProductOverview ({productList, currentProductID, currentStyleID, changeCurrentStyle}) {
   return (
     <div>
-      <h2>PRODUCT OVERVIEW</h2>
+      <h3>PRODUCT OVERVIEW</h3>
 
       <ImageGallery
         styles={productList.productStyles}
@@ -27,9 +28,9 @@ function ProductOverview ({productList, currentProductID, currentStyleID, change
         productStyles={productList.productStyles}
         currentStyleID={currentStyleID}
         currentProductID={currentProductID}/>
+      <SloganDescription
+        productList={productList}/>
 
-      <h5>{productList.productToDisplay.slogan}</h5>
-      <h5>{productList.productToDisplay.description}</h5>
 
 
     </div>
