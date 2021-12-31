@@ -18,7 +18,7 @@ function YourOutfit({outfitProductsInfo}) {
 }
 
 YourOutfit.propTypes = {
-  outfitProductsInfo: PropTypes.object
+  outfitProductsInfo: PropTypes.array
 };
 
 export default YourOutfit;
