@@ -13,8 +13,8 @@ class AddQuestion extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(e) {
-    if (e.target === 'question') { // determine distinguishing target value for given input
+  handleChange(e) { // this function is not yet implemented FIX ME
+    if (e.target === 'question') { // determine distinguishing target value for corresponding input
       this.setState({questionEntry: e.target.value});
     }
     if (e.target === 'nickname') {
