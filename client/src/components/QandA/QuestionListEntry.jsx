@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import Moment from 'moment';
+import AddAnswer from './AddAnswer.jsx';
 
-const QuestionListEntry = ({ data, answers }) => {
+const QuestionListEntry = ({ data, answers, currentProductName }) => {
   return (
     <div className="container">
       <div className="row">
@@ -10,7 +11,9 @@ const QuestionListEntry = ({ data, answers }) => {
           <h5>Q: {data.question_body}</h5>
         </div>
         <div className="col-3">
-          <p className="text-end">Helpful? Yes ({data.question_helpfulness}) | Add Answer</p>
+          <div className="row">
+            <p className="text-end">Helpful? Yes ({data.question_helpfulness}) | <AddAnswer currentProductName={currentProductName} currentQuestionBody={data.question_body} /></p>
+          </div>
         </div>
       </div>
       <div className="col-9 text-start"><h5>A:</h5>

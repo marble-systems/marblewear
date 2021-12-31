@@ -17,7 +17,7 @@ const QuestionList = (props) => {
       <div className="row">
         {props.data.results.map((question, index) => {
           if (index < 2) {
-            return <QuestionListEntry key={index} data={question} answers={props.answerParser(question.answers)}/>;
+            return <QuestionListEntry key={index} data={question} currentProductName={props.currentProductName} answers={props.answerParser(question.answers)}/>;
           }
           if (index >= 2) {
             // return <LoadMoreQuestions data={question} answers={props.answerParser(question.answers)} />; <-- add LoadMoreQuestions component
