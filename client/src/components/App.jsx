@@ -19,9 +19,13 @@ class App extends React.Component {
       reviews: [],
       questionList: QuestionListdata,
       relatedItems: relatedItemsdata,
-      imageGallery: sampleThumbnails
 
     };
+    this.changeCurrentStyle = this.changeCurrentStyle.bind(this);
+
+  }
+  changeCurrentStyle(id) {
+    this.setState({currentStyleID: id});
   }
 
 
@@ -34,7 +38,7 @@ class App extends React.Component {
           currentProductID={this.state.currentProductID}
           currentStyleID={this.state.currentStyleID}
           changeCurrentStyle={this.changeCurrentStyle}
-          />
+        />
         <Reviews productId={Reviewsdata}/>
         <QuestionList
           data={this.state.questionList.QuestionListdata.QuestionList}
