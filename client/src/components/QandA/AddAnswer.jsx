@@ -14,8 +14,8 @@ class AddAnswer extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(e) {
-    if (e.target === 'answer') { // determine distinguishing target value for given input
+  handleChange(e) { // this function isn't yet implemented. FIX ME
+    if (e.target === 'answer') { // determine distinguishing target value for corresponding input
       this.setState({ answerEntry: e.target.value });
     }
     if (e.target === 'nickname') {
