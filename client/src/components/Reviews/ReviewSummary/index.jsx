@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import AverageRating from './AverageRating.jsx';
 import RatingBreakdown from './RatingBreakdown.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
-import sharedFns from '../../SharedComponents/sharedFns.js';
+import utilityFns from '../../../utilityFns.js';
 
 // TODO: add tests for AverageRating,
 // RatingBreakdown, and ProductBreakdown components
 
 const ReviewSummary = ({ reviewsMetadata, updateFilters }) => {
-  let { totalRatings, percentageRecommended, averageRating } = sharedFns.calculateAverageRating(reviewsMetadata);
+  let { totalRatings,
+    percentageRecommended,
+    averageRating } = utilityFns.processReviewMetadata(reviewsMetadata);
   return (
     <div style={{width: '5 em'}}>
       <AverageRating

@@ -1,4 +1,4 @@
-const sharedFns = {
+const utilityFns = {
   processReviewMetadata: (reviewsMetadata) => {
     const ratings = reviewsMetadata.ratings || {};
     const totalRatings = Object.values(ratings)
@@ -15,4 +15,4 @@ const sharedFns = {
   },
 };
 
-export default sharedFns;
+export default utilityFns;
