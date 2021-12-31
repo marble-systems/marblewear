@@ -1,5 +1,5 @@
 const sharedFns = {
-  calculateAverageRating: (reviewsMetadata) => {
+  processReviewMetadata: (reviewsMetadata) => {
     const ratings = reviewsMetadata.ratings || {};
     const totalRatings = Object.values(ratings)
       .reduce((prev, curr) => { return prev + Number(curr); }, 0);
