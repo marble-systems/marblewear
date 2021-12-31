@@ -7,7 +7,7 @@ function YourOutfit({outfitProductsInfo}) {
   return (
     <div>
       <p>YOUR OUTFIT</p>
-      <div className="main-gallery js-flickity" data-flickity='{"pageDots": false, "groupCells": "80%"}'>
+      <div className="main-gallery js-flickity" data-flickity='{"pageDots": false, "cellAlign": "left", .flickity-button:disabled {display: none}}'>
         <AddOutfit />
         {outfitProductsInfo.map((outfitProductInfo, index) => {
           return (<ProductCard key={index} outfitProductInfo={outfitProductInfo} />);
