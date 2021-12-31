@@ -1,5 +1,6 @@
 import React from 'react';
 import ReviewSummary from './ReviewSummary/index.jsx';
+import ReviewList from './ReviewList/ReviewList.jsx';
 import sampleData from './reviewsData.js';
 
 class Reviews extends React.Component {
@@ -16,12 +17,16 @@ class Reviews extends React.Component {
   }
 
   render() {
+    let { reviewsMetadata, reviews } = sampleData;
     return (
       <div>
         <h3 style={{fontSize: '2em'}}>RATINGS &#38; REVIEWS</h3>
-        <ReviewSummary
-          reviewsMetadata={sampleData.reviewsMetadata}
-          updateFilters={this.updateFilters.bind(this)}/>
+        <div style={{display: 'flex', flexDirection: 'row'}}>
+          <ReviewSummary
+            reviewsMetadata={reviewsMetadata}
+            updateFilters={this.updateFilters.bind(this)}/>
+          <ReviewList reviews={reviews.results} />
+        </div>
       </div>
     );
   }
