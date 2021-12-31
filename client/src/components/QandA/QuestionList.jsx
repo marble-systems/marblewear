@@ -2,10 +2,11 @@
 import React from 'react';
 import QuestionListEntry from './QuestionListEntry.jsx';
 import AddQuestion from './AddQuestion.jsx';
+import MoreAnsweredQuestions from './MoreAnsweredQuestions.jsx';
 
 const QuestionList = (props) => {
   return (
-    <div className="container">
+    <div className="container" maxHeight="vh-100">
       <p className="text-start fs-5 fw-light">
       Questions and Answers
       </p>
@@ -19,12 +20,18 @@ const QuestionList = (props) => {
           if (index < 2) {
             return <QuestionListEntry key={index} data={question} currentProductName={props.currentProductName} answers={props.answerParser(question.answers)}/>;
           }
-          if (index >= 2) {
-            // return <LoadMoreQuestions data={question} answers={props.answerParser(question.answers)} />; <-- add LoadMoreQuestions component
-          }
         })}
       </div>
-      <AddQuestion currentProductName={props.currentProductName} />
+      <div className="d-inline-flex">
+        <div className="inline-flex">
+          <MoreAnsweredQuestions data={props.data.results.slice(2)} currentProductName={props.currentProductName} answerParser={props.answerParser} answers={props.data.results.slice(2).map((question) => {
+            return props.answerParser(question.answers);
+          })}/>
+        </div>
+        <div className="inline-flex">
+          <AddQuestion currentProductName={props.currentProductName} />
+        </div>
+      </div>
     </div>
   );
 };
