@@ -38,11 +38,10 @@ class RatingBreakdown extends React.Component {
     const { selectedFilters } = this.state;
     return (
       <div style={{ width: '14em' }}>
-        <h3 style={{ fontSize: '1em' }}>Rating Breakdown</h3>
         <div style={{ fontSize: '0.8em' }}>
           {selectedFilters.length === 0
             ? '\xa0'// non-breaking space
-            : <span>{selectedFilters
+            : <span>Showing {selectedFilters
               .map(el => el + '-')
               .join(', ')
               .replace(/, ([^,]*)$/, ' and $1') // add 'and' between 2nd-to-last and last-item
