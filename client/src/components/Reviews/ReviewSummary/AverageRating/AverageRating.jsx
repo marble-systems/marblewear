@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Stars from '../../SharedComponents/Stars.jsx';
+import Stars from '../../../SharedComponents/Stars.jsx';
 
 const AverageRating = ({ ratingsCount, averageRating }) => {
   return (
@@ -10,7 +10,6 @@ const AverageRating = ({ ratingsCount, averageRating }) => {
         <Stars rating={averageRating}/>
         <span style={{fontSize: '0.5em'}}>{`(${ratingsCount} reviews total)`}</span>
       </span>
-
     </div>
   );
 };

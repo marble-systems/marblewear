@@ -1,5 +1,5 @@
 import React from 'react';
-import ReviewSummary from './ReviewSummary/index.jsx';
+import ReviewSummary from './ReviewSummary/ReviewSummary.jsx';
 import ReviewList from './ReviewList/ReviewList.jsx';
 import sampleData from './reviewsData.js';
 
