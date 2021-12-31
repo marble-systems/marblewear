@@ -1,34 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class Modal extends React.Component {
-  render() {
-    let { show, body } = this.props;
-    if (!show) {
-      return null;
-    }
-    return (
-      <div style={{width: '500px', background: 'white', border: '1px solid #ccc'}}>
-        <div className="actions">
-          <img src={body}></img>
-          <button className="toggle-button" onClick={this.props.onClose}>
-            close
-          </button>
+const Modal = ({show, body, onClose}) => {
+  if (!show) {
+    return null;
+  }
+  return (
+    <div style={{
+      background: 'rgba(56, 47, 52, 0.08)',
+      border: '1px solid #ccc',
+      position: 'fixed',
+      top: '25%',
+      left: '25%'}}>
+      <div className="actions">
+        <div style={{position: 'relative', }} className="modal-body">
+          <a style={{ textDecoration: 'none', color: 'black', position: 'absolute', top: '20px', right: '20px', cursor: 'pointer'}}
+            className="toggle-button"
+            onClick={onClose}>
+            X
+          </a>
+          <div style={{width: '100%', height: 'auto'}}>
+            {body()}
+          </div>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 Modal.propTypes = {
   show: PropTypes.bool.isRequired,
-  body: PropTypes.string,
+  body: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
 };
 
-// TODO: change to functional component
-// allow body to be a react component or JSX
-// add styling
 // reference https://blog.bitsrc.io/build-a-simple-modal-component-with-react-16decdc111a6
 
 export default Modal;
