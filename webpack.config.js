@@ -1,7 +1,7 @@
 
 module.exports = {
   entry: __dirname + '/client/src/index.jsx',
-  devtool: "source-map",
+  devtool: 'source-map',
   mode: 'production',
   module: {
     rules: [
@@ -30,7 +30,7 @@ module.exports = {
       },
     ]
   },
-   output: {
+  output: {
     filename: 'bundle.js',
     path: __dirname + '/client/dist'
   }
