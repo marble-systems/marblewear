@@ -1,11 +1,11 @@
 import React from 'react';
 import Reviews from './Reviews/Reviews.jsx';
 import ProductOverview from './ProductDetails/ProductOverview.jsx';
-import QuestionList from './Q&A/Q&Alist.jsx';
+import QuestionList from './QandA/QuestionList.jsx';
 import RelatedItems from './RelatedItems/RelatedItems.jsx';
 
 import Reviewsdata from './Reviews/reviewsData.js';
-import QuestionListdata from './Q&A/Q&AlistData.js';
+import QuestionListdata from './QandA/QandAListData.js';
 import relatedItemsdata from './RelatedItems/relatedItemsData.js';
 import productListDummyData  from './ProductDetails/sampleData/productListDummyData.js';
 
@@ -43,7 +43,8 @@ class App extends React.Component {
         <QuestionList
           data={this.state.questionList.QuestionListdata.QuestionList}
           currentProductID={this.state.currentProductID}
-          answerParser={this.state.questionList.QuestionListdata.answerParser}/>
+          answerParser={this.state.questionList.QuestionListdata.answerParser}
+          currentProductName={this.state.questionList.QuestionListdata.currentProductInfo.name}/>
         <RelatedItems relatedItemsdata={this.state.relatedItems}/>
       </div>
     );
