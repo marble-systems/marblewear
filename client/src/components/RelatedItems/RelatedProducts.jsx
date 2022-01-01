@@ -13,7 +13,7 @@ function RelatedProducts({currentProductInfo, relatedProductsInfo}) {
           return (<ProductCard key={index} relatedProductInfo={relatedProductInfo}/>);
         })}
       </div>
-      <ComparisonModal />
+      <ComparisonModal currentProductInfo={currentProductInfo}/>
     </div>
   );
 }
