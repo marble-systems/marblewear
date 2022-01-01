@@ -1,20 +1,45 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-import StyleThumbnail from './StyleThumbnail.jsx'
+import './prodStyles.css';
 
 
-function StyleSelector ({sampleImg, styles}) {
+function StyleSelector ({styles, currentStyleID, currentProductID, changeCurrentStyle}) {
+  const getCurrentProductObject = (targetId, allProducts) => {
+    return allProducts.filter((product) => {
+      return product.product_id === targetId;
+    });
+  };
+
+  const currentProductObject = getCurrentProductObject(currentProductID, styles);
+
+  const getStylesArray = (targetStyleId, stylesArray) => {
+    return stylesArray.filter((style) => {
+      return style.style_id === targetStyleId;
+    });
+  };
+
+  const stylesArray = currentProductObject[0]['results'];
+
+  const currentStyleObject = getStylesArray(currentStyleID, stylesArray);
+
+
   return (
     <div>
-      <h4>Current Style -> {styles[0]['name']}</h4>
+      <h2>{currentStyleObject[0]['name']}</h2>
+      <h4>{`$${currentStyleObject[0]['original_price']}`}</h4>
 
-      {styles.map((style) =>
-        <StyleThumbnail
-          style={style}
-          image={sampleImg}/>
+      {styles[0]['results'].map((style) =>
+        <div key={style}>
+            Style: {`${style.name}`}
+          <img
+            className="styleThumbnail"
+            src={style.photos[0]['thumbnail_url']}
+            onClick={() => changeCurrentStyle(style.style_id)}
+          />
+        </div>
       )}
-
     </div>
-  )
+  );
 }
 
 export default StyleSelector;
