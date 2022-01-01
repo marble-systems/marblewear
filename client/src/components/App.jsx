@@ -7,7 +7,7 @@ import RelatedItems from './RelatedItems/RelatedItems.jsx';
 import Reviewsdata from './Reviews/reviewsData.js';
 import QuestionListdata from './Q&A/Q&AlistData.js';
 import relatedItemsdata from './RelatedItems/relatedItemsData.js';
-import productListDummyData  from './ProductDetails/sampledata/productListDummyData.js';
+import productListDummyData  from './ProductDetails/sampleData/productListDummyData.js';
 
 class App extends React.Component {
   constructor(props) {
