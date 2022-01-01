@@ -1,17 +1,25 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import AddOutfit from './AddOutfit.jsx';
 import ProductCard from './ProductCard.jsx';
+import './relatedItemsStyle.css';
 
 function YourOutfit({outfitProductsInfo}) {
   return (
     <div>
-      <AddOutfit />
-      {outfitProductsInfo.map(outfitProductInfo => {
-        return <ProductCard outfitProductInfo={outfitProductInfo} />
-      })}
+      <p>YOUR OUTFIT</p>
+      <div className="main-gallery js-flickity" data-flickity='{"pageDots": false, "cellAlign": "left"}'>
+        <AddOutfit />
+        {outfitProductsInfo.map((outfitProductInfo, index) => {
+          return (<ProductCard key={index} outfitProductInfo={outfitProductInfo} />);
+        })}
+      </div>
     </div>
-  )
+  );
 }
+
+YourOutfit.propTypes = {
+  outfitProductsInfo: PropTypes.array
+};
 
 export default YourOutfit;
