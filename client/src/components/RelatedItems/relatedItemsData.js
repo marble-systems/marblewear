@@ -103,6 +103,7 @@ const relatedItemsdata = {
         "4": "2",
         "5": "14"
       },
+      "recommended": {}
     },
     {
       "id": 39335,
@@ -161,6 +162,7 @@ const relatedItemsdata = {
         "4": "2",
         "5": "2"
       },
+      "recommended": {}
     },
     {
       "id": 39339,
@@ -207,6 +209,7 @@ const relatedItemsdata = {
         "1": "1",
         "5": "1"
       },
+      "recommended": {}
     },
     {
       "id": 39340,
@@ -285,7 +288,8 @@ const relatedItemsdata = {
           }
         ]
       },
-      "ratings": {}
+      "ratings": {},
+      "recommended": {}
     }
   ],
   outfitProductsInfo: [
