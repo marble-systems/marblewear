@@ -39,12 +39,14 @@ class App extends React.Component {
           currentStyleID={this.state.currentStyleID}
           changeCurrentStyle={this.changeCurrentStyle}
         />
-        <Reviews productId={Reviewsdata}/>
-        <QuestionList
-          data={this.state.questionList.QuestionListdata.QuestionList}
-          currentProductID={this.state.currentProductID}
-          currentProductName={this.state.questionList.QuestionListdata.currentProductInfo.name}/>
-        <RelatedItems relatedItemsdata={this.state.relatedItems}/>
+        <div className="container">
+          <Reviews productId={Reviewsdata}/>
+          <QuestionList
+            data={this.state.questionList.QuestionListdata.QuestionList}
+            currentProductID={this.state.currentProductID}
+            currentProductName={this.state.questionList.QuestionListdata.currentProductInfo.name}/>
+          <RelatedItems relatedItemsdata={this.state.relatedItems}/>
+        </div>
       </div>
     );
   }
