@@ -11,16 +11,17 @@ function ProductOverview ({productList, currentProductID, currentStyleID, change
   return (
     <div>
 
-      <div className="d-flex flex-row">
-        <div className>
+      <div className="d-flex flex-row" >
+        <div className="flex-column-8" style={{width: '50em', margin: '1em', position: 'relative'}}>
           <h3>PRODUCT OVERVIEW</h3>
           <ImageGallery
             styles={productList.productStyles}
             currentProductID={currentProductID}
             currentStyleID={currentStyleID}/>
+
         </div>
 
-        <div className="d-flex flex-column">
+        <div className="d-flex flex-column" style={{width: '20em', margin: '1em', position: 'relative'}}>
           <StyleSelector
             styles={productList.productStyles}
             currentStyleID={currentStyleID}
@@ -30,11 +31,12 @@ function ProductOverview ({productList, currentProductID, currentStyleID, change
             productStyles={productList.productStyles}
             currentStyleID={currentStyleID}
             currentProductID={currentProductID}/>
+
         </div>
       </div>
 
 
-      <div className="d-flex flex-row">
+      <div className="d-flex flex-row" style={{width: '50em', margin: '1em', position: 'relative'}}>
         <div>
           <SloganDescription
             productList={productList}/>

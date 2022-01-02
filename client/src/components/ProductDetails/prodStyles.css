@@ -2,10 +2,10 @@
 
 
 .button {
-  display: inline-block;
+  display: block;
   padding: 0.3em 1.2em;
   margin: 0 0.3em 0.3em 0;
-  border-radius:2em;
+  border-radius:.25em;
   box-sizing: border-box;
   text-decoration:none;
   font-family:'Roboto',sans-serif;
@@ -14,6 +14,8 @@
   background-color:#4eb5f1;
   text-align:center;
   transition: all 0.2s;
+  height: 2em;
+
 
   }
   .button:hover{
@@ -26,40 +28,59 @@
   };
 }
 
+.cart {
+  width: 12em;
+}
+.quantity {
+  width: 6em;
+}
+.selectSize{
+  width: 10em;
+}
+.favorite {
+  width: 2em;
+}
+
 .select {
   display: block;
-  width: 5em;
+  padding: 0.3em 1.2em;
+  margin: 0 0.3em 0.3em 0;
   height: 2em;
   line-height: 3;
   overflow: hidden;
   border-radius: .25em;
+  box-sizing: border-box;
   padding-bottom: 10px;
 }
 
 .mainImage {
-  width: 350px;
+  width: 500px;
   height: auto;
+  padding: 0.3em 1.2em;
+  margin: 0 0.3em 0.3em 0;
 }
 
 .imageThumbnail {
-  width: 50px;
-  height: auto;
+  width: 65px;
+  height: 70px;
   float:left;
-
+  padding: 0.5em
 }
 
 .imageThumbnailMain {
-  width: 50px;
   width: 65px;
+  height: 70px;
   border: 2px solid rgb(233, 12, 12);
   float:left;
+  padding: 0.5em
 }
 
 
 .styleThumbnail {
-  width: 50px;
-  height: 50px;
+  width: 55px;
+  height: 55px;
   border-radius: 50%;
+
 }
 
 
