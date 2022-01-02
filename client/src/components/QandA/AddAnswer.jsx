@@ -33,7 +33,7 @@ class AddAnswer extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // ensure that both answer and email fields have been filled out and are valid formats via helper functions
+    // ensure that both answer and email fields have been filled out and are valid formats via helper functions (add required="true" to these)
     // when API is implemented, use axios POST request to submit data to API
   }
 
