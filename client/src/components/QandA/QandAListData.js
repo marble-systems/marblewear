@@ -173,7 +173,7 @@ module.exports.QuestionListdata = {
       ]
     }
   },
-  answerParser: (answersObj) => {
+  answerParser: (answersObj) => { // move this to utility functions so we can delete this data!
     let resultArr = [];
     for (let key in answersObj) {
       resultArr.push(answersObj[key]);

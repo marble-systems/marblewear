@@ -17,7 +17,7 @@ const QuestionList = (props) => {
       </div>
       <div className="row">
         {props.data.results.map((question, index) => {
-          if (index < 2) {
+          if (index < 2) { // instead of hardcoding a 2 here, create a variable that increments by two each time button is clicked. Once variable is greater than or equal to the number of questions, hide the button.
             return <QuestionListEntry key={index} data={question} currentProductName={props.currentProductName} answers={props.answerParser(question.answers)}/>;
           }
         })}

@@ -22,6 +22,7 @@ const QuestionListEntry = ({ data, answers, currentProductName }) => {
             return <div key={i}>
               <div className="row"><p className="text-wrap">{answer.body}</p></div>
               <div className="row text-start"><p className="fw-light">by {answer.answerer_name}, {Moment(answer.date).format('MMMM Do, YYYY')} | Helpful? Yes ({answer.helpfulness})</p></div>
+              {/* Check out ReviewListEntry.jsx for reference on making a PUT request */}
             </div>;
           }
         })}
