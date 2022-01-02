@@ -43,7 +43,6 @@ class App extends React.Component {
         <QuestionList
           data={this.state.questionList.QuestionListdata.QuestionList}
           currentProductID={this.state.currentProductID}
-          answerParser={this.state.questionList.QuestionListdata.answerParser}
           currentProductName={this.state.questionList.QuestionListdata.currentProductInfo.name}/>
         <RelatedItems relatedItemsdata={this.state.relatedItems}/>
       </div>
