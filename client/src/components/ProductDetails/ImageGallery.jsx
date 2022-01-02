@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import './prodStyles.css';
@@ -31,13 +32,15 @@ function ImageGallery ({styles, currentProductID, currentStyleID}) {
   };
 
   return (
-    <div>
+    <div clasName="container">
       <img className="mainImage" src={currentImage}/>
       {imageGallery.map((image) =>
-        <img
-        className={setThumbnailClass(image)}
-        src={image}
-        onClick={() => updateMainImage(image)}/>
+        <div clasName="row">
+          <img
+            className={setThumbnailClass(image)}
+            src={image}
+            onClick={() => updateMainImage(image)}/>
+        </div>
       )}
     </div>
   );
