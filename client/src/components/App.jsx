@@ -7,21 +7,25 @@ import RelatedItems from './RelatedItems/RelatedItems.jsx';
 import Reviewsdata from './Reviews/reviewsData.js';
 import QuestionListdata from './QandA/QandAListData.js';
 import relatedItemsdata from './RelatedItems/relatedItemsData.js';
-import productListDummyData  from './ProductDetails/sampledata/productListDummyData.js';
-import sampleThumbnails from './ProductDetails/sampleData/imageThumbnailsArray.js'
+import productListDummyData  from './ProductDetails/sampleData/productListDummyData.js';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentProductID: 39337,
+      currentProductID: '39333',
+      currentStyleID: 234004,
       productList: productListDummyData,
       reviews: [],
       questionList: QuestionListdata,
       relatedItems: relatedItemsdata,
-      imageGallery: sampleThumbnails
 
     };
+    this.changeCurrentStyle = this.changeCurrentStyle.bind(this);
+
+  }
+  changeCurrentStyle(id) {
+    this.setState({currentStyleID: id});
   }
 
 
@@ -32,8 +36,9 @@ class App extends React.Component {
         <ProductOverview
           productList={this.state.productList}
           currentProductID={this.state.currentProductID}
-          imageGallery={this.state.imageGallery}
-          />
+          currentStyleID={this.state.currentStyleID}
+          changeCurrentStyle={this.changeCurrentStyle}
+        />
         <Reviews productId={Reviewsdata}/>
         <QuestionList
           data={this.state.questionList.QuestionListdata.QuestionList}
