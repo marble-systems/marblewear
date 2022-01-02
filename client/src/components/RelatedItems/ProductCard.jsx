@@ -1,17 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ActionButton from './ActionButton.jsx';
 import noImageAvailable from './noImageAvailable.jpeg';
 
 function ProductCard({relatedProductInfo}) {
   const imageSource = relatedProductInfo.style.photos[0].url ? relatedProductInfo.style.photos[0].url : noImageAvailable;
+  const productprice = Number(relatedProductInfo.default_price);
   return (
-    <div className="card" style={{width: '20em'}}>
-      <img className="card-img-top" src={imageSource} style={{width: 'auto', height: '35vw', objectFit: 'cover'}} alt="Product image"></img>
-      <p>--- Action Button ---</p>
+    <div className="card border-dark" style={{width: '20em', margin: '1em', position: 'relative'}}>
+      <img className="card-img-top" src={imageSource} style={{width: 'auto', height: '20vw', objectFit: 'cover'}} alt="Product image"></img>
+      <ActionButton productCardSetType={'RelatedProducts'}/>
       <div className="card-body">
-        <p className="card-text">{relatedProductInfo.category}</p>
+        <p className="card-text"><small className="text-muted">{relatedProductInfo.category.toUpperCase()}</small></p>
         <h5 className="card-title">{relatedProductInfo.name}</h5>
-        <p className="card-text">{relatedProductInfo.default_price}</p>
+        <p className="card-text"><small className="text-muted">${productprice}</small></p>
         <p>*** Star Ratings ***</p>
       </div>
     </div>
