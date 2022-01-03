@@ -78,3 +78,34 @@ a, button {
   text-decoration: none;
   cursor: pointer;
 }
+
+/* ProductBreakdown Component */
+.product-breakdown {
+  width: 14em;
+  position: relative;
+}
+
+.bar-segment {
+  margin-right: 1%;
+  height: 90%;
+  width: 30%;
+  background-color: gray;
+  margin: 1;
+}
+
+.subtext-container {
+  display : flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.6em;
+}
+
+.subtext-label {
+  display: inline-block;
+}
+
+.triangular-icon {
+  display: flex;
+  position: absolute;
+  width: 10px;
+}
