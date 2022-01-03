@@ -32,7 +32,6 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <h1> Hello World </h1>
         <ProductOverview
           productList={this.state.productList}
           currentProductID={this.state.currentProductID}
