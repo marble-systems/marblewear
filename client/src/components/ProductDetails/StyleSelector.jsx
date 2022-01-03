@@ -24,12 +24,12 @@ function StyleSelector ({styles, currentStyleID, currentProductID, changeCurrent
 
 
   return (
-    <div>
+    <div clasName="container">
       <h2>{currentStyleObject[0]['name']}</h2>
       <h4>{`$${currentStyleObject[0]['original_price']}`}</h4>
 
       {styles[0]['results'].map((style) =>
-        <div key={style} style={{width: '20em', margin: '1em', position: 'relative'}}>
+        <div clasName="row" key={style} style={{width: '20em', margin: '1em', position: 'relative'}}>
           <img
             className="styleThumbnail"
             src={style.photos[0]['thumbnail_url']}

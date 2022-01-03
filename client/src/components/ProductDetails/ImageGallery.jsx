@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import './prodStyles.css';
@@ -31,10 +30,12 @@ function ImageGallery ({styles, currentProductID, currentStyleID}) {
     return image === currentImage ? 'imageThumbnailMain' : 'imageThumbnail';
   };
 
+
   return (
     <div clasName="container">
       <img className="mainImage" src={currentImage}/>
       {imageGallery.map((image) =>
+        // eslint-disable-next-line react/jsx-key
         <div clasName="row">
           <img
             className={setThumbnailClass(image)}

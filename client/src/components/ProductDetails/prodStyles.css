@@ -1,31 +1,26 @@
-
-
-
 .button {
   display: block;
   padding: 0.3em 1.2em;
   margin: 0 0.3em 0.3em 0;
   border-radius:.25em;
   box-sizing: border-box;
-  text-decoration:none;
   font-family:'Roboto',sans-serif;
   font-weight:300;
-  color:#FFFFFF;
-  background-color:#4eb5f1;
-  text-align:center;
   transition: all 0.2s;
   height: 2em;
 
+  }
 
-  }
-  .button:hover{
-    background-color:#4095c6;
-  }
-  @media all and (max-width:30em){
-   .button3{
-    display:block;
-    margin: 0.2em auto;
-  };
+.select {
+  display: block;
+  padding: 0.3em 1.2em;
+  margin: 0 0.3em 0.3em 0;
+  height: 2em;
+  line-height: 3;
+  overflow: hidden;
+  border-radius: .25em;
+  box-sizing: border-box;
+  padding-bottom: 10px;
 }
 
 .cart {
@@ -39,18 +34,6 @@
 }
 .favorite {
   width: 2em;
-}
-
-.select {
-  display: block;
-  padding: 0.3em 1.2em;
-  margin: 0 0.3em 0.3em 0;
-  height: 2em;
-  line-height: 3;
-  overflow: hidden;
-  border-radius: .25em;
-  box-sizing: border-box;
-  padding-bottom: 10px;
 }
 
 .mainImage {
@@ -75,12 +58,10 @@
   padding: 0.5em
 }
 
-
 .styleThumbnail {
   width: 55px;
   height: 55px;
   border-radius: 50%;
-
 }
 
 
