@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReviewListEntry from './ReviewListEntry/ReviewListEntry.jsx';
 
-const SORT_BY = ['Relevant', 'Helpful', 'Newest'];
+const sortOptions = ['Relevant', 'Helpful', 'Newest'];
 
 class ReviewList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       listLength: 2,
-      sortBy: SORT_BY[0]
+      sortBy: sortOptions[0]
     };
     this.incrementListLength = this.incrementListLength.bind(this);
     this.handleSelectorChange = this.handleSelectorChange.bind(this);
@@ -25,7 +25,7 @@ class ReviewList extends React.Component {
 
   handleSelectorChange(e) {
     let idx = e.target.value;
-    this.setState({ sortBy: SORT_BY[idx] });
+    this.setState({ sortBy: sortOptions[idx] });
     // TODO: make GET request with new sort param
   }
 
@@ -39,7 +39,7 @@ class ReviewList extends React.Component {
           {`${reviews.length} reviews, sorted by `}
           {/* SORT BY DROPDOWN SELECTOR */}
           <select onChange={this.handleSelectorChange}>
-            {SORT_BY.map((order, idx) => {
+            {sortOptions.map((order, idx) => {
               return (
                 <option
                   key={`sort-by-${order.toLowerCase()}`}
