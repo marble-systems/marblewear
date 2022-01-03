@@ -16,7 +16,6 @@ const Modal = ({ show, title, subtitle, body, onClose }) => {
         </div>
         <div className="modal-body">
           {body()}
-          <button onClick={onClose}>Close</button>
         </div>
         <div className="modal-footer">
         </div>
