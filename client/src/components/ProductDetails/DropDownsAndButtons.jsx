@@ -48,42 +48,45 @@ function DropDownsAndButtons ({productStyles, currentProductID, currentStyleID})
 
 
   return (
-    <div>
-      <select
-        className="select"
-        name ="size"
-        value={skusArray}
-        onChange={e => {
-          updateInventory(8);
-          alert(`Size ${e.target.value} selected`);}
-        }>
-        {skusArray.map((sku) => {
-          return <option key={sku}> {availableSkus[sku]['size']} </option>
-        })}
-      </select>
+    <div className="container">
+      <div className="row">
+        <select
+          className="select selectSize"
+          name ="size"
+          value={skusArray}
+          onChange={e => {
+            updateInventory(8);
+            alert(`Size ${e.target.value} selected`);}
+          }>
+          {skusArray.map((sku) => {
+            return <option key={sku}> {availableSkus[sku]['size']} </option>;
+          })}
+        </select>
 
-      <select
-        className="select"
-        name ="quantity"
-        onChange={e => alert(`Quantity of ${e.target.value} selected`)}>
-        {inventoryArray.map((num)=> <option key={num} value={num}> {num} </option>)}
-      </select>
+        <select
+          className="select quantity"
+          name ="quantity"
+          onChange={e => alert(`Quantity of ${e.target.value} selected`)}>
+          {inventoryArray.map((num)=> <option key={num} value={num}> {num} </option>)}
+        </select>
+      </div>
 
-      <button
-        type="submit"
-        className = "button"
-        onClick={() => alert(`${productStyles.name} added to Favorites`)}>
+      <div className="row">
+        <button
+          type="submit"
+          className = "button cart"
+          onClick={() => alert(`${productStyles.name} added to Favorites`)}>
         ADD TO BAG
-      </button>
+        </button>
 
-      <button
-        className = "button"
-        id="favorite"
-        type="submit"
-        onClick={() => alert(`${productStyles.name} added to Cart`)}>
-        Favorite
-      </button>
-
+        <button
+          className = "button favorite"
+          id="favorite"
+          type="submit"
+          onClick={() => alert(`${productStyles.name} added to Cart`)}>
+        *
+        </button>
+      </div>
     </div>
   );
 }
