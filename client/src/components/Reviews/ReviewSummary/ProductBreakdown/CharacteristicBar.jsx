@@ -26,26 +26,24 @@ const CharacteristicBar = ({ characteristic, value }) => {
           return (
             <div
               key={`bar-segment-${idx}`}
-              style={{
-                height: '90%',
-                width: '30%',
-                backgroundColor: 'gray',
-                margin: 1
-              }}
+              className="bar-segment"
             />
           );
         })}
-        <div style={{ display: 'flex', position: 'absolute', left: percentage, width: '10px' }}>
+        <div className="triangular-icon" style={{ left: percentage }}>
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M 12 20 L 2 4 L 22 4 L 12 20 Z" fill="black" />
           </svg>
         </div>
       </div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', fontSize: '0.5em' }}>
-        <div style={{ width: '45px' }}>{characteristicScale[characteristic]['min']}</div>
-        <div style={{ width: '45px' }}>{characteristicScale[characteristic]['max']}</div>
+      <div className="subtext-container">
+        <div className="subtext-label">
+          {characteristicScale[characteristic]['min']}
+        </div>
+        <div className="subtext-label">
+          {characteristicScale[characteristic]['max']}
+        </div>
       </div>
-
     </div>
   );
 };
