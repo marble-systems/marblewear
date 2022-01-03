@@ -1,10 +1,39 @@
+:root {
+  --modal-duration: 1s;
+  --modal-color: #428bca;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f4f4;
+  font-size: 17px;
+  line-height: 1.6;
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
 h3 {
   font-size: 2em;
 }
 
-a, button {
+a {
   cursor: pointer;
   margin-right: 10px;
+}
+
+.button {
+  background: #428bca;
+  padding: 1em 2em;
+  color: #fff;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #3876ac;
 }
 
 /* ReviewList Component */
@@ -108,4 +137,10 @@ a, button {
   display: flex;
   position: absolute;
   width: 10px;
+}
+
+/* Form Component */
+.required:after {
+  content:" *";
+  color: red;
 }
