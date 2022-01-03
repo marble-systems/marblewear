@@ -16,7 +16,8 @@ class App extends React.Component {
     this.state = {
       currentProductID: '39333',
       currentStyleID: 234004,
-      productList: productListDummyData,
+      productStylesArray: productListDummyData.productStyles.results,
+      currentProduct: productListDummyData.productToDisplay,
       reviews: [],
       questionList: QuestionListdata,
       relatedItems: relatedItemsdata,
@@ -25,6 +26,8 @@ class App extends React.Component {
     this.changeCurrentStyle = this.changeCurrentStyle.bind(this);
 
   }
+
+
   changeCurrentStyle(id) {
     this.setState({ currentStyleID: id });
   }
@@ -35,7 +38,8 @@ class App extends React.Component {
       <div>
         <NavBar />
         <ProductOverview
-          productList={this.state.productList}
+          currentProduct={this.state.currentProduct}
+          productStylesArray={this.state.productStylesArray}
           currentProductID={this.state.currentProductID}
           currentStyleID={this.state.currentStyleID}
           changeCurrentStyle={this.changeCurrentStyle}
