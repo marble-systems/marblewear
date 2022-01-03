@@ -14,7 +14,7 @@ class AddQuestion extends React.Component {
   }
 
   handleChange(e) { // this function is not yet implemented FIX ME
-    if (e.target === 'question') { // determine distinguishing target value for corresponding input
+    if (e.target === 'question') { // determine distinguishing target value for corresponding input -> use getElementById?
       this.setState({questionEntry: e.target.value});
     }
     if (e.target === 'nickname') {
