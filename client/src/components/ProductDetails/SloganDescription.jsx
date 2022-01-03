@@ -4,7 +4,6 @@ import './prodStyles.css';
 
 function SloganDescription ({productList}) {
 
-
   return (
     <div>
       <h5>{productList.productToDisplay.slogan}</h5>

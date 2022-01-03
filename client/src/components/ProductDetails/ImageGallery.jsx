@@ -30,14 +30,18 @@ function ImageGallery ({styles, currentProductID, currentStyleID}) {
     return image === currentImage ? 'imageThumbnailMain' : 'imageThumbnail';
   };
 
+
   return (
-    <div>
+    <div clasName="container">
       <img className="mainImage" src={currentImage}/>
       {imageGallery.map((image) =>
-        <img
-        className={setThumbnailClass(image)}
-        src={image}
-        onClick={() => updateMainImage(image)}/>
+        // eslint-disable-next-line react/jsx-key
+        <div clasName="row">
+          <img
+            className={setThumbnailClass(image)}
+            src={image}
+            onClick={() => updateMainImage(image)}/>
+        </div>
       )}
     </div>
   );
