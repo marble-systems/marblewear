@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AverageRating from './AverageRating.jsx';
-import RatingBreakdown from './RatingBreakdown.jsx';
-import ProductBreakdown from './ProductBreakdown.jsx';
+import AverageRating from './AverageRating/AverageRating.jsx';
+import RatingBreakdown from './RatingBreakdown/RatingBreakdown.jsx';
+import ProductBreakdown from './ProductBreakdown/ProductBreakdown.jsx';
 import utilityFns from '../../../utilityFns.js';
 
 // TODO: add tests for AverageRating,

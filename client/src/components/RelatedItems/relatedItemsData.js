@@ -96,7 +96,14 @@ const relatedItemsdata = {
             "url": null
           }
         ]
-      }
+      },
+      "ratings": {
+        "2": "1",
+        "3": "2",
+        "4": "2",
+        "5": "14"
+      },
+      "recommended": {}
     },
     {
       "id": 39335,
@@ -150,7 +157,12 @@ const relatedItemsdata = {
             "url": "https://images.unsplash.com/photo-1554921148-83d8ceda2095?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"
           }
         ]
-      }
+      },
+      "ratings": {
+        "4": "2",
+        "5": "2"
+      },
+      "recommended": {}
     },
     {
       "id": 39339,
@@ -192,7 +204,12 @@ const relatedItemsdata = {
             "url": "https://images.unsplash.com/photo-1560072810-1cffb09faf0f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
           }
         ]
-      }
+      },
+      "ratings": {
+        "1": "1",
+        "5": "1"
+      },
+      "recommended": {}
     },
     {
       "id": 39340,
@@ -270,7 +287,9 @@ const relatedItemsdata = {
             "url": "https://images.unsplash.com/photo-1515110371136-7e393289662c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1656&q=80"
           }
         ]
-      }
+      },
+      "ratings": {},
+      "recommended": {}
     }
   ],
   outfitProductsInfo: [
