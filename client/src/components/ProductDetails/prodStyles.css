@@ -1,3 +1,5 @@
+
+
 .button {
   display: block;
   padding: 0.3em 1.2em;
@@ -8,8 +10,23 @@
   font-weight:300;
   transition: all 0.2s;
   height: 2em;
-
   }
+
+.nextButton {
+  position: absolute;
+  top: 50%;
+  right:4em;
+}
+ .previousButton {
+  position: absolute;
+  top: 50%;
+  left:4em;
+}
+.downButton {
+  position: absolute;
+  bottom: 90%;
+}
+
 
 .select {
   display: block;
@@ -65,8 +82,10 @@
 }
 
 
-.carousel-inner > .item > img,
-.carousel-inner > .item > a > img {
-  width: 70%;
-  margin: auto;
+.image-button-container {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
+

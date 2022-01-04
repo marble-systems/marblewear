@@ -26,6 +26,7 @@ function ImageGallery ({productStylesArray, currentStyleID}) {
       updateMainImageIndex(currentMainImageIndex+1);
       const newImg = imageGallery.filter((image)=> imageGallery.indexOf(image) === currentMainImageIndex+1);
       updateMainImage(newImg);
+      // setThumbnailClass(imageGallery.indexOf(currentMainImageIndex+1));
     }
   };
 
@@ -34,19 +35,24 @@ function ImageGallery ({productStylesArray, currentStyleID}) {
       updateMainImageIndex(currentMainImageIndex-1);
       const newImg = imageGallery.filter((image)=> imageGallery.indexOf(image) === currentMainImageIndex-1);
       updateMainImage(newImg);
+      // setThumbnailClass(imageGallery.indexOf(currentMainImageIndex-1));
     }
   };
 
 
   return (
-    <div clasName="container">
-      <img
-        className="mainImage carousel slide"
-        data-ride="carousel"
-        src={currentImage}
-        onClick= { () => {showNextImage();} }
-      />
-
+    <div className="container image-button-container">
+      <img src={currentImage} />
+      <input
+        type="image"
+        className="previousButton"
+        src="https://img.icons8.com/ios-glyphs/50/000000/long-arrow-left.png"
+        onClick= { () => showPreviousImage()}/>
+      <input
+        type="image"
+        className="nextButton"
+        src="https://img.icons8.com/ios-glyphs/50/000000/long-arrow-right.png"
+        onClick= { () => showNextImage() }/>
 
 
       {imageGallery.map((image) =>
@@ -58,10 +64,16 @@ function ImageGallery ({productStylesArray, currentStyleID}) {
             onClick={() => {
               let indx = imageGallery.indexOf(image);
               updateMainImageIndex(indx);
-              updateMainImage(image);}
+              updateMainImage(image);
+            }
             }/>
+
         </div>
       )}
+      <input
+        type="image"
+        src="https://img.icons8.com/material-rounded/24/000000/chevron-down.png"
+        onClick= { () => showNextImage() }/>
     </div>
   );
 }
