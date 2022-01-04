@@ -41,7 +41,7 @@ function ImageGallery ({productStylesArray, currentStyleID}) {
 
   return (
     <div className="container main-image-container">
-      <img src={currentImage} />
+      <img className="mainImage" src={currentImage} />
       <input
         type="image"
         className="previousButton"

@@ -18,6 +18,7 @@ function ProductOverview ({currentProduct, productStylesArray, currentStyleID, c
         </div>
 
         <div className="d-flex flex-column" style={{width: '30em', margin: '1em', position: 'relative'}}>
+          <h4>Read All Reviews ***</h4>
           <StyleSelector
             productStylesArray={productStylesArray}
             currentStyleID={currentStyleID}

@@ -1,22 +1,46 @@
 
 
 .main-image-container {
-  display: block;
   position: relative;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
+  width: 60%;
+}
+.mainImage {
+  height: 450px;
+  width: auto;
+  padding: 0.3em 1.2em;
+  margin: 0 0.3em 0.3em 0;
+  position: absolute;
+  display: inline-block;
 }
 
 .nextButton {
   position: absolute;
-  top: 35%;
-  right:1em;
+  top: 30%;
+  right:5em;
 }
 .previousButton {
   position: absolute;
-  top: 35%;
-  left:1em;
+  top: 30%;
+  left:5em;
+}
+
+.imageThumbnail {
+  width: 65px;
+  height: 70px;
+  /* float:left; */
+  padding: 0.5em;
+  /* position: absolute; */
+}
+.imageThumbnailMain {
+  width: 65px;
+  height: 70px;
+  border-bottom: 2px solid rgb(233, 12, 12);
+  /* float:left; */
+  padding: 0.5em;
+  /* position: absolute; */
+
 }
 
 /* .downButton {
@@ -37,35 +61,13 @@
   width: 2em;
 }
 
-.mainImage {
-  width: 600px;
-  height: auto;
-  padding: 0.3em 1.2em;
-  margin: 0 0.3em 0.3em 0;
-  position: absolute
-}
 
-.imageThumbnail {
-  width: 65px;
-  height: 70px;
-  float:left;
-  padding: 0.5em;
-  /* position: absolute; */
-}
-.imageThumbnailMain {
-  width: 65px;
-  height: 70px;
-  border-bottom: 2px solid rgb(233, 12, 12);
-  float:left;
-  padding: 0.5em
-}
 .styleThumbnail {
   width: 7em;
   height: 7em;
   border-radius: 50%;
   padding: 0.5em;
 }
-
 
 .select {
   display: block;
@@ -81,12 +83,3 @@
   margin: 0 0.3em 0.3em 0;
   height: 2em;
   }
-
-  /* .flex-container {
-    flex-wrap: wrap;
-  }
-
-  .wrap    {
-    -webkit-flex-wrap: wrap;
-    flex-wrap: wrap;
-  } */
