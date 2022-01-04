@@ -2,7 +2,6 @@ import React from 'react';
 import Stars from '../../../SharedComponents/Stars.jsx';
 import Modal from '../../../SharedComponents/Modal.jsx';
 
-
 const RATING_TEXT = ['Poor', 'Fair', 'Average', 'Good', 'Great'];
 const REVIEW_BODY_MIN_LENGTH = 50;
 const CHARACTERISTICS_SCALE = {
@@ -14,12 +13,11 @@ const CHARACTERISTICS_SCALE = {
   Fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long']
 };
 
-
 class AddReviewForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      overallRating: null,
+      overallRating: 0,
       radioValues: { 'recommend-product': 'yes' },
       reviewSummary: '',
       reviewBody: '',
@@ -96,31 +94,12 @@ class AddReviewForm extends React.Component {
     let characteristics = Object.keys(CHARACTERISTICS_SCALE);
 
     // Check for missing inputs
-    let missingInputs = characteristics.filter(characteristic => { return !radioValues[characteristic]; });
+    let missingInputs = characteristics
+      .filter(characteristic => { return !radioValues[characteristic]; });
     let inputsObject = { 'Overall rating': overallRating, 'Review body': reviewBody, 'Nickname': nickname, 'Email': email };
     missingInputs.push(...Object.keys(inputsObject).filter(key => { return !inputsObject[key]; }));
     if (!overallRating || !reviewBody || !nickname || !email) {
-      let formValidationModal = this.state.formValidationModal;
-      formValidationModal.body = () => {
-        return (
-          <div>
-            You must enter the following:
-            <ol>
-              {missingInputs.map((input, idx) => {
-                return (
-                  <li key={`missing-input-${idx}`}>
-                    {input}
-                  </li>
-                );
-              })}
-            </ol>
-          </div>
-        );
-      };
-      formValidationModal.title = 'Missing Input';
-      this.setState({ formValidationModal });
-      this.handleToggleModalClick();
-      return;
+      alert(`You must enter: \n${missingInputs.join(', ').replace(/, ([^,]*)$/, ' and $1')}`);
     }
     // TODOs:
     // validate email format
@@ -132,7 +111,7 @@ class AddReviewForm extends React.Component {
   render() {
     let { overallRating, radioValues, reviewSummary, reviewBody, nickname, email, images, formValidationModal } = this.state;
     return (
-      <div style={{ width: '20em' }}>
+      <div style={{ width: '40em' }}>
         <form id="review-form">
           <ol>
             <li className="required">Overall Rating</li>
@@ -204,7 +183,6 @@ class AddReviewForm extends React.Component {
                 })}
               </p>
             </p>
-
             <li>Review Summary</li>
             <p>
               <input
@@ -239,7 +217,7 @@ class AddReviewForm extends React.Component {
                 display: 'flex',
                 flexDirection: 'row'
               }}
-                className="image-thumbnails">
+              className="image-thumbnails">
                 {images.map((url, idx) => {
                   return (
                     // FIX: modal gets too wide when image is selected
