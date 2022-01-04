@@ -12,7 +12,8 @@ class App extends React.Component {
     this.state = {
       currentProductID: '',
       currentStyleID: 234004,
-      productList: [],
+      productStylesArray: [],
+      currentProduct: [],
       reviews: [],
       questionList: [],
       relatedItems: [],
@@ -26,27 +27,33 @@ class App extends React.Component {
   }
 
   getProductData(productId) {
-    let currentProduct = this.cachedProducts.productId;
-    if (currentProduct) {
-      let {productList, reviews, questionList} = currentProduct;
+    let cachedProduct = this.cachedProducts[productId];
+    if (cachedProduct) {
+      let {currentProduct, productStylesArray, reviews, questionList} = cachedProduct;
       this.setState({
         currentProductID: productId,
-        productList,
+        currentProduct,
+        productStylesArray,
         reviews,
         questionList
       });
     } else {
-      axios.get('./products', {
-        params: {
-          productId
-        }
-      })
-        .then(result => {
-          this.cachedProducts.productId = result;
+      axios.get(`./products/${productId}`)
+        .then(({data}) => {
+          let productInfo = {
+            currentProduct: data[0],
+            productStylesArray: data[1].results,
+            reviews: {
+              reviewsMetadata: data[4],
+              reviews: data[3],
+            },
+            questionList: data[2]
+          };
+          this.cachedProducts[productId] = productInfo;
           this.getProductData(productId);
         })
         .catch(err => {
-          alert(`Error ${err} occured`);
+          alert(`Error ${err} occurred`);
         });
     }
   }
@@ -56,25 +63,31 @@ class App extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <NavBar />
-        <ProductOverview
-          currentProduct={this.state.currentProduct}
-          productStylesArray={this.state.productStylesArray}
-          currentStyleID={this.state.currentStyleID}
-          changeCurrentStyle={this.changeCurrentStyle}
-        />
-        <div className="container">
-          <RelatedItems relatedItemsdata={this.state.relatedItems} />
-          <QuestionList
-            data={this.state.questionList.QuestionListdata.QuestionList}
-            currentProductID={this.state.currentProductID}
-            currentProductName={this.state.questionList.QuestionListdata.currentProductInfo.name}/>
-          <Reviews productId={Reviewsdata}/>
+    if (this.state.currentProductID) {
+      return (
+        <div>
+          <NavBar />
+          <ProductOverview
+            currentProduct={this.state.currentProduct}
+            productStylesArray={this.state.productStylesArray}
+            currentStyleID={this.state.currentStyleID}
+            changeCurrentStyle={this.changeCurrentStyle}
+          />
+          <div className="container">
+            {/* <RelatedItems relatedItemsdata={this.state.relatedItems} /> */}
+            <QuestionList
+              data={this.state.questionList}
+              currentProductID={this.state.currentProductID}
+              currentProductName={this.state.currentProduct.name}/>
+            <Reviews reviewsData={this.state.reviews}/>
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div></div>
+      );
+    }
   }
 }
 
