@@ -4,6 +4,7 @@ import ProductOverview from './ProductDetails/ProductOverview.jsx';
 import QuestionList from './QandA/QuestionList.jsx';
 import RelatedItems from './RelatedItems/RelatedItems.jsx';
 import NavBar from './Navbar.jsx';
+const axios = require('axios');
 
 import Reviewsdata from './Reviews/reviewsData.js';
 import QuestionListdata from './QandA/QandAListData.js';
@@ -21,17 +22,23 @@ class App extends React.Component {
       reviews: [],
       questionList: QuestionListdata,
       relatedItems: relatedItemsdata,
-
     };
     this.changeCurrentStyle = this.changeCurrentStyle.bind(this);
-
   }
-
 
   changeCurrentStyle(id) {
     this.setState({ currentStyleID: id });
   }
 
+  componentDidMount() {
+    axios.get('/products/38324')
+      .then((results) => {
+        console.log(results);
+      })
+      .catch((error) => {
+        console.log('this is not working', error);
+      });
+  }
 
   render() {
     return (
