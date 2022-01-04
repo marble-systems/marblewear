@@ -3,7 +3,7 @@ import Reviews from './Reviews/Reviews.jsx';
 import ProductOverview from './ProductDetails/ProductOverview.jsx';
 import QuestionList from './QandA/QuestionList.jsx';
 import RelatedItems from './RelatedItems/RelatedItems.jsx';
-import NavBar from './Navbar.jsx';
+import NavBar from './NavBar.jsx';
 
 import Reviewsdata from './Reviews/reviewsData.js';
 import QuestionListdata from './QandA/QandAListData.js';
