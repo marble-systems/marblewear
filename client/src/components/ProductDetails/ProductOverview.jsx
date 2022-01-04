@@ -12,7 +12,6 @@ function ProductOverview ({currentProduct, productStylesArray, currentStyleID, c
     <div>
       <div className="d-flex flex-row" >
         <div className="flex-column" style={{width: '50em', margin: '1em', position: 'relative'}}>
-          <h3>PRODUCT OVERVIEW</h3>
           <ImageGallery
             productStylesArray={productStylesArray}
             currentStyleID={currentStyleID}/>
