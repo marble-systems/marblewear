@@ -7,17 +7,17 @@ const Modal = ({ show, title, subtitle, body, onClose }) => {
     return null;
   }
   return (
-    <div id="my-modal" className="modal">
-      <div className="modal-content">
-        <div className="modal-header">
+    <div className="modal-component">
+      <div className="modal-component-content">
+        <div className="modal-component-header">
           <span onClick={onClose} className="close">&times;</span>
           <h2>{title}</h2>
           <h3>{subtitle}</h3>
         </div>
-        <div className="modal-body">
+        <div className="modal-component-body">
           {body()}
         </div>
-        <div className="modal-footer">
+        <div className="modal-component-footer">
         </div>
       </div>
     </div>
