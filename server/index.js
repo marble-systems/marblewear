@@ -10,9 +10,11 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+
+/* MAIN PRODUCT ID GET HANDLER */
+
 app.get('/products/:productID', (req, res) => {
   const productID = req.params.productID;
-
   let totalProductInfo = [api.getProductInfo(productID), api.getProductStyles(productID), api.getQuestions(productID), api.getReviews(productID), api.getReviewsMetadata(productID)];
   Promise.all(totalProductInfo)
     .then(results => {
@@ -22,13 +24,6 @@ app.get('/products/:productID', (req, res) => {
       res.status(503).send(error);
     });
 });
-
-
-
-
-
-
-
 
 
 

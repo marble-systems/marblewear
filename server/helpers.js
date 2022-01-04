@@ -12,7 +12,6 @@ module.exports = {
     return axios({
       url: `${url}/products/${productID}`,
       method: 'get',
-      // transformResponse: [function (data) { return data.data; }],
       headers: { 'Authorization': api_key }
     });
   },
@@ -20,7 +19,6 @@ module.exports = {
     return axios({
       url: `${url}/products/${productID}/styles`,
       method: 'get',
-      // transformResponse: [function (data) { return data.data; }],
       headers: { 'Authorization': api_key }
     });
   },
@@ -28,7 +26,6 @@ module.exports = {
     return axios({
       url: `${url}/reviews?product_id=${productID}`,
       method: 'get',
-      // transformResponse: [function (data) { return data.data; }],
       headers: { 'Authorization': api_key }
     });
   },
@@ -36,7 +33,6 @@ module.exports = {
     return axios({
       url: `${url}/reviews/meta?product_id=${productID}`,
       method: 'get',
-      // transformResponse: [function (data) { return data.data; }],
       headers: { 'Authorization': api_key }
     });
   },
@@ -44,7 +40,6 @@ module.exports = {
     return axios({
       url: `${url}/qa/questions?product_id=${productID}`,
       method: 'get',
-      // transformResponse: [function (data) { return data.data; }],
       headers: { 'Authorization': api_key }
     });
   }

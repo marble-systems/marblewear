@@ -15,7 +15,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentProductID: '39333',
+      currentProductID: '38323',
       currentStyleID: 234004,
       productStylesArray: productListDummyData.productStyles.results,
       currentProduct: productListDummyData.productToDisplay,
@@ -30,13 +30,13 @@ class App extends React.Component {
     this.setState({ currentStyleID: id });
   }
 
+
+  // this is a test function to show how to configure requests to the server -
   componentDidMount() {
-    axios.get('/products/38324')
+    const { currentProductID } = this.state;
+    axios.get(`/products/${currentProductID}`)
       .then((results) => {
         console.log(results);
-      })
-      .catch((error) => {
-        console.log('this is not working', error);
       });
   }
 
