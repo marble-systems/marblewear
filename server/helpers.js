@@ -1,7 +1,7 @@
 const axios = require('axios');
-
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx';
-const api_key = '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';
+const { api_key }= require('./config.js');
+const auth = { 'Authorization': api_key };
 
 axios.interceptors.response.use((response) => {
   return response.data;
@@ -12,35 +12,35 @@ module.exports = {
     return axios({
       url: `${url}/products/${productID}`,
       method: 'get',
-      headers: { 'Authorization': api_key }
+      headers: auth
     });
   },
   getProductStyles: (productID) => {
     return axios({
       url: `${url}/products/${productID}/styles`,
       method: 'get',
-      headers: { 'Authorization': api_key }
+      headers: auth
     });
   },
   getReviews: (productID) => {
     return axios({
       url: `${url}/reviews?product_id=${productID}`,
       method: 'get',
-      headers: { 'Authorization': api_key }
+      headers: auth
     });
   },
   getReviewsMetadata: (productID) => {
     return axios({
       url: `${url}/reviews/meta?product_id=${productID}`,
       method: 'get',
-      headers: { 'Authorization': api_key }
+      headers: auth
     });
   },
   getQuestions: (productID) => {
     return axios({
       url: `${url}/qa/questions?product_id=${productID}`,
       method: 'get',
-      headers: { 'Authorization': api_key }
+      headers: auth
     });
   }
 };
