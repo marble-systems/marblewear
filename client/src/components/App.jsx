@@ -40,7 +40,6 @@ class App extends React.Component {
         <ProductOverview
           currentProduct={this.state.currentProduct}
           productStylesArray={this.state.productStylesArray}
-          currentProductID={this.state.currentProductID}
           currentStyleID={this.state.currentStyleID}
           changeCurrentStyle={this.changeCurrentStyle}
         />

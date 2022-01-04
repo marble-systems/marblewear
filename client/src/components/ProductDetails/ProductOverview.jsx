@@ -7,7 +7,7 @@ import DropDownsAndButtons from './DropDownsAndButtons.jsx';
 import SloganDescription from './SloganDescription.jsx';
 
 
-function ProductOverview ({currentProduct,productStylesArray, currentProductID, currentStyleID, changeCurrentStyle}) {
+function ProductOverview ({currentProduct, productStylesArray, currentStyleID, changeCurrentStyle}) {
   return (
     <div>
       <div className="d-flex flex-row" >
@@ -15,7 +15,6 @@ function ProductOverview ({currentProduct,productStylesArray, currentProductID, 
           <h3>PRODUCT OVERVIEW</h3>
           <ImageGallery
             productStylesArray={productStylesArray}
-            currentProductID={currentProductID}
             currentStyleID={currentStyleID}/>
         </div>
 
@@ -23,12 +22,10 @@ function ProductOverview ({currentProduct,productStylesArray, currentProductID, 
           <StyleSelector
             productStylesArray={productStylesArray}
             currentStyleID={currentStyleID}
-            currentProductID={currentProductID}
             changeCurrentStyle={changeCurrentStyle}/>
           <DropDownsAndButtons
             productStylesArray={productStylesArray}
-            currentStyleID={currentStyleID}
-            currentProductID={currentProductID}/>
+            currentStyleID={currentStyleID}/>
         </div>
       </div>
 
