@@ -60,8 +60,8 @@ class App extends React.Component {
       <div>
         <NavBar />
         <ProductOverview
-          productList={this.state.productList}
-          currentProductID={this.state.currentProductID}
+          currentProduct={this.state.currentProduct}
+          productStylesArray={this.state.productStylesArray}
           currentStyleID={this.state.currentStyleID}
           changeCurrentStyle={this.changeCurrentStyle}
         />
