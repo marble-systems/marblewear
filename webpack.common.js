@@ -1,10 +1,25 @@
 
+const path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
-  entry: __dirname + '/client/src/index.jsx',
-  devtool: 'source-map',
-  mode: 'production',
+  entry: path.resolve(__dirname + '/client/src/index.jsx'),
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'client/dist/template.html',
+      inject: 'body'
+    })
+  ],
   module: {
     rules: [
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: 'html-loader',
+          }
+        ]
+      },
       {
         test: [/\.jsx$/],
         exclude: /node_modules/,
@@ -17,7 +32,7 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
@@ -30,8 +45,4 @@ module.exports = {
       },
     ]
   },
-  output: {
-    filename: 'bundle.js',
-    path: __dirname + '/client/dist'
-  }
 };
