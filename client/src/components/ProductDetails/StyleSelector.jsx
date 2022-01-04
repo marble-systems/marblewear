@@ -2,23 +2,13 @@
 import React from 'react';
 import './prodStyles.css';
 
-//can get rid of - simply get from
-function StyleSelector ({productStylesArray, currentStyleID, currentProductID, changeCurrentStyle}) {
-  // const getCurrentProductObject = (targetId, allProducts) => {
-  //   return allProducts.filter((product) => {
-  //     return product.product_id === targetId;
-  //   });
-  // };
-
-  // const currentProductObject = getCurrentProductObject(currentProductID, productStylesArray);
+function StyleSelector ({productStylesArray, currentStyleID, changeCurrentStyle}) {
 
   const getCurrentStyleObject = (targetStyleId, stylesArray) => {
     return stylesArray.filter((style) => {
       return style.style_id === targetStyleId;
     });
   };
-
-  // const stylesArray = currentProductObject[0]['results'];
 
   const currentStyleObject = getCurrentStyleObject(currentStyleID, productStylesArray);
 
