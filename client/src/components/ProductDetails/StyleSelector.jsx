@@ -4,6 +4,7 @@ import './prodStyles.css';
 
 function StyleSelector ({productStylesArray, currentStyleID, changeCurrentStyle}) {
 
+
   const getCurrentStyleObject = (targetStyleId, stylesArray) => {
     return stylesArray.filter((style) => {
       return style.style_id === targetStyleId;

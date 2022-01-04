@@ -40,7 +40,7 @@ function ImageGallery ({productStylesArray, currentStyleID}) {
 
 
   return (
-    <div className="container image-button-container">
+    <div className="container main-image-container">
       <img src={currentImage} />
       <input
         type="image"
@@ -56,7 +56,7 @@ function ImageGallery ({productStylesArray, currentStyleID}) {
 
       {imageGallery.map((image) =>
         // eslint-disable-next-line react/jsx-key
-        <div clasName="row">
+        <div className="row">
           <img
             className={setThumbnailClass(image)}
             src={image}
