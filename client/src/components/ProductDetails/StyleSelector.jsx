@@ -2,25 +2,25 @@
 import React from 'react';
 import './prodStyles.css';
 
+//can get rid of - simply get from
+function StyleSelector ({productStylesArray, currentStyleID, currentProductID, changeCurrentStyle}) {
+  // const getCurrentProductObject = (targetId, allProducts) => {
+  //   return allProducts.filter((product) => {
+  //     return product.product_id === targetId;
+  //   });
+  // };
 
-function StyleSelector ({styles, currentStyleID, currentProductID, changeCurrentStyle}) {
-  const getCurrentProductObject = (targetId, allProducts) => {
-    return allProducts.filter((product) => {
-      return product.product_id === targetId;
-    });
-  };
+  // const currentProductObject = getCurrentProductObject(currentProductID, productStylesArray);
 
-  const currentProductObject = getCurrentProductObject(currentProductID, styles);
-
-  const getStylesArray = (targetStyleId, stylesArray) => {
+  const getCurrentStyleObject = (targetStyleId, stylesArray) => {
     return stylesArray.filter((style) => {
       return style.style_id === targetStyleId;
     });
   };
 
-  const stylesArray = currentProductObject[0]['results'];
+  // const stylesArray = currentProductObject[0]['results'];
 
-  const currentStyleObject = getStylesArray(currentStyleID, stylesArray);
+  const currentStyleObject = getCurrentStyleObject(currentStyleID, productStylesArray);
 
 
   return (
@@ -28,7 +28,7 @@ function StyleSelector ({styles, currentStyleID, currentProductID, changeCurrent
       <h2>{currentStyleObject[0]['name']}</h2>
       <h4>{`$${currentStyleObject[0]['original_price']}`}</h4>
 
-      {styles[0]['results'].map((style) =>
+      {productStylesArray.map((style) =>
         <div clasName="row" key={style} style={{width: '20em', margin: '1em', position: 'relative'}}>
           <img
             className="styleThumbnail"

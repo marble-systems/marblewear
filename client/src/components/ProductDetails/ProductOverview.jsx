@@ -7,36 +7,32 @@ import DropDownsAndButtons from './DropDownsAndButtons.jsx';
 import SloganDescription from './SloganDescription.jsx';
 
 
-function ProductOverview ({productList, currentProductID, currentStyleID, changeCurrentStyle}) {
+function ProductOverview ({currentProduct, productStylesArray, currentStyleID, changeCurrentStyle}) {
   return (
     <div>
-
       <div className="d-flex flex-row" >
         <div className="flex-column" style={{width: '50em', margin: '1em', position: 'relative'}}>
           <h3>PRODUCT OVERVIEW</h3>
           <ImageGallery
-            styles={productList.productStyles}
-            currentProductID={currentProductID}
+            productStylesArray={productStylesArray}
             currentStyleID={currentStyleID}/>
         </div>
 
         <div className="d-flex flex-column" style={{width: '30em', margin: '1em', position: 'relative'}}>
           <StyleSelector
-            styles={productList.productStyles}
+            productStylesArray={productStylesArray}
             currentStyleID={currentStyleID}
-            currentProductID={currentProductID}
             changeCurrentStyle={changeCurrentStyle}/>
           <DropDownsAndButtons
-            productStyles={productList.productStyles}
-            currentStyleID={currentStyleID}
-            currentProductID={currentProductID}/>
+            productStylesArray={productStylesArray}
+            currentStyleID={currentStyleID}/>
         </div>
       </div>
 
       <div className="d-flex flex-row" style={{width: '50em', margin: '1em', position: 'relative'}}>
         <div>
           <SloganDescription
-            productList={productList}/>
+            currentProduct={currentProduct}/>
         </div>
       </div>
 
@@ -45,5 +41,6 @@ function ProductOverview ({productList, currentProductID, currentStyleID, change
 }
 
 export default ProductOverview;
+
 
 
