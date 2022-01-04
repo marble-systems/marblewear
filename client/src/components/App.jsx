@@ -3,11 +3,12 @@ import Reviews from './Reviews/Reviews.jsx';
 import ProductOverview from './ProductDetails/ProductOverview.jsx';
 import QuestionList from './QandA/QuestionList.jsx';
 import RelatedItems from './RelatedItems/RelatedItems.jsx';
+import NavBar from './Navbar.jsx';
 
 import Reviewsdata from './Reviews/reviewsData.js';
 import QuestionListdata from './QandA/QandAListData.js';
 import relatedItemsdata from './RelatedItems/relatedItemsData.js';
-import productListDummyData  from './ProductDetails/sampleData/productListDummyData.js';
+import productListDummyData from './ProductDetails/sampleData/productListDummyData.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,7 +16,8 @@ class App extends React.Component {
     this.state = {
       currentProductID: '39333',
       currentStyleID: 234004,
-      productList: productListDummyData,
+      productStylesArray: productListDummyData.productStyles.results,
+      currentProduct: productListDummyData.productToDisplay,
       reviews: [],
       questionList: QuestionListdata,
       relatedItems: relatedItemsdata,
@@ -24,26 +26,31 @@ class App extends React.Component {
     this.changeCurrentStyle = this.changeCurrentStyle.bind(this);
 
   }
+
+
   changeCurrentStyle(id) {
-    this.setState({currentStyleID: id});
+    this.setState({ currentStyleID: id });
   }
 
 
-  render () {
+  render() {
     return (
       <div>
+        <NavBar />
         <ProductOverview
-          productList={this.state.productList}
-          currentProductID={this.state.currentProductID}
+          currentProduct={this.state.currentProduct}
+          productStylesArray={this.state.productStylesArray}
           currentStyleID={this.state.currentStyleID}
           changeCurrentStyle={this.changeCurrentStyle}
         />
-        <Reviews productId={Reviewsdata}/>
-        <QuestionList
-          data={this.state.questionList.QuestionListdata.QuestionList}
-          currentProductID={this.state.currentProductID}
-          currentProductName={this.state.questionList.QuestionListdata.currentProductInfo.name}/>
-        <RelatedItems relatedItemsdata={this.state.relatedItems}/>
+        <div className="container">
+          <RelatedItems relatedItemsdata={this.state.relatedItems} />
+          <QuestionList
+            data={this.state.questionList.QuestionListdata.QuestionList}
+            currentProductID={this.state.currentProductID}
+            currentProductName={this.state.questionList.QuestionListdata.currentProductInfo.name}/>
+          <Reviews productId={Reviewsdata}/>
+        </div>
       </div>
     );
   }

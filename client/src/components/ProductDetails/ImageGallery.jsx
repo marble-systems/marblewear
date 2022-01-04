@@ -2,27 +2,14 @@
 import React, { useState } from 'react';
 import './prodStyles.css';
 
-function ImageGallery ({styles, currentProductID, currentStyleID}) {
+function ImageGallery ({productStylesArray, currentStyleID}) {
 
-  const getCurrentProductObject = (targetId, allProducts) => {
-    return allProducts.filter((product) => {
-      return product.product_id === targetId;
-    });
+  const getCurrentStyleObject = (targetStyleId, productStylesArray) => {return productStylesArray.filter((style) => style.style_id === targetStyleId);
   };
 
-  const currentProductObject = getCurrentProductObject(currentProductID, styles);
+  const currentStyleObject = getCurrentStyleObject(currentStyleID, productStylesArray);
 
-  const getStylesArray = (targetStyleId, stylesArray) => {
-    return stylesArray.filter((style) => {
-      return style.style_id === targetStyleId;
-    });
-  };
-
-  const stylesArray = currentProductObject[0]['results'];
-
-  const currentStyleObject = getStylesArray(currentStyleID, stylesArray);
-
-  const imageGallery = currentStyleObject[0]['photos'].map((photo) => photo.thumbnail_url);
+  const imageGallery = currentStyleObject[0].photos.map((photo)=> photo.thumbnail_url);
 
   const [currentImage, updateMainImage] = useState(imageGallery[0]);
 

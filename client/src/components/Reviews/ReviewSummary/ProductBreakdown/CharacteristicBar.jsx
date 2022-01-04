@@ -13,7 +13,7 @@ const characteristicScale = {
 const CharacteristicBar = ({ characteristic, value }) => {
   const percentage = Number(value) / 5 * 100;
   return (
-    <div>
+    <div style={{position: 'relative'}}>
       <div>
         {characteristic}
       </div>
