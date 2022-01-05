@@ -4,6 +4,7 @@ import ProductOverview from './ProductDetails/ProductOverview.jsx';
 import QuestionList from './QandA/QuestionList.jsx';
 import RelatedItems from './RelatedItems/RelatedItems.jsx';
 import NavBar from './Navbar.jsx';
+const axios = require('axios');
 
 import Reviewsdata from './Reviews/reviewsData.js';
 import QuestionListdata from './QandA/QandAListData.js';
@@ -14,24 +15,30 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentProductID: '39333',
+      currentProductID: '38323',
       currentStyleID: 234004,
       productStylesArray: productListDummyData.productStyles.results,
       currentProduct: productListDummyData.productToDisplay,
       reviews: [],
       questionList: QuestionListdata,
       relatedItems: relatedItemsdata,
-
     };
     this.changeCurrentStyle = this.changeCurrentStyle.bind(this);
-
   }
-
 
   changeCurrentStyle(id) {
     this.setState({ currentStyleID: id });
   }
 
+
+  // this is a test function to show how to configure requests to the server -
+  componentDidMount() {
+    const { currentProductID } = this.state;
+    axios.get(`/products/${currentProductID}`)
+      .then((results) => {
+        console.log(results);
+      });
+  }
 
   render() {
     return (
