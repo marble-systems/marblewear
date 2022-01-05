@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import './prodStyles.css';
 
-
 function DropDownsAndButtons ({productStylesArray, currentStyleID}) {
 
   const getCurrentStyleObject = (targetStyleId, stylesArray) => {
@@ -27,15 +26,6 @@ function DropDownsAndButtons ({productStylesArray, currentStyleID}) {
   for(var i = 1; i <inventory+1; i++){
     inventoryArray.push(i);
   }
-
-  //Need to finish this function in order for the inventory drop down to be dynamic according to size selected
-  const updateInventoryarray = (newInventory) => {
-    let inventoryArray = [];
-    for(var i = 1; i <inventory+1; i++){
-      inventoryArray.push(i);
-    }
-    return inventoryArray;
-  };
 
 
   return (

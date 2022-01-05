@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import './prodStyles.css';
 
 function ImageGallery ({productStylesArray, currentStyleID}) {
 
@@ -18,7 +17,6 @@ function ImageGallery ({productStylesArray, currentStyleID}) {
   const setThumbnailClass = (image) => {
     return image === currentImage ? 'imageThumbnailMain' : 'imageThumbnail';
   };
-
 
   const showNextImage = ()=>{
     if(currentMainImageIndex !== imageGallery.length-1) {

@@ -65,7 +65,8 @@ class App extends React.Component {
   render() {
     if (this.state.currentProductID) {
       return (
-        <div>
+        <div className="container">
+
           <NavBar />
           <ProductOverview
             currentProduct={this.state.currentProduct}
@@ -73,17 +74,16 @@ class App extends React.Component {
             currentStyleID={this.state.currentStyleID}
             changeCurrentStyle={this.changeCurrentStyle}
           />
-          <div className="container">
-            {/* <RelatedItems relatedItemsdata={this.state.relatedItems} /> */}
-            <QuestionList
-              data={this.state.questionList}
-              currentProductID={this.state.currentProductID}
-              currentProductName={this.state.currentProduct.name}/>
-            <Reviews
-              reviewsData={this.state.reviews}
-              currentProductID={this.state.currentProductID}
-            />
-          </div>
+          {/* <RelatedItems relatedItemsdata={this.state.relatedItems} /> */}
+          <QuestionList
+            data={this.state.questionList}
+            currentProductID={this.state.currentProductID}
+            currentProductName={this.state.currentProduct.name}/>
+          <Reviews
+            reviewsData={this.state.reviews}
+            currentProductID={this.state.currentProductID}
+          />
+
         </div>
       );
     } else {
