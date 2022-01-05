@@ -26,6 +26,7 @@ class ReviewListEntry extends React.Component {
       currentImage: '',
       modalShowing: false,
       reviewReported: false,
+      reviewHelpful: false
     };
     this.handleShowMoreClick = this.handleShowMoreClick.bind(this);
     this.handleToggleModalClick = this.handleToggleModalClick.bind(this);
@@ -43,22 +44,28 @@ class ReviewListEntry extends React.Component {
     this.setState({ currentImage, modalShowing });
   }
 
-  handleHelpfulClick() {
-    console.log('handleHelpfulClick');
-    // TODO: make a PUT request to /reviews/:review_id/helpful
-    // https://app-hrsei-api.herokuapp.com/api/fec2/:CAMPUS_CODE/
+  handleHelpfulClick(review_id) {
+    let reviewHelpful = true;
+    this.setState({ reviewHelpful });
+    axios.put(`/reviews/${review_id}/helpful`)
+      .then(res => {
+        //TODO: trigger get request to update
+        // review list tile
+      });
   }
 
-  handleReportClick() {
-    let reviewReported = !this.state.reviewReported;
+  handleReportClick(review_id) {
+    let reviewReported = true;
     this.setState({ reviewReported });
-    console.log('handleReportClick');
-    axios.puth('/reviews')
-    // TODO: make a PUT request to /reviews/:review_id/report
+    axios.put(`/reviews/${review_id}/report`)
+      .then(res => {
+        //TODO: trigger get request to update
+        // review list tile
+      });
   }
 
   render() {
-    let { expanded, modalShowing, currentImage, reviewReported } = this.state;
+    let { expanded, modalShowing, currentImage, reviewReported, reviewHelpful } = this.state;
     let { review } = this.props;
     let { rating, summary, recommend, response, body, date, reviewer_name, helpfulness, photos, review_id } = review;
     let modalImage = () => (<img src={currentImage}></img>);
@@ -128,14 +135,14 @@ class ReviewListEntry extends React.Component {
         {/* HELPFUL? YES REPORT */}
         <span>
           Helpful? &nbsp;
-          <a
-            onClick={this.handleHelpfulClick}>
-            Yes
-          </a>
+          { reviewHelpful
+            ? <span>Yes</span>
+            : <a onClick={()=>{this.handleHelpfulClick(review_id);}}>Yes</a>
+          }
           {` (${helpfulness}) | `}
           { reviewReported
             ? <span>Reported</span>
-            : <a onClick={this.handleReportClick}>Report</a>}
+            : <a onClick={()=>{this.handleReportClick(review_id);}}>Report</a>}
         </span>
       </div>
     );
