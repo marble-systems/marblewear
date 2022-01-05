@@ -8,6 +8,9 @@ axios.interceptors.response.use((response) => {
 });
 
 module.exports = {
+
+  /* MAIN HANDLER HELPERS */
+
   getProductInfo: (productID) => {
     return axios({
       url: `${url}/products/${productID}`,
@@ -42,5 +45,46 @@ module.exports = {
       method: 'get',
       headers: auth
     });
+  },
+
+  /* RATINGS AND REVIEWS HELPERS */
+
+  markReview: (review_id, putType) => {
+    return axios({
+      url: `${url}/reviews/${review_id}/${putType}`,
+      method: 'put',
+      headers: auth
+    });
+  },
+
+  postReview: (reviewParams) => {
+
+  },
+
+  /* QUESTIONS AND ANSWERS HELPERS */
+
+  markQuestion: (question_id, putType) => {
+    return axios({
+      url: `${url}/qa/questions/${question_id}/${putType}`,
+      method: 'put',
+      headers: auth
+    });
+  },
+
+  markAnswer: (answer_id, putType) => {
+    return axios({
+      url: `${url}/qa/answers/${answer_id}/${putType}`,
+      method: 'put',
+      headers: auth
+    });
+  },
+
+  postQuestion: (questionParams) => {
+    const { body, name, email, product_id } = questionParams;
+    return axios({
+      url: `${url}/qa/questions?body=${body}&name=${name}&email=${email}&product_id=${product_id}`,
+      method: 'post',
+    });
   }
+
 };

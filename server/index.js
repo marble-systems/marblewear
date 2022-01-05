@@ -25,6 +25,37 @@ app.get('/products/:productID', (req, res) => {
     });
 });
 
+/* R&R POST/PUT HANDLERS */
+
+app.put('/reviews/:review_id/:type', (req, res) => {
+  const reviewID = req.params.review_id;
+  const type = req.params.type;
+  api.markReview(reviewID, type)
+    .then(() => {
+      res.status(204).send();
+    })
+    .catch((err) => {
+      res.status(503).send(err);
+    });
+});
+
+/* app.post('/reviews) - to be implemented */
+
+/* Q&A POST/PUT HANDLERS */
+
+app.put('/qa/questions/:question_id/:type', (req, res) => {
+  const questionID = req.params.question_id;
+  const type = req.params.type;
+  api.markReview(questionID, type)
+    .then(() => {
+      res.status(204).send();
+    })
+    .catch((err) => {
+      res.status(503).send(err);
+    });
+});
+
+
 
 
 
