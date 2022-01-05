@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Stars from '../../../SharedComponents/Stars.jsx';
 import Modal from '../../../SharedComponents/Modal.jsx';
+import axios from 'axios';
 
 const SUMMARY_CHAR_LIMIT = 60;
 const BODY_CHAR_LIMIT = 250;
@@ -26,6 +27,10 @@ class ReviewListEntry extends React.Component {
       modalShowing: false,
       reviewReported: false,
     };
+    this.handleShowMoreClick = this.handleShowMoreClick.bind(this);
+    this.handleToggleModalClick = this.handleToggleModalClick.bind(this);
+    this.handleHelpfulClick = this.handleHelpfulClick.bind(this);
+    this.handleReportClick = this.handleReportClick.bind(this);
   }
 
   handleShowMoreClick() {
@@ -48,18 +53,18 @@ class ReviewListEntry extends React.Component {
     let reviewReported = !this.state.reviewReported;
     this.setState({ reviewReported });
     console.log('handleReportClick');
+    axios.puth('/reviews')
     // TODO: make a PUT request to /reviews/:review_id/report
   }
 
   render() {
     let { expanded, modalShowing, currentImage, reviewReported } = this.state;
     let { review } = this.props;
-    let { rating, summary, recommend, response, body, date, reviewer_name, helpfulness, photos } = review;
+    let { rating, summary, recommend, response, body, date, reviewer_name, helpfulness, photos, review_id } = review;
     let modalImage = () => (<img src={currentImage}></img>);
 
     return (
       <div className="review-tile">
-
         {/* STARS USERNAME & DATE */}
         <div>
           <Stars rating={rating} />
@@ -79,7 +84,7 @@ class ReviewListEntry extends React.Component {
             ? body
             : <span>{body.substring(0, BODY_CHAR_LIMIT)}...
               <a
-                onClick={this.handleShowMoreClick.bind(this)}>
+                onClick={this.handleShowMoreClick(this)}>
                 Show more
               </a>
             </span>}
@@ -105,7 +110,7 @@ class ReviewListEntry extends React.Component {
           {photos.map((url, idx) => {
             return (
               <div onClick={() => { this.handleToggleModalClick(url); }}
-                key={`img-${url}-${idx}`}
+                key={`img-${review_id}-${idx}`}
                 className="review-tile-image">
                 <img src={url} width='50px' />
               </div>
@@ -118,19 +123,19 @@ class ReviewListEntry extends React.Component {
         <Modal
           show={modalShowing}
           body={modalImage}
-          onClose={this.handleToggleModalClick.bind(this)}/>
+          onClose={this.handleToggleModalClick}/>
 
         {/* HELPFUL? YES REPORT */}
         <span>
           Helpful? &nbsp;
           <a
-            onClick={this.handleHelpfulClick.bind(this)}>
+            onClick={this.handleHelpfulClick}>
             Yes
           </a>
           {` (${helpfulness}) | `}
           { reviewReported
             ? <span>Reported</span>
-            : <a onClick={this.handleReportClick.bind(this)}>Report</a>}
+            : <a onClick={this.handleReportClick}>Report</a>}
         </span>
       </div>
     );
