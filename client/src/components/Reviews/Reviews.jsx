@@ -31,6 +31,7 @@ class Reviews extends React.Component {
           <ReviewList
             currentProductName={currentProductName}
             starFilter={starFilter}
+            currentProductID={currentProductID}
             reviews={reviews.results} />
         </div>
       </div>
