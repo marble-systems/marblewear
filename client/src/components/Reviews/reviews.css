@@ -1,10 +1,28 @@
+:root {
+  --modal-duration: 1s;
+  --modal-color: #428bca;
+}
+
 h3 {
   font-size: 2em;
 }
 
-a, button {
+a {
   cursor: pointer;
   margin-right: 10px;
+}
+
+.button {
+  background: #428bca;
+  padding: 1em 2em;
+  color: #fff;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #3876ac;
 }
 
 /* ReviewList Component */
@@ -17,4 +35,101 @@ a, button {
   margin-top: 10px;
   display: flex;
   flex-direction: row;
+}
+
+/* MODAL COMPONENT */
+.modal-component {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-component-content {
+  margin: 10% auto;
+  width: 60%;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+}
+
+.modal-component-header h2,
+.modal-component-footer h3 {
+  margin: 0;
+}
+
+.modal-component-header {
+  background: var(--modal-color);
+  padding: 15px;
+  color: #fff;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.modal-component-body {
+  padding: 10px 20px;
+  background: #fff;
+}
+
+.modal-component-footer {
+  background: var(--modal-color);
+  padding: 10px;
+  color: #fff;
+  text-align: center;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.close {
+  color: #ccc;
+  float: right;
+  font-size: 30px;
+  color: #fff;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* ProductBreakdown Component */
+.product-breakdown {
+  width: 14em;
+  position: relative;
+}
+
+.bar-segment {
+  margin-right: 1%;
+  height: 90%;
+  width: 30%;
+  background-color: gray;
+  margin: 1;
+}
+
+.subtext-container {
+  display : flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.6em;
+}
+
+.subtext-label {
+  display: inline-block;
+}
+
+.triangular-icon {
+  display: flex;
+  position: absolute;
+  width: 10px;
+}
+
+/* Form Component */
+.required:after {
+  content:" *";
+  color: red;
 }

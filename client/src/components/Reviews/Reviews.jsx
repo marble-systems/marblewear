@@ -1,7 +1,6 @@
 import React from 'react';
 import ReviewSummary from './ReviewSummary/ReviewSummary.jsx';
 import ReviewList from './ReviewList/ReviewList.jsx';
-import sampleData from './reviewsData.js';
 import './reviews.css';
 
 class Reviews extends React.Component {
@@ -18,8 +17,9 @@ class Reviews extends React.Component {
   }
 
   render() {
-    let { reviewsMetadata, reviews } = sampleData;
-    let { starFilter, productId } = this.state;
+    let { starFilter } = this.state;
+    let { reviewsData, currentProductID } = this.props;
+    let { reviewsMetadata, reviews } = reviewsData;
     return (
       <div>
         <h3>RATINGS &#38; REVIEWS</h3>
@@ -28,6 +28,7 @@ class Reviews extends React.Component {
             reviewsMetadata={reviewsMetadata}
             updateFilters={this.updateFilters.bind(this)}/>
           <ReviewList
+            productName={'Adidas Sneakers'}
             starFilter={starFilter}
             reviews={reviews.results} />
         </div>
@@ -35,4 +36,7 @@ class Reviews extends React.Component {
     );
   }
 }
+
+
+
 export default Reviews;

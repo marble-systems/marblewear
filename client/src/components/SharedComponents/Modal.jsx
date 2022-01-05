@@ -1,27 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../Reviews/reviews.css';
 
-const Modal = ({show, body, onClose}) => {
+const Modal = ({ show, title, subtitle, body, onClose }) => {
   if (!show) {
     return null;
   }
   return (
-    <div style={{
-      background: 'rgba(56, 47, 52, 0.08)',
-      border: '1px solid #ccc',
-      position: 'fixed',
-      top: '25%',
-      left: '25%'}}>
-      <div className="actions">
-        <div style={{position: 'relative', }} className="modal-body">
-          <a style={{ textDecoration: 'none', color: 'black', position: 'absolute', top: '20px', right: '20px', cursor: 'pointer'}}
-            className="toggle-button"
-            onClick={onClose}>
-            X
-          </a>
-          <div style={{width: '100%', height: 'auto'}}>
-            {body()}
-          </div>
+    <div className="modal-component">
+      <div className="modal-component-content">
+        <div className="modal-component-header">
+          <span onClick={onClose} className="close">&times;</span>
+          <h2>{title}</h2>
+          <h3>{subtitle}</h3>
+        </div>
+        <div className="modal-component-body">
+          {body()}
+        </div>
+        <div className="modal-component-footer">
         </div>
       </div>
     </div>
@@ -32,8 +28,9 @@ Modal.propTypes = {
   show: PropTypes.bool.isRequired,
   body: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string,
+  position: PropTypes.number
 };
-
-// reference https://blog.bitsrc.io/build-a-simple-modal-component-with-react-16decdc111a6
 
 export default Modal;

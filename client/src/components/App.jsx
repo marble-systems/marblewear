@@ -1,41 +1,70 @@
 import React from 'react';
+import axios from 'axios';
 import Reviews from './Reviews/Reviews.jsx';
 import ProductOverview from './ProductDetails/ProductOverview.jsx';
 import QuestionList from './QandA/QuestionList.jsx';
 import RelatedItems from './RelatedItems/RelatedItems.jsx';
-import NavBar from './Navbar.jsx';
-
-import Reviewsdata from './Reviews/reviewsData.js';
-import QuestionListdata from './QandA/QandAListData.js';
-import relatedItemsdata from './RelatedItems/relatedItemsData.js';
-import productListDummyData from './ProductDetails/sampleData/productListDummyData.js';
+import NavBar from './NavBar.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentProductID: '39333',
+      currentProductID: '',
       currentStyleID: 234004,
-      productStylesArray: productListDummyData.productStyles.results,
-      currentProduct: productListDummyData.productToDisplay,
+      productStylesArray: [],
+      currentProduct: [],
       reviews: [],
-      questionList: QuestionListdata,
-      relatedItems: relatedItemsdata,
-
+      questionList: [],
+      relatedItems: [],
     };
+    this.cachedProducts = {};
     this.changeCurrentStyle = this.changeCurrentStyle.bind(this);
-
   }
 
+  componentDidMount() {
+    this.getProductData('39333');
+  }
+
+  getProductData(productId) {
+    let cachedProduct = this.cachedProducts[productId];
+    if (cachedProduct) {
+      let {currentProduct, productStylesArray, reviews, questionList} = cachedProduct;
+      this.setState({
+        currentProductID: productId,
+        currentProduct,
+        productStylesArray,
+        reviews,
+        questionList
+      });
+    } else {
+      axios.get(`./products/${productId}`)
+        .then(({data}) => {
+          let productInfo = {
+            currentProduct: data[0],
+            productStylesArray: data[1].results,
+            reviews: {
+              reviewsMetadata: data[4],
+              reviews: data[3],
+            },
+            questionList: data[2]
+          };
+          this.cachedProducts[productId] = productInfo;
+          this.getProductData(productId);
+        })
+        .catch(err => {
+          alert(`Error encountered: ${err}`);
+        });
+    }
+  }
 
   changeCurrentStyle(id) {
     this.setState({ currentStyleID: id });
   }
 
-
   render() {
-    return (
-      <div className="container">
+    if (this.state.currentProductID) {
+      return (
         <div>
           <NavBar />
           <ProductOverview
@@ -44,15 +73,24 @@ class App extends React.Component {
             currentStyleID={this.state.currentStyleID}
             changeCurrentStyle={this.changeCurrentStyle}
           />
-          <RelatedItems relatedItemsdata={this.state.relatedItems} />
-          <QuestionList
-            data={this.state.questionList.QuestionListdata.QuestionList}
-            currentProductID={this.state.currentProductID}
-            currentProductName={this.state.questionList.QuestionListdata.currentProductInfo.name}/>
-          <Reviews productId={Reviewsdata}/>
+          <div className="container">
+            {/* <RelatedItems relatedItemsdata={this.state.relatedItems} /> */}
+            <QuestionList
+              data={this.state.questionList}
+              currentProductID={this.state.currentProductID}
+              currentProductName={this.state.currentProduct.name}/>
+            <Reviews
+              reviewsData={this.state.reviews}
+              currentProductID={this.state.currentProductID}
+            />
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div></div>
+      );
+    }
   }
 }
 
