@@ -30,7 +30,7 @@ function ImageGallery ({productStylesArray, currentStyleID}) {
 
   const showPreviousImage = ()=>{
     if(currentMainImageIndex > 0) {
-      // updateMainImageIndex(currentMainImageIndex-1);
+      updateMainImageIndex(currentMainImageIndex-1);
       const newImg = imageGallery.filter((image)=> imageGallery.indexOf(image) === currentMainImageIndex-1);
       updateMainImage(newImg);
 
@@ -59,6 +59,7 @@ function ImageGallery ({productStylesArray, currentStyleID}) {
         // eslint-disable-next-line react/jsx-key
         <div className="row">
           <img
+            key={imageGallery[image]}
             className={setThumbnailClass(image)}
             src={image}
             onClick={() => {
