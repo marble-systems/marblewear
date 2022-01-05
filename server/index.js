@@ -77,7 +77,7 @@ app.post('/reviews', (req, res) => {
 });
 
 app.put('/reviews/:review_id/:type', (req, res) => {
-  const { review_id } = req.params.review_id;
+  const { review_id } = req.params;
   const type = req.params.type;
   api.markReview(review_id, type)
     .then(() => {
