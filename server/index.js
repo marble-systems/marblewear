@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const port = 3070;
-const api = require('/.helpers.js');
+const api = require('./helpers.js');
 
 
 const app = express();

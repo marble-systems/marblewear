@@ -7,5 +7,14 @@ module.exports = merge(common, {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, '/client/dist')
-  }
+  },
+  devServer: {
+    hot: true,
+    proxy: {
+      '/': {
+        target: 'http://localhost:3070',
+      }
+    }
+  },
+
 });

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "webpack-dev-server --config webpack.dev.js --open",
+    "start": "webpack-dev-server --config webpack.dev.js --open --port 3000",
     "build": "webpack --config webpack.prod.js",
     "start-server": "npx nodemon server/index.js"
   },
