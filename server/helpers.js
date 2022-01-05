@@ -95,6 +95,15 @@ module.exports = {
     });
   },
 
+  postAnswer: (question_id, answerParams) => {
+    return axios({
+      url: `${url}/qa/questions/${question_id}/answers`,
+      method: 'post',
+      data: answerParams,
+      headers: auth
+    });
+  },
+
   /* RATINGS AND REVIEWS HELPERS */
 
   markReview: (review_id, putType) => {

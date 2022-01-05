@@ -15,9 +15,9 @@ app.use(express.json());
 
 /* PRODUCT DATA COMPONENT INITIALIZER */
 
-app.get('/products/:productID', (req, res) => {
-  const productID = req.params.productID;
-  let totalProductInfo = [api.getProductInfo(productID), api.getProductStyles(productID), api.getQuestions(productID), api.getReviews(productID), api.getReviewsMetadata(productID)];
+app.get('/products/:product_id', (req, res) => {
+  const { product_id } = req.params;
+  let totalProductInfo = [api.getProductInfo(product_id), api.getProductStyles(product_id), api.getQuestions(product_id), api.getReviews(product_id), api.getReviewsMetadata(product_id)];
   Promise.all(totalProductInfo)
     .then(results => {
       res.status(200).send(results);
@@ -53,8 +53,8 @@ app.post('/cart', (req, res) => {
 /* RELATED PRODUCT HANDLERS */
 
 app.get('/products/:product_id/related', (req, res) => {
-  const productID = req.params.product_id;
-  api.getRelatedProducts(productID)
+  const { product_id } = req.params.product_id;
+  api.getRelatedProducts(product_id)
     .then(response => {
       res.status(200).send(response);
     })
@@ -66,7 +66,6 @@ app.get('/products/:product_id/related', (req, res) => {
 /* R&R POST/PUT HANDLERS */
 
 app.post('/reviews', (req, res) => {
-  console.log('you accessed the server, here is the data: ', req.body);
   api.postReview(req.body)
     .then((success) => {
       res.status(201).send(success);
@@ -77,9 +76,9 @@ app.post('/reviews', (req, res) => {
 });
 
 app.put('/reviews/:review_id/:type', (req, res) => {
-  const reviewID = req.params.review_id;
+  const { review_id } = req.params.review_id;
   const type = req.params.type;
-  api.markReview(reviewID, type)
+  api.markReview(review_id, type)
     .then(() => {
       res.status(204).send();
     })
@@ -100,10 +99,22 @@ app.post('/qa/questions', (req, res) => {
     });
 });
 
+app.post('/qa/questions/:question_id/answers', (req, res) => {
+  const { question_id } = req.params;
+  const { answerData } = req.body;
+  api.postAnswer(question_id, answerData)
+    .then((success) => {
+      res.status(201).send(success);
+    })
+    .catch((err) => {
+      res.status(503).send(err);
+    });
+});
+
 app.put('/qa/questions/:question_id/:type', (req, res) => {
-  const questionID = req.params.question_id;
+  const { question_id } = req.params;
   const type = req.params.type;
-  api.markQuestion(questionID, type)
+  api.markQuestion(question_id, type)
     .then(() => {
       res.status(204).send();
     })
@@ -113,9 +124,9 @@ app.put('/qa/questions/:question_id/:type', (req, res) => {
 });
 
 app.put('/qa/answers/:answer_id/:type', (req, res) => {
-  const answerID = req.params.answer_id;
+  const { answer_id } = req.params;
   const type = req.params.type;
-  api.markAnswer(answerID, type)
+  api.markAnswer(answer_id, type)
     .then(() => {
       res.status(204).send();
     })
