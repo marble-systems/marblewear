@@ -11,7 +11,7 @@ module.exports = merge(common, {
   devServer: {
     hot: true,
     proxy: {
-      '/products': {
+      '/': {
         target: 'http://localhost:3070',
       }
     }
