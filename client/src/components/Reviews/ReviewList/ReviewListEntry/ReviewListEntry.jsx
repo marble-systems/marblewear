@@ -23,7 +23,8 @@ class ReviewListEntry extends React.Component {
     this.state = {
       expanded: false,
       currentImage: '',
-      modalShowing: false
+      modalShowing: false,
+      reviewReported: false,
     };
   }
 
@@ -44,28 +45,32 @@ class ReviewListEntry extends React.Component {
   }
 
   handleReportClick() {
+    let reviewReported = !this.state.reviewReported;
+    this.setState({ reviewReported });
     console.log('handleReportClick');
     // TODO: make a PUT request to /reviews/:review_id/report
   }
 
   render() {
-    let { expanded, modalShowing, currentImage } = this.state;
+    let { expanded, modalShowing, currentImage, reviewReported } = this.state;
     let { review } = this.props;
     let { rating, summary, recommend, response, body, date, reviewer_name, helpfulness, photos } = review;
     let modalImage = () => (<img src={currentImage}></img>);
 
     return (
-      <div style={{ borderBottom: '1px solid gray', width: '24em' }}>
+      <div className="review-tile">
 
         {/* STARS USERNAME & DATE */}
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div>
           <Stars rating={rating} />
           {`${reviewer_name}, ${formatDate(date)}`}
         </div>
 
         {/* REVIEW SUMMARY */}
-        <div style={{ fontWeight: 'bold' }}>
-          {summary.length > SUMMARY_CHAR_LIMIT ? `${summary.substring(0, SUMMARY_CHAR_LIMIT)}...` : summary}
+        <div className="review-tile-summary">
+          {summary.length > SUMMARY_CHAR_LIMIT
+            ? `${summary.substring(0, SUMMARY_CHAR_LIMIT)}...`
+            : summary}
         </div>
 
         {/* REVIEW BODY */}
@@ -74,7 +79,6 @@ class ReviewListEntry extends React.Component {
             ? body
             : <span>{body.substring(0, BODY_CHAR_LIMIT)}...
               <a
-                style={{ textDecoration: 'underline', cursor: 'pointer' }}
                 onClick={this.handleShowMoreClick.bind(this)}>
                 Show more
               </a>
@@ -97,10 +101,12 @@ class ReviewListEntry extends React.Component {
         </div>
 
         {/* IMAGES */}
-        <div style={{ display: 'flex', flexDirection: 'row', flexShrink: 1 }}>
+        <div className="review-tile-images">
           {photos.map((url, idx) => {
             return (
-              <div onClick={() => { this.handleToggleModalClick(url); }} key={idx} style={{ margin: '5px', cursor: 'pointer' }}>
+              <div onClick={() => { this.handleToggleModalClick(url); }}
+                key={`img-${url}-${idx}`}
+                className="review-tile-image">
                 <img src={url} width='50px' />
               </div>
             );
@@ -117,12 +123,14 @@ class ReviewListEntry extends React.Component {
         {/* HELPFUL? YES REPORT */}
         <span>
           Helpful? &nbsp;
-          <a style={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={this.handleHelpfulClick.bind(this)}>
+          <a
+            onClick={this.handleHelpfulClick.bind(this)}>
             Yes
           </a>
           {` (${helpfulness}) | `}
-          <a style={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={this.handleReportClick.bind(this)}>
-            Report
+          <a
+            onClick={this.handleReportClick.bind(this)}>
+            { reviewReported ? 'Reported' : 'Report' }
           </a>
         </span>
       </div>
