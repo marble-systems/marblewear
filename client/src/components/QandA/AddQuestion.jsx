@@ -13,14 +13,14 @@ class AddQuestion extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(e) { // this function is not yet implemented FIX ME
-    if (e.target === 'question') { // determine distinguishing target value for corresponding input -> use getElementById?
+  handleInputChange(e) {
+    if (e.target.id === 'formControlQuestionEntry') {
       this.setState({questionEntry: e.target.value});
     }
-    if (e.target === 'nickname') {
+    if (e.target.id === 'formControlNicknameEntry') {
       this.setState({nicknameEntry: e.target.value});
     }
-    if (e.target === 'email') {
+    if (e.target.id === 'formControlEmailEntry') {
       this.setState({emailEntry: e.target.value});
     }
   }

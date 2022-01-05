@@ -14,14 +14,14 @@ class AddAnswer extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(e) { // this function isn't yet implemented. FIX ME
-    if (e.target === 'answer') { // determine distinguishing target value for corresponding input
-      this.setState({ answerEntry: e.target.value });
+  handleInputChange(e) {
+    if (e.target.id === 'formControlAnswerEntry') {
+      this.setState({ questionEntry: e.target.value });
     }
-    if (e.target === 'nickname') {
+    if (e.target.id === 'formControlNicknameEntry') {
       this.setState({ nicknameEntry: e.target.value });
     }
-    if (e.target === 'email') {
+    if (e.target.id === 'formControlEmailEntry') {
       this.setState({ emailEntry: e.target.value });
     }
   }
@@ -51,8 +51,8 @@ class AddAnswer extends React.Component {
               </div>
               <div className="modal-body">
                 <div className="mb-3">
-                  <label htmlFor="formControlQuestionEntry" className="form-label">Your Question (mandatory)</label>
-                  <textarea onChange={this.handleChange} className="form-control" id="formControlQuestionEntry" rows="10" maxLength="1000" placeholder="Type your answer here (max characters: 1000)"></textarea>
+                  <label htmlFor="formControlQuestionEntry" className="form-label">Your Answer (mandatory)</label>
+                  <textarea onChange={this.handleChange} className="form-control" id="formControlAnswerEntry" rows="10" maxLength="1000" placeholder="Type your answer here (max characters: 1000)"></textarea>
                 </div>
                 <div className="mb-3">
                   <label htmlFor="formControlNicknameEntry" className="form-label">What is your nickname (optional)</label>
