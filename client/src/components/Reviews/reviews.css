@@ -8,6 +8,7 @@ h3 {
 }
 
 a {
+  text-decoration: underline;
   cursor: pointer;
   margin-right: 10px;
 }
@@ -35,6 +36,32 @@ a {
   margin-top: 10px;
   display: flex;
   flex-direction: row;
+}
+
+/* ReviewListEntry Component */
+.review-tile {
+  border-bottom: 1px solid gray;
+  width: 24em;
+}
+
+.review-tile-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.review-tile-summary {
+  font-weight: bold;
+}
+
+.review-tile-images {
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 1;
+}
+
+.review-tile-image {
+  margin: 5px;
+  cursor: pointer;
 }
 
 /* MODAL COMPONENT */
