@@ -1,10 +1,32 @@
 import axios from 'axios';
 
 const parserFunctions = {
-  getRelatedItems: (productId) => {
-    axios.get(`/products/${productId}/related`)
-      .then(({data}) => console.log(data))
-      .catch(err => console.log(err));
+  getRelatedItems: (productId, cachedProducts) => {
+    return axios.get(`/products/${productId}/related`)
+      .then(({data}) => {
+        let relatedProducts = data.map(product => {
+          if (cachedProducts[product]) {
+            return ['find'];
+          } else {
+            return axios.get(`./products/${productId}`)
+              .then(({data}) => {
+                let productInfo = {
+                  currentProduct: data[0],
+                  productStylesArray: data[1].results,
+                  reviews: {
+                    reviewsMetadata: data[4],
+                    reviews: data[3],
+                  },
+                  questionList: data[2]
+                };
+                return productInfo;});
+          }
+        });
+        return Promise.all(relatedProducts);
+      })
+      .catch(err => {
+        alert(`Error encountered: ${err}`);
+      });
   }
 
 

@@ -31,14 +31,16 @@ class App extends React.Component {
     let cachedProduct = this.cachedProducts[productId];
     if (cachedProduct) {
       let {currentProduct, productStylesArray, reviews, questionList} = cachedProduct;
-      parserFunctions.getRelatedItems(productId);
-      this.setState({
-        currentProductID: productId,
-        currentProduct,
-        productStylesArray,
-        reviews,
-        questionList
-      });
+      parserFunctions.getRelatedItems(productId, this.cachedProducts)
+        .then(relatedItemsData => {
+          this.setState({
+            currentProductID: productId,
+            currentProduct,
+            productStylesArray,
+            reviews,
+            questionList
+          });
+        });
     } else {
       axios.get(`./products/${productId}`)
         .then(({data}) => {
