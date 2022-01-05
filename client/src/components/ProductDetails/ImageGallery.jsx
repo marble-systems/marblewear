@@ -13,23 +13,68 @@ function ImageGallery ({productStylesArray, currentStyleID}) {
 
   const [currentImage, updateMainImage] = useState(imageGallery[0]);
 
+  const [currentMainImageIndex, updateMainImageIndex] = useState(0);
+
   const setThumbnailClass = (image) => {
     return image === currentImage ? 'imageThumbnailMain' : 'imageThumbnail';
   };
 
 
+  const showNextImage = ()=>{
+    if(currentMainImageIndex !== imageGallery.length-1) {
+      updateMainImageIndex(currentMainImageIndex+1);
+      const newImg = imageGallery.filter((image)=> imageGallery.indexOf(image) === currentMainImageIndex+1);
+      updateMainImage(newImg);
+    }
+  };
+
+  const showPreviousImage = ()=>{
+    if(currentMainImageIndex > 0) {
+      updateMainImageIndex(currentMainImageIndex-1);
+      const newImg = imageGallery.filter((image)=> imageGallery.indexOf(image) === currentMainImageIndex-1);
+      updateMainImage(newImg);
+
+    }
+  };
+
+
   return (
-    <div clasName="container">
-      <img className="mainImage" src={currentImage}/>
+    <div className="container">
+
+      <div className="main-image-container">
+        <img  className="mainImage" src={currentImage} />
+        <input
+          type="image"
+          className="previousButton"
+          src="https://img.icons8.com/ios-glyphs/50/000000/long-arrow-left.png"
+          onClick= { () => showPreviousImage()}/>
+        <input
+          type="image"
+          className="nextButton"
+          src="https://img.icons8.com/ios-glyphs/50/000000/long-arrow-right.png"
+          onClick= { () => showNextImage() }/>
+      </div>
+
       {imageGallery.map((image) =>
         // eslint-disable-next-line react/jsx-key
-        <div clasName="row">
+        <div className="row">
           <img
+            key={imageGallery[image]}
             className={setThumbnailClass(image)}
             src={image}
-            onClick={() => updateMainImage(image)}/>
+            onClick={() => {
+              let indx = imageGallery.indexOf(image);
+              updateMainImageIndex(indx);
+              updateMainImage(image);
+            }
+            }/>
+
         </div>
       )}
+      <input
+        type="image"
+        src="https://img.icons8.com/material-rounded/24/000000/chevron-down.png"
+        onClick= { () => showNextImage() }/>
     </div>
   );
 }
