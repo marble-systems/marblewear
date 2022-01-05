@@ -5,6 +5,7 @@ import ProductOverview from './ProductDetails/ProductOverview.jsx';
 import QuestionList from './QandA/QuestionList.jsx';
 import RelatedItems from './RelatedItems/RelatedItems.jsx';
 import NavBar from './NavBar.jsx';
+import parserFunctions from '../parserFunctions.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -30,6 +31,7 @@ class App extends React.Component {
     let cachedProduct = this.cachedProducts[productId];
     if (cachedProduct) {
       let {currentProduct, productStylesArray, reviews, questionList} = cachedProduct;
+      parserFunctions.getRelatedItems(productId);
       this.setState({
         currentProductID: productId,
         currentProduct,
