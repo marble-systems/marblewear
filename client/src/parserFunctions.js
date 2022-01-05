@@ -8,7 +8,7 @@ const parserFunctions = {
           if (cachedProducts[product]) {
             return ['find'];
           } else {
-            return axios.get(`./products/${productId}`)
+            return axios.get(`./products/${product}`)
               .then(({data}) => {
                 let productInfo = {
                   currentProduct: data[0],
