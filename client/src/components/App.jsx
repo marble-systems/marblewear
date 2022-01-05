@@ -32,13 +32,14 @@ class App extends React.Component {
     if (cachedProduct) {
       let {currentProduct, productStylesArray, reviews, questionList} = cachedProduct;
       parserFunctions.getRelatedItems(productId, this.cachedProducts)
-        .then(relatedItemsData => {
+        .then(relatedItems => {
           this.setState({
             currentProductID: productId,
             currentProduct,
             productStylesArray,
             reviews,
-            questionList
+            questionList,
+            relatedItems
           });
         });
     } else {
@@ -78,15 +79,14 @@ class App extends React.Component {
             changeCurrentStyle={this.changeCurrentStyle}
           />
           <div className="container">
-            {/* <RelatedItems relatedItemsdata={this.state.relatedItems} /> */}
+            <RelatedItems relatedProductsInfo={this.state.relatedItems} currentProduct={this.state.currentProduct}/>
             <QuestionList
               data={this.state.questionList}
               currentProductID={this.state.currentProductID}
               currentProductName={this.state.currentProduct.name}/>
             <Reviews
               reviewsData={this.state.reviews}
-              currentProductID={this.state.currentProductID}
-              />
+              currentProductID={this.state.currentProductID}/>
           </div>
         </div>
       );
