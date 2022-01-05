@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReviewSummary from './ReviewSummary/ReviewSummary.jsx';
 import ReviewList from './ReviewList/ReviewList.jsx';
 import './reviews.css';
@@ -18,7 +19,7 @@ class Reviews extends React.Component {
 
   render() {
     let { starFilter } = this.state;
-    let { reviewsData, currentProductID } = this.props;
+    let { reviewsData, currentProductID, currentProductName } = this.props;
     let { reviewsMetadata, reviews } = reviewsData;
     return (
       <div>
@@ -28,7 +29,7 @@ class Reviews extends React.Component {
             reviewsMetadata={reviewsMetadata}
             updateFilters={this.updateFilters.bind(this)}/>
           <ReviewList
-            productName={'Adidas Sneakers'}
+            currentProductName={currentProductName}
             starFilter={starFilter}
             reviews={reviews.results} />
         </div>
@@ -37,6 +38,10 @@ class Reviews extends React.Component {
   }
 }
 
-
+Reviews.propTypes = {
+  reviewsData: PropTypes.object,
+  currentProductID: PropTypes.string,
+  currentProductName: PropTypes.string
+};
 
 export default Reviews;
