@@ -128,10 +128,9 @@ class ReviewListEntry extends React.Component {
             Yes
           </a>
           {` (${helpfulness}) | `}
-          <a
-            onClick={this.handleReportClick.bind(this)}>
-            { reviewReported ? 'Reported' : 'Report' }
-          </a>
+          { reviewReported
+            ? <span>Reported</span>
+            : <a onClick={this.handleReportClick.bind(this)}>Report</a>}
         </span>
       </div>
     );
