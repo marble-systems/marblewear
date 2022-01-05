@@ -4,7 +4,6 @@ import Reviews from './Reviews/Reviews.jsx';
 import ProductOverview from './ProductDetails/ProductOverview.jsx';
 import QuestionList from './QandA/QuestionList.jsx';
 import RelatedItems from './RelatedItems/RelatedItems.jsx';
-const axios = require('axios');
 import NavBar from './Navbar.jsx';
 
 class App extends React.Component {
