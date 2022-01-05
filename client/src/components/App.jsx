@@ -82,7 +82,7 @@ class App extends React.Component {
             <Reviews
               reviewsData={this.state.reviews}
               currentProductID={this.state.currentProductID}
-              />
+            />
           </div>
         </div>
       );
