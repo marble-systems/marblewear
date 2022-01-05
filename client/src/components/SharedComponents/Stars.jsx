@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Stars = ({ rating, handleClick, fillColor = '#696969' }) => {
+const Stars = ({ rating, handleClick, handleStarClick, fillColor = '#696969' }) => {
   const roundedRating = Number((Math.round(rating * 4) / 4).toFixed(2));
   return (
     <span
-      style={{ cursor: (handleClick ? 'pointer' : 'auto') }}
+      style={{ cursor: (handleClick || handleStarClick ? 'pointer' : 'auto') }}
       onClick={(handleClick ? handleClick : () => { })}>
       {Array(5)
         .fill(0)
@@ -25,6 +25,7 @@ const Stars = ({ rating, handleClick, fillColor = '#696969' }) => {
           }
           return (
             <svg
+              onClick={()=>{handleStarClick(starNumber);}}
               key={starNumber}
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -46,6 +47,7 @@ const Stars = ({ rating, handleClick, fillColor = '#696969' }) => {
 Stars.propTypes = {
   rating: PropTypes.number.isRequired,
   handleClick: PropTypes.func,
+  handleStarClick: PropTypes.func,
   fillColor: PropTypes.string,
 };
 

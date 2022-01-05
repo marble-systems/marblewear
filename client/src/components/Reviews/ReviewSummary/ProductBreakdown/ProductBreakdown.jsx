@@ -5,7 +5,7 @@ import CharacteristicBar from './CharacteristicBar.jsx';
 const ProductBreakdown = ({ characteristics }) => {
   const characteristicNames = Object.keys(characteristics);
   return (
-    <div style={{ width: '14em' }}>
+    <div className="product-breakdown">
       {characteristicNames.map((name) => {
         let { id, value } = characteristics[name];
         return (
