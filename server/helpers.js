@@ -1,5 +1,5 @@
 const axios = require('axios');
-const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx';
+const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc';
 const { api_key }= require('./config.js');
 const auth = { 'Authorization': api_key };
 
