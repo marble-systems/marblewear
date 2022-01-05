@@ -4,7 +4,7 @@ import Reviews from './Reviews/Reviews.jsx';
 import ProductOverview from './ProductDetails/ProductOverview.jsx';
 import QuestionList from './QandA/QuestionList.jsx';
 import RelatedItems from './RelatedItems/RelatedItems.jsx';
-import NavBar from './Navbar.jsx';
+import NavBar from './NavBar.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -79,7 +79,10 @@ class App extends React.Component {
               data={this.state.questionList}
               currentProductID={this.state.currentProductID}
               currentProductName={this.state.currentProduct.name}/>
-            <Reviews reviewsData={this.state.reviews}/>
+            <Reviews
+              reviewsData={this.state.reviews}
+              currentProductID={this.state.currentProductID}
+              />
           </div>
         </div>
       );
