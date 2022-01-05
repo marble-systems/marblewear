@@ -25,34 +25,35 @@ function ImageGallery ({productStylesArray, currentStyleID}) {
       updateMainImageIndex(currentMainImageIndex+1);
       const newImg = imageGallery.filter((image)=> imageGallery.indexOf(image) === currentMainImageIndex+1);
       updateMainImage(newImg);
-      // setThumbnailClass(imageGallery.indexOf(currentMainImageIndex+1));
     }
   };
 
   const showPreviousImage = ()=>{
     if(currentMainImageIndex > 0) {
-      updateMainImageIndex(currentMainImageIndex-1);
+      // updateMainImageIndex(currentMainImageIndex-1);
       const newImg = imageGallery.filter((image)=> imageGallery.indexOf(image) === currentMainImageIndex-1);
       updateMainImage(newImg);
-      // setThumbnailClass(imageGallery.indexOf(currentMainImageIndex-1));
+
     }
   };
 
 
   return (
-    <div className="container main-image-container">
-      <img className="mainImage" src={currentImage} />
-      <input
-        type="image"
-        className="previousButton"
-        src="https://img.icons8.com/ios-glyphs/50/000000/long-arrow-left.png"
-        onClick= { () => showPreviousImage()}/>
-      <input
-        type="image"
-        className="nextButton"
-        src="https://img.icons8.com/ios-glyphs/50/000000/long-arrow-right.png"
-        onClick= { () => showNextImage() }/>
+    <div className="container">
 
+      <div className="main-image-container">
+        <img  className="mainImage" src={currentImage} />
+        <input
+          type="image"
+          className="previousButton"
+          src="https://img.icons8.com/ios-glyphs/50/000000/long-arrow-left.png"
+          onClick= { () => showPreviousImage()}/>
+        <input
+          type="image"
+          className="nextButton"
+          src="https://img.icons8.com/ios-glyphs/50/000000/long-arrow-right.png"
+          onClick= { () => showNextImage() }/>
+      </div>
 
       {imageGallery.map((image) =>
         // eslint-disable-next-line react/jsx-key

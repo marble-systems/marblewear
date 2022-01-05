@@ -35,15 +35,15 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <NavBar />
-        <ProductOverview
-          currentProduct={this.state.currentProduct}
-          productStylesArray={this.state.productStylesArray}
-          currentStyleID={this.state.currentStyleID}
-          changeCurrentStyle={this.changeCurrentStyle}
-        />
-        <div className="container">
+      <div className="container">
+        <div>
+          <NavBar />
+          <ProductOverview
+            currentProduct={this.state.currentProduct}
+            productStylesArray={this.state.productStylesArray}
+            currentStyleID={this.state.currentStyleID}
+            changeCurrentStyle={this.changeCurrentStyle}
+          />
           <RelatedItems relatedItemsdata={this.state.relatedItems} />
           <QuestionList
             data={this.state.questionList.QuestionListdata.QuestionList}

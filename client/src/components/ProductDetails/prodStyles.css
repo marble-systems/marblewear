@@ -1,19 +1,18 @@
-
-
 .main-image-container {
   position: relative;
   margin-left: auto;
   margin-right: auto;
-  width: 60%;
+  width: 50%;
 }
 .mainImage {
-  height: 450px;
-  width: auto;
-  padding: 0.3em 1.2em;
-  margin: 0 0.3em 0.3em 0;
   position: absolute;
   display: inline-block;
+  height: 450px;
+  width: 550px;
+  padding: 0.3em;
+  margin: 0 0.3em 0.3em 0;
 }
+
 
 .nextButton {
   position: absolute;
@@ -29,57 +28,52 @@
 .imageThumbnail {
   width: 65px;
   height: 70px;
-  /* float:left; */
   padding: 0.5em;
-  /* position: absolute; */
 }
 .imageThumbnailMain {
   width: 65px;
   height: 70px;
-  border-bottom: 2px solid rgb(233, 12, 12);
-  /* float:left; */
+  border-bottom: 5px solid rgb(2, 2, 2);
   padding: 0.5em;
-  /* position: absolute; */
-
 }
 
-/* .downButton {
-  position: absolute;
-  bottom: 90%;
-} */
 
 .cart {
   width: 12em;
+  padding: 0.5em;
 }
 .quantity {
   width: 6em;
+  padding: 0.5em;
 }
 .selectSize{
   width: 10em;
+  padding: 0.5em;
 }
 .favorite {
   width: 2em;
+  padding: 0.5em;
 }
 
 
 .styleThumbnail {
-  width: 7em;
-  height: 7em;
+  width: 5.8em;
+  height: 5.8em;
   border-radius: 50%;
   padding: 0.5em;
 }
 
 .select {
   display: block;
-  padding: 0.3em 1.2em;
-  margin: 0 0.3em 0.3em 0;
   height: 2em;
   line-height: 3;
+  padding: 0.3em 1.2em;
   padding-bottom: 10px;
+  margin: 0 0.3em 0.3em 0;
 }
 .button {
   display: block;
-  padding: 0.3em 1.2em;
-  margin: 0 0.3em 0.3em 0;
   height: 2em;
+  padding: 0.3em 1.2em;
+  margin: 0 0.5em 0.5em 0;
   }
