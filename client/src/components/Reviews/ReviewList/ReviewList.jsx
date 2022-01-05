@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 import ReviewListEntry from './ReviewListEntry/ReviewListEntry.jsx';
 import Modal from '../../SharedComponents/Modal.jsx';
 import AddReviewForm from './AddReviewForm/AddReviewForm.jsx';
+import axios from 'axios';
 
-const sortOptions = ['Relevant', 'Helpful', 'Newest'];
+const sortOptions = {relevant: 'Relevant', helpful: 'Helpful', newest: 'Newest'};
 
 class ReviewList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       listLength: 2,
-      sortBy: sortOptions[0],
+      getReviewsParams: {page: 1, count: 5, sort: sortOptions.relevant, product_id: null},
       addReviewModal: {isShowing: false, body: () => { return (<AddReviewForm/>); } },
     };
     this.incrementListLength = this.incrementListLength.bind(this);
@@ -28,8 +29,8 @@ class ReviewList extends React.Component {
   }
 
   handleSelectorChange(e) {
-    let idx = e.target.value;
-    this.setState({ sortBy: sortOptions[idx] });
+    let key = e.target.value;
+    this.setState({ sortBy: sortOptions[key] });
     // TODO: make GET request with new sort param
   }
 
@@ -40,7 +41,7 @@ class ReviewList extends React.Component {
   }
 
   render() {
-    let { reviews, starFilter, productName } = this.props;
+    let { reviews, starFilter, currentProductName } = this.props;
     let { listLength, addReviewModal } = this.state;
     return (
 
@@ -49,12 +50,12 @@ class ReviewList extends React.Component {
           {`${reviews.length} reviews, sorted by `}
           {/* SORT BY DROPDOWN SELECTOR */}
           <select onChange={this.handleSelectorChange}>
-            {sortOptions.map((order, idx) => {
+            {Object.keys(sortOptions).map((key) => {
               return (
                 <option
-                  key={`sort-by-${order.toLowerCase()}`}
-                  value={idx}>
-                  {order}
+                  key={`sort-by-${key}`}
+                  value={key}>
+                  {sortOptions[key]}
                 </option>
               );
             })}
@@ -89,7 +90,7 @@ class ReviewList extends React.Component {
           </button>
           <Modal
             title={'Write Your Review'}
-            subtitle={`About the ${productName}`}
+            subtitle={`About the ${currentProductName}`}
             show={addReviewModal.isShowing}
             onClose={this.toggleModalVisibility}
             body={addReviewModal.body}
@@ -102,7 +103,7 @@ class ReviewList extends React.Component {
 
 ReviewList.propTypes = {
   reviews: PropTypes.array.isRequired,
-  productName: PropTypes.string.isRequired,
+  currentProductName: PropTypes.string.isRequired,
   starFilter: PropTypes.array.isRequired
 };
 
