@@ -54,7 +54,7 @@ app.post('/cart', (req, res) => {
 /* RELATED PRODUCT HANDLERS */
 
 app.get('/products/:product_id/related', (req, res) => {
-  const { product_id } = req.params.product_id;
+  const { product_id } = req.params;
   api.getRelatedProducts(product_id)
     .then(response => {
       res.status(200).send(response);
