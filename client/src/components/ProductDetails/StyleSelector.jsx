@@ -3,7 +3,7 @@
 import React from 'react';
 import './prodStyles.css';
 
-function StyleSelector ({productStylesArray, currentStyleID, changeCurrentStyle}) {
+function StyleSelector ({productStylesArray, currentStyleID, changeCurrentStyle, currentProduct}) {
 
 
   const getCurrentStyleObject = (targetStyleId, stylesArray) => {
@@ -14,10 +14,23 @@ function StyleSelector ({productStylesArray, currentStyleID, changeCurrentStyle}
 
   const currentStyleObject = getCurrentStyleObject(currentStyleID, productStylesArray);
 
+
+  //implement function
+  //if product is on sale- display sale price in red strike then show original price striken through
+
+  let priceToDisplay = currentStyleObject[0]['original_price'];
+  if(currentStyleObject[0]['sale_price'] === !null) {
+    priceToDisplay = '$1000';
+  }
+
+
+
   return (
     <div className="flex-container wrap">
-      <h2>{currentStyleObject[0]['name']}</h2>
-      <h4>{`$${currentStyleObject[0]['original_price']}`}</h4>
+      <h5>{currentProduct.category}</h5>
+      <h2>{currentProduct.name}</h2>
+      <h5>{`$${priceToDisplay}`}</h5>
+      <h2>Style--! {currentStyleObject[0]['name']}</h2>
 
       {productStylesArray.map((style) =>
         <img

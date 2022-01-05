@@ -11,7 +11,8 @@ function ProductOverview ({currentProduct, productStylesArray, currentStyleID, c
   return (
     <div>
       <div className="d-flex flex-row" >
-        <div className="flex-column" style={{width: '50em', margin: '1em', position: 'relative'}}>
+
+        <div className="flex-column" style={{width: '50em', margin: 'auto', position: 'relative'}}>
           <ImageGallery
             productStylesArray={productStylesArray}
             currentStyleID={currentStyleID}/>
@@ -22,18 +23,28 @@ function ProductOverview ({currentProduct, productStylesArray, currentStyleID, c
           <StyleSelector
             productStylesArray={productStylesArray}
             currentStyleID={currentStyleID}
-            changeCurrentStyle={changeCurrentStyle}/>
+            changeCurrentStyle={changeCurrentStyle}
+            currentProduct={currentProduct}/>
           <DropDownsAndButtons
             productStylesArray={productStylesArray}
             currentStyleID={currentStyleID}/>
         </div>
       </div>
 
-      <div className="d-flex flex-row" style={{width: '50em', margin: '1em', position: 'relative'}}>
-        <div>
+
+      <div className="d-flex flex-row" >
+
+        <div className="flex-column" style={{width: '50em', margin: 'auto', position: 'relative'}}>
           <SloganDescription
             currentProduct={currentProduct}/>
         </div>
+
+        <div className="d-flex flex-column" style={{width: '30em', margin: '1em', position: 'relative'}}>
+          <h4>features##$%#%#%</h4>
+          <h4>more features##$%#%#%</h4>
+          <h4>even features##$%#%#%</h4>
+        </div>
+
       </div>
 
     </div>

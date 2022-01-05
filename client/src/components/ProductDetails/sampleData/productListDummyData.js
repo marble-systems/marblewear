@@ -70,7 +70,7 @@ const productStyles =
           },
           '1356843': {
             'quantity': 4,
-            'size': 'XL'
+            'size': 'XXL'
           }
         }
       },

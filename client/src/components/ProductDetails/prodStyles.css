@@ -4,11 +4,12 @@
   position: relative;
   margin-left: auto;
   margin-right: auto;
-  width: 60%;
+
+  /* width: 50%; */
 }
 .mainImage {
   height: 450px;
-  width: auto;
+  width: 600px;
   padding: 0.3em 1.2em;
   margin: 0 0.3em 0.3em 0;
   position: absolute;
@@ -50,15 +51,19 @@
 
 .cart {
   width: 12em;
+  padding: 0.5em;
 }
 .quantity {
   width: 6em;
+  padding: 0.5em;
 }
 .selectSize{
   width: 10em;
+  padding: 0.5em;
 }
 .favorite {
   width: 2em;
+  padding: 0.5em;
 }
 
 

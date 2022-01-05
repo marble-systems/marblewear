@@ -12,6 +12,7 @@ function DropDownsAndButtons ({productStylesArray, currentStyleID}) {
   };
 
   const [inventory, updateInventory] = useState(5);
+  const [currentSize, updatecurrentSize] = useState('XS');
 
   const currentStyleObject = getCurrentStyleObject(currentStyleID, productStylesArray);
 
@@ -20,8 +21,10 @@ function DropDownsAndButtons ({productStylesArray, currentStyleID}) {
   const skusArray = [];
 
   for (const key of Object.keys(availableSkus)) {
+    console.log(availableSkus[key].size, availableSkus[key].quantity);
     skusArray.push(key);
   }
+
 
   let inventoryArray = [];
   for(var i = 1; i <inventory+1; i++){
@@ -29,13 +32,13 @@ function DropDownsAndButtons ({productStylesArray, currentStyleID}) {
   }
 
   //Need to finish this function in order for the inventory drop down to be dynamic according to size selected
-  const updateInventoryarray = (newInventory) => {
-    let inventoryArray = [];
-    for(var i = 1; i <inventory+1; i++){
-      inventoryArray.push(i);
-    }
-    return inventoryArray;
-  };
+  // const updateInventoryarray = (newInventory) => {
+  //   let inventoryArray = [];
+  //   for(var i = 1; i <inventory+1; i++){
+  //     inventoryArray.push(i);
+  //   }
+  //   return inventoryArray;
+  // };
 
 
   return (
@@ -46,8 +49,10 @@ function DropDownsAndButtons ({productStylesArray, currentStyleID}) {
           name ="size"
           value={skusArray}
           onChange={e => {
-            updateInventory(8);
-            alert(`Size ${e.target.value} selected`);}
+            alert(`Size ${e.target.value} selected`);
+            updatecurrentSize(e.target.value);
+            updateInventory(8);}
+
           }>
           {skusArray.map((sku) => {
             return <option key={sku}> {availableSkus[sku]['size']} </option>;
@@ -66,7 +71,7 @@ function DropDownsAndButtons ({productStylesArray, currentStyleID}) {
         <button
           type="submit"
           className = "button cart"
-          onClick={() => alert(`${currentStyleObject.name} added to Favorites`)}>
+          onClick={() => console.log(`${currentStyleObject} added to Favorites`)}>
         ADD TO BAG
         </button>
 
@@ -74,7 +79,7 @@ function DropDownsAndButtons ({productStylesArray, currentStyleID}) {
           className = "button favorite"
           id="favorite"
           type="submit"
-          onClick={() => alert(`${currentStyleObject.name} added to Cart`)}>
+          onClick={() => alert(`${currentStyleObject[0]['name']} added to Cart`)}>
         *
         </button>
       </div>

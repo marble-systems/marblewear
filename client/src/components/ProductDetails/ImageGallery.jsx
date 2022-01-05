@@ -9,7 +9,7 @@ function ImageGallery ({productStylesArray, currentStyleID}) {
 
   const currentStyleObject = getCurrentStyleObject(currentStyleID, productStylesArray);
 
-  const imageGallery = currentStyleObject[0].photos.map((photo)=> photo.thumbnail_url);
+  const imageGallery = currentStyleObject[0].photos.map((photo)=> photo.url);
 
   const [currentImage, updateMainImage] = useState(imageGallery[0]);
 
