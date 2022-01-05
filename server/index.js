@@ -1,7 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const port = 3070;
-const api = require('./helpers.js');
+const api = require('/.helpers.js');
+
 
 const app = express();
 
@@ -134,7 +135,6 @@ app.put('/qa/answers/:answer_id/:type', (req, res) => {
       res.status(503).send(err);
     });
 });
-
 
 
 app.listen(port, () => {console.log(`listening on ${port}`);});

@@ -1,18 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReviewListEntry from './ReviewListEntry/ReviewListEntry.jsx';
+import Modal from '../../SharedComponents/Modal.jsx';
+import AddReviewForm from './AddReviewForm/AddReviewForm.jsx';
 
-const SORT_BY = ['Relevant', 'Helpful', 'Newest'];
+const sortOptions = ['Relevant', 'Helpful', 'Newest'];
 
 class ReviewList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       listLength: 2,
-      sortBy: SORT_BY[0]
+      sortBy: sortOptions[0],
+      addReviewModal: {isShowing: false, body: () => { return (<AddReviewForm/>); } },
     };
     this.incrementListLength = this.incrementListLength.bind(this);
     this.handleSelectorChange = this.handleSelectorChange.bind(this);
+    this.toggleModalVisibility = this.toggleModalVisibility.bind(this);
   }
 
   incrementListLength() {
@@ -25,13 +29,19 @@ class ReviewList extends React.Component {
 
   handleSelectorChange(e) {
     let idx = e.target.value;
-    this.setState({ sortBy: SORT_BY[idx] });
+    this.setState({ sortBy: sortOptions[idx] });
     // TODO: make GET request with new sort param
   }
 
+  toggleModalVisibility() {
+    let { addReviewModal } = this.state;
+    addReviewModal.isShowing = !addReviewModal.isShowing;
+    this.setState({ addReviewModal });
+  }
+
   render() {
-    let { reviews, starFilter } = this.props;
-    let { listLength } = this.state;
+    let { reviews, starFilter, productName } = this.props;
+    let { listLength, addReviewModal } = this.state;
     return (
 
       <div className="review-list-container">
@@ -39,7 +49,7 @@ class ReviewList extends React.Component {
           {`${reviews.length} reviews, sorted by `}
           {/* SORT BY DROPDOWN SELECTOR */}
           <select onChange={this.handleSelectorChange}>
-            {SORT_BY.map((order, idx) => {
+            {sortOptions.map((order, idx) => {
               return (
                 <option
                   key={`sort-by-${order.toLowerCase()}`}
@@ -66,12 +76,24 @@ class ReviewList extends React.Component {
           })}
         {/* MORE REVIEWS & ADD REVIEW BUTTONS */}
         <div className="button-container">
+          {/* MORE REVIEWS BUTTON */}
           {listLength >= reviews.length ? null :
             <button
               onClick={this.incrementListLength}>
               MORE REVIEWS
             </button>
           }
+          {/* ADD REVIEW BUTTON */}
+          <button onClick={this.toggleModalVisibility}>
+          ADD A REVIEW  +
+          </button>
+          <Modal
+            title={'Write Your Review'}
+            subtitle={`About the ${productName}`}
+            show={addReviewModal.isShowing}
+            onClose={this.toggleModalVisibility}
+            body={addReviewModal.body}
+          />
         </div>
       </div>
     );

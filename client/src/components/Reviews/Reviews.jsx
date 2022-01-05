@@ -28,6 +28,7 @@ class Reviews extends React.Component {
             reviewsMetadata={reviewsMetadata}
             updateFilters={this.updateFilters.bind(this)}/>
           <ReviewList
+            productName={'Adidas Sneakers'}
             starFilter={starFilter}
             reviews={reviews.results} />
         </div>
