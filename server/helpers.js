@@ -9,7 +9,7 @@ axios.interceptors.response.use((response) => {
 
 module.exports = {
 
-  /* MAIN HANDLER HELPERS */
+  /* MAIN GET HELPERS */
 
   getProductInfo: (productID) => {
     return axios({
@@ -47,18 +47,25 @@ module.exports = {
     });
   },
 
-  /* RATINGS AND REVIEWS HELPERS */
+  /* CART HELPERS */
 
-  markReview: (review_id, putType) => {
+  handleCart: (method, sku_id) => {
     return axios({
-      url: `${url}/reviews/${review_id}/${putType}`,
-      method: 'put',
+      url: `${url}/cart`,
+      method: method,
+      data: {sku_id},
       headers: auth
     });
   },
 
-  postReview: (reviewParams) => {
+  /* RELATED PRODUCTS HELPERS */
 
+  getRelatedProducts: (productID) => {
+    return axios({
+      url: `${url}/products/${productID}/related`,
+      method: 'get',
+      headers: auth
+    });
   },
 
   /* QUESTIONS AND ANSWERS HELPERS */
@@ -80,11 +87,31 @@ module.exports = {
   },
 
   postQuestion: (questionParams) => {
-    const { body, name, email, product_id } = questionParams;
     return axios({
-      url: `${url}/qa/questions?body=${body}&name=${name}&email=${email}&product_id=${product_id}`,
+      url: `${url}/qa/questions`,
       method: 'post',
+      data: questionParams,
+      headers: auth
     });
-  }
+  },
+
+  /* RATINGS AND REVIEWS HELPERS */
+
+  markReview: (review_id, putType) => {
+    return axios({
+      url: `${url}/reviews/${review_id}/${putType}`,
+      method: 'put',
+      headers: auth
+    });
+  },
+
+  postReview: (reviewParams) => {
+    return axios({
+      url: `${url}/reviews`,
+      method: 'post',
+      data: reviewParams,
+      headers: auth
+    });
+  },
 
 };

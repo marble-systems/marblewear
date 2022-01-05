@@ -5,13 +5,15 @@ const api = require('./helpers.js');
 
 const app = express();
 
+/* EXPRESS MIDDLEWARE */
+
 app.use(express.static(__dirname + '/../client/dist/'));
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 
-/* MAIN PRODUCT ID GET HANDLER */
+/* PRODUCT DATA COMPONENT INITIALIZER */
 
 app.get('/products/:productID', (req, res) => {
   const productID = req.params.productID;
@@ -20,12 +22,59 @@ app.get('/products/:productID', (req, res) => {
     .then(results => {
       res.status(200).send(results);
     })
-    .catch(error => {
-      res.status(503).send(error);
+    .catch((err) => {
+      res.status(503).send(err);
+    });
+});
+
+/* CART HANDLERS */
+
+app.get('/cart', (req, res) => {
+  api.handleCart('get')
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch((err) => {
+      res.status(503).send(err);
+    });
+});
+
+app.post('/cart', (req, res) => {
+  const { sku_id } = req.body;
+  api.handleCart('post', sku_id)
+    .then(response => {
+      res.status(201).send(response);
+    })
+    .catch((err) => {
+      res.status(503).send(err);
+    });
+});
+
+/* RELATED PRODUCT HANDLERS */
+
+app.get('/products/:product_id/related', (req, res) => {
+  const productID = req.params.product_id;
+  api.getRelatedProducts(productID)
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch((err) => {
+      res.status(503).send(err);
     });
 });
 
 /* R&R POST/PUT HANDLERS */
+
+app.post('/reviews', (req, res) => {
+  console.log('you accessed the server, here is the data: ', req.body);
+  api.postReview(req.body)
+    .then((success) => {
+      res.status(201).send(success);
+    })
+    .catch((err) => {
+      res.status(503).send(err);
+    });
+});
 
 app.put('/reviews/:review_id/:type', (req, res) => {
   const reviewID = req.params.review_id;
@@ -39,14 +88,22 @@ app.put('/reviews/:review_id/:type', (req, res) => {
     });
 });
 
-/* app.post('/reviews) - to be implemented */
-
 /* Q&A POST/PUT HANDLERS */
+
+app.post('/qa/questions', (req, res) => {
+  api.postQuestion(req.body)
+    .then((success) => {
+      res.status(201).send(success);
+    })
+    .catch((err) => {
+      res.status(503).send(err);
+    });
+});
 
 app.put('/qa/questions/:question_id/:type', (req, res) => {
   const questionID = req.params.question_id;
   const type = req.params.type;
-  api.markReview(questionID, type)
+  api.markQuestion(questionID, type)
     .then(() => {
       res.status(204).send();
     })
@@ -55,7 +112,17 @@ app.put('/qa/questions/:question_id/:type', (req, res) => {
     });
 });
 
-
+app.put('/qa/answers/:answer_id/:type', (req, res) => {
+  const answerID = req.params.answer_id;
+  const type = req.params.type;
+  api.markAnswer(answerID, type)
+    .then(() => {
+      res.status(204).send();
+    })
+    .catch((err) => {
+      res.status(503).send(err);
+    });
+});
 
 
 
