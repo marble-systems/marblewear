@@ -53,7 +53,7 @@ class App extends React.Component {
           this.getProductData(productId);
         })
         .catch(err => {
-          alert(`Error ${err} occurred`);
+          alert(`Error encountered: ${err}`);
         });
     }
   }
