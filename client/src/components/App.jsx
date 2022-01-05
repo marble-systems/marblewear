@@ -82,7 +82,8 @@ class App extends React.Component {
             <Reviews
               reviewsData={this.state.reviews}
               currentProductID={this.state.currentProductID}
-              />
+              currentProductName={this.state.currentProduct.name}
+            />
           </div>
         </div>
       );
@@ -93,6 +94,5 @@ class App extends React.Component {
     }
   }
 }
-
 
 export default App;
