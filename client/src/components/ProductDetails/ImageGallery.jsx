@@ -31,7 +31,6 @@ function ImageGallery ({productStylesArray, currentStyleID}) {
       updateMainImageIndex(currentMainImageIndex-1);
       const newImg = imageGallery.filter((image)=> imageGallery.indexOf(image) === currentMainImageIndex-1);
       updateMainImage(newImg);
-
     }
   };
 

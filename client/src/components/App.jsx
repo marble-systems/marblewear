@@ -11,7 +11,6 @@ class App extends React.Component {
     super(props);
     this.state = {
       currentProductID: '',
-      currentStyleID: 234004,
       productStylesArray: [],
       currentProduct: [],
       reviews: [],
@@ -19,7 +18,6 @@ class App extends React.Component {
       relatedItems: [],
     };
     this.cachedProducts = {};
-    this.changeCurrentStyle = this.changeCurrentStyle.bind(this);
   }
 
   componentDidMount() {
@@ -58,12 +56,10 @@ class App extends React.Component {
     }
   }
 
-  changeCurrentStyle(id) {
-    this.setState({ currentStyleID: id });
-  }
+
 
   render() {
-    let { currentProductID, currentProduct, productStylesArray, currentStyleID, changeCurrentStyle, questionList, reviews, relatedItems  } = this.state;
+    let { currentProductID, currentProduct, productStylesArray, changeCurrentStyle, questionList, reviews, relatedItems  } = this.state;
     if (this.state.currentProductID) {
       return (
         <div className="container">
@@ -72,7 +68,6 @@ class App extends React.Component {
           <ProductOverview
             currentProduct={currentProduct}
             productStylesArray={productStylesArray}
-            currentStyleID={currentStyleID}
             changeCurrentStyle={changeCurrentStyle}
           />
           {/* <RelatedItems relatedItemsdata={relatedItems} /> */}
