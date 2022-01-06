@@ -21,6 +21,7 @@ class App extends React.Component {
     this.cachedProducts = {};
     this.changeCurrentStyle = this.changeCurrentStyle.bind(this);
     this.updateReviewList = this.updateReviewList.bind(this);
+    this.incrementHelpfulCount = this.incrementHelpfulCount.bind(this);
   }
 
   componentDidMount() {
@@ -65,6 +66,15 @@ class App extends React.Component {
     this.setState({ reviews });
   }
 
+  incrementHelpfulCount (review_id) {
+    let { reviews } = this.state;
+    let idx = reviews.reviews.results.findIndex((review) =>{
+      return review.review_id === review_id;
+    });
+    reviews.reviews.results[idx]['helpfulness'] += 1;
+    this.setState({ reviews });
+  }
+
   changeCurrentStyle(id) {
     this.setState({ currentStyleID: id });
   }
@@ -90,6 +100,7 @@ class App extends React.Component {
               reviewsData={this.state.reviews}
               currentProductID={this.state.currentProductID}
               currentProductName={this.state.currentProduct.name}
+              incrementHelpfulCount={this.incrementHelpfulCount}
               updateReviewList={this.updateReviewList}/>
           </div>
         </div>
