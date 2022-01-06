@@ -95,7 +95,29 @@ class App extends React.Component {
     this.setState({
       favoriteProducts: updatedFavoriteProducts
     });
+  }
 
+  changeCurrentProduct(productId) {
+    let updatedProductInfo = this.cachedProducts[productId];
+    let {currentProduct, productStylesArray, reviews, questionList} = updatedProductInfo;
+    parserFunctions.getRelatedItems(productId, this.cachedProducts)
+      .then(relatedItems => {
+        relatedItems.filter(relatedItem => {
+          return !this.cachedProducts[relatedItem.currentProduct.id];
+        })
+          .forEach(relatedItem => {
+            this.cachedProducts[relatedItem.currentProduct.id] = relatedItem;
+          });
+        this.setState({
+          currentProductID: productId,
+          currentStyleID: productStylesArray[0].style_id,
+          currentProduct,
+          productStylesArray,
+          reviews,
+          questionList,
+          relatedItems
+        });
+      });
   }
 
   render() {
@@ -110,7 +132,7 @@ class App extends React.Component {
             changeCurrentStyle={this.changeCurrentStyle}
           />
           <div className="container">
-            <RelatedItems relatedProductsInfo={this.state.relatedItems} currentProduct={this.state.currentProduct} favoriteProducts={this.state.favoriteProducts} addProductToFavorites={this.addProductToFavorites.bind(this)} removeProductFromFavorites={this.removeProductFromFavorites.bind(this)}/>
+            <RelatedItems relatedProductsInfo={this.state.relatedItems} currentProduct={this.state.currentProduct} favoriteProducts={this.state.favoriteProducts} addProductToFavorites={this.addProductToFavorites.bind(this)} removeProductFromFavorites={this.removeProductFromFavorites.bind(this)} changeCurrentProduct={this.changeCurrentProduct.bind(this)}/>
             <QuestionList
               data={this.state.questionList}
               currentProductID={this.state.currentProductID}
