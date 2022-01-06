@@ -7,12 +7,12 @@ const RATING_TEXT = ['Poor', 'Fair', 'Average', 'Good', 'Great'];
 const REVIEW_BODY_MIN_LENGTH = 50;
 const REVIEW_BODY_MAX_LENGTH = 1000;
 const CHARACTERISTICS_SCALE = {
-  Size: ['A size too small', '½ a size too small', 'Perfect', '½ a size too big', 'A size too wide'],
-  Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
-  Comfort: ['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
-  Quality: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
-  Length: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
-  Fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long']
+  Size: { options: ['A size too small', '½ a size too small', 'Perfect', '½ a size too big', 'A size too wide'], id: 131851 },
+  Width: { options: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'], id: 131852 },
+  Comfort: { options: ['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'], id: 131853 },
+  Quality: { options: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'], id: 131854 },
+  Length: { options: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'], id: 131844 },
+  Fit: { options: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long'], id: 131847 }
 };
 
 class AddReviewForm extends React.Component {
@@ -151,27 +151,28 @@ class AddReviewForm extends React.Component {
             <p>
               <li className="required">Characteristics</li>
               <p>
-                {Object.keys(CHARACTERISTICS_SCALE).map((characteristic, idx1) => {
+                {Object.keys(CHARACTERISTICS_SCALE).map((characteristic) => {
+                  let optionId = CHARACTERISTICS_SCALE[characteristic]['id'];
                   return (
-                    <div key={`selector-${idx1}`}>
-                      <div>{`${characteristic}: ${radioValues[characteristic]
-                        ? CHARACTERISTICS_SCALE[characteristic][Number(radioValues[characteristic])]
+                    <div key={`selector-${optionId}`}>
+                      <div>{`${characteristic}: ${radioValues[optionId]
+                        ? CHARACTERISTICS_SCALE[characteristic]['options'][Number(radioValues[optionId])]
                         : 'None selected'}`}</div>
                       <div style={{
                         display: 'flex',
                         justifyContent: 'space-between',
                         flexDirection: 'row'
                       }}>
-                        {Array(5).fill(0).map((val, idx2) => {
+                        {Array(5).fill(0).map((val, idx) => {
                           return (
                             <input
                               required
                               style={{ marginRight: '10px' }}
-                              key={`selector-${idx1}-${idx2}`}
+                              key={`selector-${optionId}-${idx}`}
                               type="radio"
-                              name={`${characteristic}`}
-                              value={idx2}
-                              checked={idx2 === Number(radioValues[characteristic])}
+                              name={optionId}
+                              value={idx}
+                              checked={idx === Number(radioValues[optionId])}
                               onChange={this.handleRadioSelectorChange} />
                           );
                         })}
@@ -181,8 +182,8 @@ class AddReviewForm extends React.Component {
                         justifyContent: 'space-between',
                         fontSize: '0.5em', flexDirection: 'row'
                       }}>
-                        <div>{CHARACTERISTICS_SCALE[characteristic][0]}</div>
-                        <div>{CHARACTERISTICS_SCALE[characteristic][4]}</div>
+                        <div>{CHARACTERISTICS_SCALE[characteristic]['options'][0]}</div>
+                        <div>{CHARACTERISTICS_SCALE[characteristic]['options'][4]}</div>
                       </div>
                     </div>
                   );
