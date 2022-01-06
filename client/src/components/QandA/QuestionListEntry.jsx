@@ -10,10 +10,19 @@ class QuestionListEntry extends React.Component {
     this.state = {
       answersShown: 2,
       helpfulClicked: false,
-      reportClicked: false
     };
     this.showMoreAnswers = this.showMoreAnswers.bind(this);
     this.showLessAnswers = this.showLessAnswers.bind(this);
+  }
+
+  markQuestionHelpful(e, question_id) {
+    e.preventDefault;
+    !this.state.helpfulClicked ? null :
+      axios({
+        url: `/qa/questions/${question_id}/helpful`,
+        method: 'put'
+      });
+    this.setState({ helpfulClicked: true });
   }
 
   /* ANSWERLIST LENGTH ALTERING FUNCTIONS */
@@ -38,7 +47,7 @@ class QuestionListEntry extends React.Component {
           </div>
           <div className="col-5">
             <div className="row">
-              <span className="text-end">Helpful? <button className="btn btn-link" onClick={this.markQuestionHelpful}>Yes</button> ({data.question_helpfulness}) | <AddAnswer currentProductName={currentProductName} currentQuestionBody={data.question_body} handleSubmitAnswer={handleSubmitAnswer} handleAnswerInputChange={handleAnswerInputChange} question_id={question_id} /></span>
+              <span className="text-end">Helpful? <button className="btn btn-link" onClick={(e) => {this.markQuestionHelpful(e, question_id);}}>Yes</button> ({data.question_helpfulness}) | <AddAnswer currentProductName={currentProductName} currentQuestionBody={data.question_body} handleSubmitAnswer={handleSubmitAnswer} handleAnswerInputChange={handleAnswerInputChange} question_id={question_id} /></span>
             </div>
           </div>
         </div>
