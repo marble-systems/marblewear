@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const port = 3070;
 const api = require('./helpers.js');
+const path = require('path');
 
 
 const app = express();
@@ -13,6 +14,9 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 /* PRODUCT DATA COMPONENT INITIALIZER */
 
@@ -67,11 +71,13 @@ app.get('/products/:product_id/related', (req, res) => {
 /* R&R POST/PUT/GET HANDLERS */
 
 app.post('/reviews', (req, res) => {
+  console.log(req.body)
   api.postReview(req.body)
     .then((success) => {
       res.status(201).send(success);
     })
     .catch((err) => {
+      //console.log(err)
       res.status(503).send(err);
     });
 });
