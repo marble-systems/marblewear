@@ -22,7 +22,7 @@ class Reviews extends React.Component {
     let { reviewsData, currentProductID, currentProductName, updateReviewList, incrementHelpfulCount } = this.props;
     let { reviewsMetadata, reviews } = reviewsData;
     return (
-      <div>
+      <div id="reviews-component">
         <h3>RATINGS &#38; REVIEWS</h3>
         <div style={{display: 'flex', flexDirection: 'row'}}>
           <ReviewSummary
