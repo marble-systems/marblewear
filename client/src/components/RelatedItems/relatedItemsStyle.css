@@ -1,3 +1,37 @@
-.flickity-button:disabled {
-  display: none;
+.carousel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.carousel-wrapper {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-card {
+  display: flex;
+  transition: all 250ms linear;
+}
+
+.previous-button, .next-button {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  background-color: lightgrey;
+  border: 1px solid #ddd;
+}
+
+.previous-button {
+  left: 24px;
+}
+
+.next-button {
+  right: 24px;
 }

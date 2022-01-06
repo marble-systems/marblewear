@@ -27,7 +27,7 @@ function ProductCard({relatedProductInfo}) {
 }
 
 ProductCard.propTypes = {
-  relatedProductInfo: PropTypes.array,
+  relatedProductInfo: PropTypes.object,
   currentProduct: PropTypes.object,
   productStylesArray: PropTypes.array,
   reviews: PropTypes.object,
