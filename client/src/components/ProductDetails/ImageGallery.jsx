@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-function ImageGallery ({productStylesArray, currentStyleID}) {
+function ImageGallery ({productStylesArray, currentStyleID, mainImage, updateMainImage}) {
 
   const getCurrentStyleObject = (targetStyleId, productStylesArray) => {return productStylesArray.filter((style) => style.style_id === targetStyleId);
   };
@@ -10,12 +10,14 @@ function ImageGallery ({productStylesArray, currentStyleID}) {
 
   const imageGallery = currentStyleObject[0].photos.map((photo)=> photo.thumbnail_url);
 
-  const [currentImage, updateMainImage] = useState(imageGallery[0]);
+
+
+  // const [currentImage, updateMainImage] = useState(mainImage);
 
   const [currentMainImageIndex, updateMainImageIndex] = useState(0);
 
   const setThumbnailClass = (image) => {
-    return image === currentImage ? 'imageThumbnailMain' : 'imageThumbnail';
+    return image === mainImage ? 'imageThumbnailMain' : 'imageThumbnail';
   };
 
   const showNextImage = ()=>{
@@ -40,7 +42,7 @@ function ImageGallery ({productStylesArray, currentStyleID}) {
     <div className="container">
 
       <div className="main-image-container">
-        <img  className="mainImage" src={currentImage} />
+        <img  className="mainImage" src={mainImage} />
         <input
           type="image"
           className="previousButton"
@@ -77,7 +79,9 @@ function ImageGallery ({productStylesArray, currentStyleID}) {
 
 ImageGallery.propTypes = {
   productStylesArray: PropTypes.array.isRequired,
-  currentStyleID: PropTypes.number.isRequired
+  currentStyleID: PropTypes.number.isRequired,
+  mainImage: PropTypes.string.isRequired,
+  updateMainImage: PropTypes.func.isRequired
 };
 
 export default ImageGallery;
