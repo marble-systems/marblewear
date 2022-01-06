@@ -16,6 +16,8 @@ function ImageGallery ({productStylesArray, currentStyleID, mainImage, updateMai
 
   const [currentMainImageIndex, updateMainImageIndex] = useState(0);
 
+  mainImage = imageGallery[0];
+
   const setThumbnailClass = (image) => {
     return image === mainImage ? 'imageThumbnailMain' : 'imageThumbnail';
   };
@@ -24,7 +26,7 @@ function ImageGallery ({productStylesArray, currentStyleID, mainImage, updateMai
     if(currentMainImageIndex !== imageGallery.length-1) {
       updateMainImageIndex(currentMainImageIndex+1);
       const newImg = imageGallery.filter((image)=> imageGallery.indexOf(image) === currentMainImageIndex+1);
-      updateMainImage(newImg);
+      updateMainImage(newImg[0]);
     }
   };
 

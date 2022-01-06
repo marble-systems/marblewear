@@ -83,9 +83,9 @@ class App extends React.Component {
     this.setState({ reviews });
   }
 
-  updateMainImage(newStyle) {
-    this.setState({ mainImage: newStyle });
-    console.log('state of main image after', this.state.mainImage);
+  updateMainImage(newImg) {
+    console.log('new image', newImg);
+    this.setState({ mainImage: newImg });
   }
 
   changeCurrentStyle(id) {
