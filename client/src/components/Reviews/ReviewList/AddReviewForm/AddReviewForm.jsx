@@ -1,9 +1,11 @@
 import React from 'react';
+import axios from 'axios';
 import Stars from '../../../SharedComponents/Stars.jsx';
 import Modal from '../../../SharedComponents/Modal.jsx';
 
 const RATING_TEXT = ['Poor', 'Fair', 'Average', 'Good', 'Great'];
 const REVIEW_BODY_MIN_LENGTH = 50;
+const REVIEW_BODY_MAX_LENGTH = 1000;
 const CHARACTERISTICS_SCALE = {
   Size: ['A size too small', '½ a size too small', 'Perfect', '½ a size too big', 'A size too wide'],
   Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
@@ -92,7 +94,7 @@ class AddReviewForm extends React.Component {
     e.preventDefault();
     let { overallRating, radioValues, reviewBody, nickname, email } = this.state;
     let characteristics = Object.keys(CHARACTERISTICS_SCALE);
-
+    let invalidEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
     // Check for missing inputs
     let missingInputs = characteristics
       .filter(characteristic => { return !radioValues[characteristic]; });
@@ -100,12 +102,16 @@ class AddReviewForm extends React.Component {
     missingInputs.push(...Object.keys(inputsObject).filter(key => { return !inputsObject[key]; }));
     if (!overallRating || !reviewBody || !nickname || !email) {
       alert(`You must enter: \n${missingInputs.join(', ').replace(/, ([^,]*)$/, ' and $1')}`);
+    } else if (invalidEmail) {
+      alert('Invalid email format');
+    } else if (reviewBody.length > REVIEW_BODY_MAX_LENGTH) {
+      alert(`Review body must not exceed ${REVIEW_BODY_MAX_LENGTH} characters in length`);
+    } else if (reviewBody.length < REVIEW_BODY_MIN_LENGTH) {
+      alert(`Review body must be at least ${REVIEW_BODY_MIN_LENGTH} characters long`);
     }
     // TODOs:
-    // validate email format
-    // validate body length
     // validate image format and upload
-    // TODO: make POST request to POST /reviews endpoint
+    // make POST request to POST /reviews endpoint
   }
 
   render() {
@@ -202,7 +208,7 @@ class AddReviewForm extends React.Component {
                 value={reviewBody}
                 placeholder="Why did you like the product or not?"
                 minLength={REVIEW_BODY_MIN_LENGTH}
-                maxLength="1000"
+                maxLength={REVIEW_BODY_MAX_LENGTH}
                 type="textarea" />
               <div style={{ fontSize: '0.5em' }}>{reviewBody.length < REVIEW_BODY_MIN_LENGTH ?
                 `Minimum required characters left ${REVIEW_BODY_MIN_LENGTH - reviewBody.length}`
