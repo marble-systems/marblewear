@@ -5,7 +5,7 @@ import noImageAvailable from './noImageAvailable.jpeg';
 import Stars from '../SharedComponents/Stars.jsx';
 import utilityFns from '../../utilityFns.js';
 
-function ProductCard({relatedProductInfo}) {
+function ProductCard({relatedProductInfo, productCardType, removeProductFromFavorites}) {
   let {currentProduct,
     productStylesArray,
     reviews} = relatedProductInfo;
@@ -15,7 +15,7 @@ function ProductCard({relatedProductInfo}) {
   return (
     <div className="card border-dark" style={{width: '20em', margin: '1em', position: 'relative'}}>
       <img className="card-img-top" src={imageSource} style={{width: 'auto', height: '20vw', objectFit: 'cover'}} alt="Product image"></img>
-      <ActionButton productCardSetType={'RelatedProducts'}/>
+      <ActionButton productCardType={productCardType} removeProductFromFavorites={removeProductFromFavorites} productId={currentProduct.id}/>
       <div className="card-body">
         <p className="card-text"><small className="text-muted">{currentProduct.category.toUpperCase()}</small></p>
         <h5 className="card-title">{currentProduct.name}</h5>
@@ -31,6 +31,8 @@ ProductCard.propTypes = {
   currentProduct: PropTypes.object,
   productStylesArray: PropTypes.array,
   reviews: PropTypes.object,
+  productCardType: PropTypes.string,
+  removeProductFromFavorites: PropTypes.func,
 };
 
 export default ProductCard;
