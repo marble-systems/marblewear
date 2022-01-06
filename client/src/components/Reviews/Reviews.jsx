@@ -19,7 +19,7 @@ class Reviews extends React.Component {
 
   render() {
     let { starFilter } = this.state;
-    let { reviewsData, currentProductID, currentProductName } = this.props;
+    let { reviewsData, currentProductID, currentProductName, updateReviewList } = this.props;
     let { reviewsMetadata, reviews } = reviewsData;
     return (
       <div>
@@ -32,7 +32,8 @@ class Reviews extends React.Component {
             currentProductName={currentProductName}
             starFilter={starFilter}
             currentProductID={currentProductID}
-            reviews={reviews.results} />
+            reviews={reviews.results}
+            updateReviewList={updateReviewList} />
         </div>
       </div>
     );
@@ -42,7 +43,8 @@ class Reviews extends React.Component {
 Reviews.propTypes = {
   reviewsData: PropTypes.object,
   currentProductID: PropTypes.string,
-  currentProductName: PropTypes.string
+  currentProductName: PropTypes.string,
+  updateReviewList: PropTypes.func,
 };
 
 export default Reviews;
