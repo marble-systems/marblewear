@@ -1,6 +1,7 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
 import './prodStyles.css';
+
 import ImageGallery from './ImageGallery.jsx';
 import StyleSelector from './StyleSelector.jsx';
 import DropDownsAndButtons from './DropDownsAndButtons.jsx';
@@ -52,6 +53,13 @@ function ProductOverview ({currentProduct, productStylesArray, currentStyleID, c
     </div>
   );
 }
+
+ProductOverview.propTypes = {
+  productStylesArray: PropTypes.array.isRequired,
+  currentStyleID: PropTypes.number.isRequired,
+  currentProduct: PropTypes.object.isRequired,
+  changeCurrentStyle: PropTypes.func
+};
 
 export default ProductOverview;
 

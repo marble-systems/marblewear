@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function SloganDescription ({currentProduct}) {
   return (
@@ -9,5 +10,9 @@ function SloganDescription ({currentProduct}) {
     </div>
   );
 }
+
+SloganDescription.propTypes = {
+  currentProduct: PropTypes.object.isRequired,
+};
 
 export default SloganDescription;

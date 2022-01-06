@@ -63,25 +63,26 @@ class App extends React.Component {
   }
 
   render() {
+    let { currentProductID, currentProduct, productStylesArray, currentStyleID, changeCurrentStyle, questionList, reviews, relatedItems  } = this.state;
     if (this.state.currentProductID) {
       return (
         <div className="container">
 
           <NavBar />
           <ProductOverview
-            currentProduct={this.state.currentProduct}
-            productStylesArray={this.state.productStylesArray}
-            currentStyleID={this.state.currentStyleID}
-            changeCurrentStyle={this.changeCurrentStyle}
+            currentProduct={currentProduct}
+            productStylesArray={productStylesArray}
+            currentStyleID={currentStyleID}
+            changeCurrentStyle={changeCurrentStyle}
           />
-          {/* <RelatedItems relatedItemsdata={this.state.relatedItems} /> */}
+          {/* <RelatedItems relatedItemsdata={relatedItems} /> */}
           <QuestionList
-            data={this.state.questionList}
-            currentProductID={this.state.currentProductID}
-            currentProductName={this.state.currentProduct.name}/>
+            data={questionList}
+            currentProductID={currentProductID}
+            currentProductName={currentProduct.name}/>
           <Reviews
-            reviewsData={this.state.reviews}
-            currentProductID={this.state.currentProductID}
+            reviewsData={reviews}
+            currentProductID={currentProductID}
           />
 
         </div>
