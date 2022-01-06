@@ -12,7 +12,7 @@ class ReviewList extends React.Component {
     super(props);
     this.state = {
       listLength: 2,
-      getReviewsParams: {page: 1, count: 5, sort: sortOptions.relevant, product_id: null},
+      getReviewsRequestParams: { page: 0, count: 5, sort: sortOptions.relevant, product_id: null },
       addReviewModal: {isShowing: false, body: () => { return (<AddReviewForm/>); } },
     };
     this.incrementListLength = this.incrementListLength.bind(this);
@@ -30,8 +30,21 @@ class ReviewList extends React.Component {
 
   handleSelectorChange(e) {
     let key = e.target.value;
-    this.setState({ sortBy: sortOptions[key] });
-    // TODO: make GET request with new sort param
+    let { getReviewsRequestParams } = this.state;
+    getReviewsRequestParams.product_id = this.props.currentProductID;
+    getReviewsRequestParams.sort = key;
+    getReviewsRequestParams.page += 1;
+    const qs = Object.keys(getReviewsRequestParams)
+      .map(key => `${key}=${getReviewsRequestParams[key]}`)
+      .join('&');
+    axios.get(`/reviews/?${qs}`)
+      .then(res => {
+        let { count, page, product, results } = res.data;
+        Object.assign(getReviewsRequestParams, { count, page, product_id: product });
+        this.setState({ getReviewsRequestParams });
+        //TOOD: update props
+        this.props.updateReviewList(results);
+      });
   }
 
   toggleModalVisibility() {
@@ -44,7 +57,6 @@ class ReviewList extends React.Component {
     let { reviews, starFilter, currentProductName } = this.props;
     let { listLength, addReviewModal } = this.state;
     return (
-
       <div className="review-list-container">
         <span>
           {`${reviews.length} reviews, sorted by `}
@@ -102,9 +114,11 @@ class ReviewList extends React.Component {
 }
 
 ReviewList.propTypes = {
-  reviews: PropTypes.array.isRequired,
+  reviews: PropTypes.array,
   currentProductName: PropTypes.string.isRequired,
-  starFilter: PropTypes.array.isRequired
+  starFilter: PropTypes.array.isRequired,
+  currentProductID: PropTypes.string,
+  updateReviewList: PropTypes.func,
 };
 
 export default ReviewList;
