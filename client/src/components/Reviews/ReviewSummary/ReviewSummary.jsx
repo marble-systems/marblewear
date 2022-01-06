@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import AverageRating from './AverageRating/AverageRating.jsx';
 import RatingBreakdown from './RatingBreakdown/RatingBreakdown.jsx';
 import ProductBreakdown from './ProductBreakdown/ProductBreakdown.jsx';
-import utilityFns from '../../../utilityFns.js';
 
 // TODO: add tests for AverageRating,
 // RatingBreakdown, and ProductBreakdown components
@@ -11,7 +10,9 @@ import utilityFns from '../../../utilityFns.js';
 const ReviewSummary = ({ reviewsMetadata, updateFilters }) => {
   let { totalRatings,
     percentageRecommended,
-    averageRating } = utilityFns.processReviewMetadata(reviewsMetadata);
+    averageRating,
+    ratings,
+    characteristics } = reviewsMetadata;
   return (
     <div style={{width: '5 em'}}>
       <AverageRating
@@ -19,11 +20,11 @@ const ReviewSummary = ({ reviewsMetadata, updateFilters }) => {
         averageRating={averageRating} />
       <p>{percentageRecommended}% of reviews recommend this product</p>
       <RatingBreakdown
-        starsCount={reviewsMetadata.ratings}
+        starsCount={ratings}
         ratingsCount={totalRatings}
         updateFilters={updateFilters}/>
       <ProductBreakdown
-        characteristics={reviewsMetadata.characteristics}/>
+        characteristics={characteristics}/>
     </div>
   );
 };

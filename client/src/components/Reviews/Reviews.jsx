@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReviewSummary from './ReviewSummary/ReviewSummary.jsx';
 import ReviewList from './ReviewList/ReviewList.jsx';
+import utilityFns from '../../utilityFns.js';
 import './reviews.css';
 
 class Reviews extends React.Component {
@@ -21,18 +22,20 @@ class Reviews extends React.Component {
     let { starFilter } = this.state;
     let { reviewsData, currentProductID, currentProductName, updateReviewList, incrementHelpfulCount } = this.props;
     let { reviewsMetadata, reviews } = reviewsData;
+    let processedReviewMetadata = utilityFns.processReviewMetadata(reviewsMetadata);
     return (
       <div id="reviews-component">
         <h3>RATINGS &#38; REVIEWS</h3>
         <div style={{display: 'flex', flexDirection: 'row'}}>
           <ReviewSummary
-            reviewsMetadata={reviewsMetadata}
+            reviewsMetadata={processedReviewMetadata}
             updateFilters={this.updateFilters.bind(this)}/>
           <ReviewList
             currentProductName={currentProductName}
             starFilter={starFilter}
             currentProductID={currentProductID}
             reviews={reviews.results}
+            totalReviews={processedReviewMetadata.totalRatings}
             incrementHelpfulCount={incrementHelpfulCount}
             updateReviewList={updateReviewList} />
         </div>
