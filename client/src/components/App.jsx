@@ -85,7 +85,7 @@ class App extends React.Component {
   }
 
   render() {
-    let { currentProductID, currentProduct, productStylesArray, currentStyleID, changeCurrentStyle, questionList, reviews, relatedItems  } = this.state;
+    let { currentProduct, productStylesArray, currentStyleID } = this.state;
 
     if (this.state.currentProductID) {
       return (
@@ -96,7 +96,7 @@ class App extends React.Component {
             currentProduct={currentProduct}
             productStylesArray={productStylesArray}
             currentStyleID={currentStyleID}
-            changeCurrentStyle={changeCurrentStyle}
+            changeCurrentStyle={this.changeCurrentStyle}
           />
           <div className="container">
             <RelatedItems relatedProductsInfo={this.state.relatedItems} currentProduct={this.state.currentProduct}/>
