@@ -20,9 +20,13 @@ function RelatedProducts({currentProductInfo, relatedProductsInfo, changeCurrent
     }
   };
 
-  let comparisonRelatedProduct = () {
 
-  }
+  let comparisonRelatedProduct = relatedProductsInfo[0].currentProduct;
+
+  let changecomparisonRelatedProduct = (productId) => {
+    var updatedComparisonRelatedProduct = relatedProductsInfo.filter(relatedProduct => { return relatedProduct.currentProduct.id === productId;});
+    comparisonRelatedProduct = updatedComparisonRelatedProduct.currentProduct;
+  };
 
   return (
     <div>
@@ -37,7 +41,7 @@ function RelatedProducts({currentProductInfo, relatedProductsInfo, changeCurrent
           <div className="carousel-inner">
             <div className="carousel-card" style={{ transform: `translateX(-${currentCardIndex * (100 / 3.81)}%)` }}>
               {relatedProductsInfo.map((relatedProductInfo) => {
-                return (<ProductCard key={relatedProductInfo.currentProduct.id} relatedProductInfo={relatedProductInfo} changeCurrentProduct={changeCurrentProduct} productCardType={'RelatedProducts'} />);
+                return (<ProductCard key={relatedProductInfo.currentProduct.id} relatedProductInfo={relatedProductInfo} changeCurrentProduct={changeCurrentProduct} productCardType={'RelatedProducts'} changecomparisonRelatedProduct={changecomparisonRelatedProduct}/>);
               })}
             </div>
           </div>
@@ -48,7 +52,7 @@ function RelatedProducts({currentProductInfo, relatedProductsInfo, changeCurrent
           }
         </div>
       </div>
-      <ComparisonModal currentProductInfo={currentProductInfo}/>
+      <ComparisonModal currentProductInfo={currentProductInfo} comparisonRelatedProduct={comparisonRelatedProduct}/>
     </div>
   );
 }
