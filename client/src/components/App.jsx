@@ -86,7 +86,8 @@ class App extends React.Component {
               currentProductName={this.state.currentProduct.name}/>
             <Reviews
               reviewsData={this.state.reviews}
-              currentProductID={this.state.currentProductID}/>
+              currentProductID={this.state.currentProductID}
+            />
           </div>
         </div>
       );

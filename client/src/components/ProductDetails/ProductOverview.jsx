@@ -12,13 +12,13 @@ function ProductOverview ({currentProduct, productStylesArray, currentStyleID, c
     <div>
       <div className="d-flex flex-row" >
         <div className="flex-column" style={{width: '50em', margin: '1em', position: 'relative'}}>
-          <h3>PRODUCT OVERVIEW</h3>
           <ImageGallery
             productStylesArray={productStylesArray}
             currentStyleID={currentStyleID}/>
         </div>
 
         <div className="d-flex flex-column" style={{width: '30em', margin: '1em', position: 'relative'}}>
+          <h4>Read All Reviews ***</h4>
           <StyleSelector
             productStylesArray={productStylesArray}
             currentStyleID={currentStyleID}
