@@ -64,6 +64,7 @@ class App extends React.Component {
 
   render() {
     let { currentProductID, currentProduct, productStylesArray, currentStyleID, changeCurrentStyle, questionList, reviews, relatedItems  } = this.state;
+
     if (this.state.currentProductID) {
       return (
         <div className="container">
