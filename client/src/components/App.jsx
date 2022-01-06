@@ -85,14 +85,17 @@ class App extends React.Component {
   }
 
   render() {
+    let { currentProduct, productStylesArray, currentStyleID } = this.state;
+
     if (this.state.currentProductID) {
       return (
-        <div>
+        <div className="container">
+
           <NavBar />
           <ProductOverview
-            currentProduct={this.state.currentProduct}
-            productStylesArray={this.state.productStylesArray}
-            currentStyleID={this.state.currentStyleID}
+            currentProduct={currentProduct}
+            productStylesArray={productStylesArray}
+            currentStyleID={currentStyleID}
             changeCurrentStyle={this.changeCurrentStyle}
           />
           <div className="container">
