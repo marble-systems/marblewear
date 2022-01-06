@@ -72,7 +72,7 @@ class RatingBreakdown extends React.Component {
                 onMouseLeave={() => { this.handleMouseOver(starCount, false); }}>
                 <StarRatingBar
                   stars={starCount}
-                  reviews={reviews}
+                  reviews={Number(reviews)}
                   percentage={percentage} />
               </div>
             );

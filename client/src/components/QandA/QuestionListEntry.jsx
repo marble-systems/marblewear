@@ -2,16 +2,21 @@
 import React from 'react';
 import AddAnswer from './AddAnswer.jsx';
 import AnswerListEntry from './AnswerListEntry.jsx';
+import axios from 'axios';
 
 class QuestionListEntry extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      answersShown: 2
+      answersShown: 2,
+      helpfulClicked: false,
+      reportClicked: false
     };
     this.showMoreAnswers = this.showMoreAnswers.bind(this);
     this.showLessAnswers = this.showLessAnswers.bind(this);
   }
+
+  /* ANSWERLIST LENGTH ALTERING FUNCTIONS */
 
   showMoreAnswers() {
     let { answersShown } = this.state;
@@ -33,7 +38,7 @@ class QuestionListEntry extends React.Component {
           </div>
           <div className="col-5">
             <div className="row">
-              <span className="text-end">Helpful? Yes ({data.question_helpfulness}) | <AddAnswer currentProductName={currentProductName} currentQuestionBody={data.question_body} handleSubmitAnswer={handleSubmitAnswer} handleAnswerInputChange={handleAnswerInputChange} question_id={question_id} /></span>
+              <span className="text-end">Helpful? <button className="btn btn-link" onClick={this.markQuestionHelpful}>Yes</button> ({data.question_helpfulness}) | <AddAnswer currentProductName={currentProductName} currentQuestionBody={data.question_body} handleSubmitAnswer={handleSubmitAnswer} handleAnswerInputChange={handleAnswerInputChange} question_id={question_id} /></span>
             </div>
           </div>
         </div>
