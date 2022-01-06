@@ -37,21 +37,20 @@ class QuestionListEntry extends React.Component {
             </div>
           </div>
         </div>
-        <div>
-          <h5>A:</h5><div className="row">
+        <div className="d-inline-block">
+          <h5 className="d-inline-block">A:</h5><div className="row">
             {answers
               .filter((a, i) => { return i < this.state.answersShown; })
               .map((answer, i) => {
                 return i < this.state.answersShown ? <AnswerListEntry key={i} answer={answer} listLength={answers.length} /> : null;
-              })}
-            {this.state.answersShown >= answers.length ? <button onClick={this.showLessAnswers}>
-                Show Less Answers
-            </button> :
-              <button onClick={this.showMoreAnswers}>
-                  Show More Answers
-              </button>
-            }
-          </div>
+              })}</div>
+          {this.state.answersShown >= answers.length ? <button onClick={this.showLessAnswers}>
+              Show Less Answers
+          </button> :
+            <button onClick={this.showMoreAnswers}>
+                Show More Answers
+            </button>
+          }
         </div>
       </div>
     );
