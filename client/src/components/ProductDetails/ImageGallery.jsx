@@ -1,6 +1,5 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import './prodStyles.css';
+import PropTypes from 'prop-types';
 
 function ImageGallery ({productStylesArray, currentStyleID}) {
 
@@ -18,7 +17,6 @@ function ImageGallery ({productStylesArray, currentStyleID}) {
   const setThumbnailClass = (image) => {
     return image === currentImage ? 'imageThumbnailMain' : 'imageThumbnail';
   };
-
 
   const showNextImage = ()=>{
     if(currentMainImageIndex !== imageGallery.length-1) {
@@ -55,11 +53,9 @@ function ImageGallery ({productStylesArray, currentStyleID}) {
           onClick= { () => showNextImage() }/>
       </div>
 
-      {imageGallery.map((image) =>
-        // eslint-disable-next-line react/jsx-key
-        <div className="row">
+      {imageGallery.map((image, idx) =>
+        <div className="row" key={idx}>
           <img
-            key={imageGallery[image]}
             className={setThumbnailClass(image)}
             src={image}
             onClick={() => {
@@ -78,5 +74,10 @@ function ImageGallery ({productStylesArray, currentStyleID}) {
     </div>
   );
 }
+
+ImageGallery.propTypes = {
+  productStylesArray: PropTypes.array.isRequired,
+  currentStyleID: PropTypes.number.isRequired
+};
 
 export default ImageGallery;

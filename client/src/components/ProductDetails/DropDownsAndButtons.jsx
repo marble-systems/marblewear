@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import './prodStyles.css';
+import PropTypes from 'prop-types';
 
 
 function DropDownsAndButtons ({productStylesArray, currentStyleID}) {
@@ -23,19 +23,10 @@ function DropDownsAndButtons ({productStylesArray, currentStyleID}) {
     skusArray.push(key);
   }
 
-  let inventoryArray = [];
+  let inventoryArray = ['0'];
   for(var i = 1; i <inventory+1; i++){
     inventoryArray.push(i);
   }
-
-  //Need to finish this function in order for the inventory drop down to be dynamic according to size selected
-  const updateInventoryarray = (newInventory) => {
-    let inventoryArray = [];
-    for(var i = 1; i <inventory+1; i++){
-      inventoryArray.push(i);
-    }
-    return inventoryArray;
-  };
 
 
   return (
@@ -58,7 +49,8 @@ function DropDownsAndButtons ({productStylesArray, currentStyleID}) {
           className="select quantity"
           name ="quantity"
           onChange={e => alert(`Quantity of ${e.target.value} selected`)}>
-          {inventoryArray.map((num)=> <option key={num} value={num}> {num} </option>)}
+          {inventoryArray.map((num, idx)=>
+            <option key={idx} value={num}> {num} </option>)}
         </select>
       </div>
 
@@ -81,6 +73,11 @@ function DropDownsAndButtons ({productStylesArray, currentStyleID}) {
     </div>
   );
 }
+
+DropDownsAndButtons.propTypes = {
+  productStylesArray: PropTypes.array.isRequired,
+  currentStyleID: PropTypes.number.isRequired,
+};
 
 export default DropDownsAndButtons;
 

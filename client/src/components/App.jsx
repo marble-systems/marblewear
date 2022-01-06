@@ -15,7 +15,7 @@ class App extends React.Component {
       currentStyleID: 234004,
       productStylesArray: [],
       currentProduct: [],
-      reviews: [],
+      reviews: {},
       questionList: [],
       relatedItems: [],
       favoriteProducts: [],
@@ -23,6 +23,8 @@ class App extends React.Component {
     this.favorites = {};
     this.cachedProducts = {};
     this.changeCurrentStyle = this.changeCurrentStyle.bind(this);
+    this.updateReviewList = this.updateReviewList.bind(this);
+    this.incrementHelpfulCount = this.incrementHelpfulCount.bind(this);
   }
 
   componentDidMount() {
@@ -66,6 +68,21 @@ class App extends React.Component {
           alert(`Error encountered: ${err}`);
         });
     }
+  }
+
+  updateReviewList (reviewsList) {
+    let { reviews } = this.state;
+    reviews.reviews = {results: reviewsList};
+    this.setState({ reviews });
+  }
+
+  incrementHelpfulCount (review_id) {
+    let { reviews } = this.state;
+    let idx = reviews.reviews.results.findIndex((review) =>{
+      return review.review_id === review_id;
+    });
+    reviews.reviews.results[idx]['helpfulness'] += 1;
+    this.setState({ reviews });
   }
 
   changeCurrentStyle(id) {
@@ -121,18 +138,21 @@ class App extends React.Component {
   }
 
   render() {
+    let { currentProduct, productStylesArray, currentStyleID, relatedItems, favoriteProducts } = this.state;
+
     if (this.state.currentProductID) {
       return (
-        <div>
+        <div className="container">
+
           <NavBar />
           <ProductOverview
-            currentProduct={this.state.currentProduct}
-            productStylesArray={this.state.productStylesArray}
-            currentStyleID={this.state.currentStyleID}
+            currentProduct={currentProduct}
+            productStylesArray={productStylesArray}
+            currentStyleID={currentStyleID}
             changeCurrentStyle={this.changeCurrentStyle}
           />
           <div className="container">
-            <RelatedItems relatedProductsInfo={this.state.relatedItems} currentProduct={this.state.currentProduct} favoriteProducts={this.state.favoriteProducts} addProductToFavorites={this.addProductToFavorites.bind(this)} removeProductFromFavorites={this.removeProductFromFavorites.bind(this)} changeCurrentProduct={this.changeCurrentProduct.bind(this)}/>
+            <RelatedItems relatedProductsInfo={relatedItems} currentProduct={currentProduct} favoriteProducts={favoriteProducts} addProductToFavorites={this.addProductToFavorites.bind(this)} removeProductFromFavorites={this.removeProductFromFavorites.bind(this)} changeCurrentProduct={this.changeCurrentProduct.bind(this)}/>
             <QuestionList
               data={this.state.questionList}
               currentProductID={this.state.currentProductID}
@@ -140,7 +160,9 @@ class App extends React.Component {
             <Reviews
               reviewsData={this.state.reviews}
               currentProductID={this.state.currentProductID}
-            />
+              currentProductName={this.state.currentProduct.name}
+              incrementHelpfulCount={this.incrementHelpfulCount}
+              updateReviewList={this.updateReviewList}/>
           </div>
         </div>
       );
@@ -151,6 +173,5 @@ class App extends React.Component {
     }
   }
 }
-
 
 export default App;

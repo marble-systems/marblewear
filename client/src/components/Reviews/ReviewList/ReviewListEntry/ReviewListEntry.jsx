@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Stars from '../../../SharedComponents/Stars.jsx';
 import Modal from '../../../SharedComponents/Modal.jsx';
+import axios from 'axios';
 
 const SUMMARY_CHAR_LIMIT = 60;
 const BODY_CHAR_LIMIT = 250;
@@ -16,15 +17,20 @@ const checkmarkIcon = () => {
   </svg>);
 };
 
-
 class ReviewListEntry extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       expanded: false,
       currentImage: '',
-      modalShowing: false
+      modalShowing: false,
+      reviewReported: false,
+      reviewHelpful: false
     };
+    this.handleShowMoreClick = this.handleShowMoreClick.bind(this);
+    this.handleToggleModalClick = this.handleToggleModalClick.bind(this);
+    this.handleHelpfulClick = this.handleHelpfulClick.bind(this);
+    this.handleReportClick = this.handleReportClick.bind(this);
   }
 
   handleShowMoreClick() {
@@ -37,35 +43,42 @@ class ReviewListEntry extends React.Component {
     this.setState({ currentImage, modalShowing });
   }
 
-  handleHelpfulClick() {
-    console.log('handleHelpfulClick');
-    // TODO: make a PUT request to /reviews/:review_id/helpful
-    // https://app-hrsei-api.herokuapp.com/api/fec2/:CAMPUS_CODE/
+  handleHelpfulClick(review_id) {
+    let reviewHelpful = true;
+    this.setState({ reviewHelpful });
+    axios.put(`/reviews/${review_id}/helpful`)
+      .then(res => {
+        this.props.incrementHelpfulCount(review_id);
+      });
   }
 
-  handleReportClick() {
-    console.log('handleReportClick');
-    // TODO: make a PUT request to /reviews/:review_id/report
+  handleReportClick(review_id) {
+    let reviewReported = true;
+    axios.put(`/reviews/${review_id}/report`)
+      .then(res => {
+        this.setState({ reviewReported });
+      });
   }
 
   render() {
-    let { expanded, modalShowing, currentImage } = this.state;
-    let { review } = this.props;
-    let { rating, summary, recommend, response, body, date, reviewer_name, helpfulness, photos } = review;
+    let { expanded, modalShowing, currentImage, reviewReported, reviewHelpful } = this.state;
+    let { review, incrementHelpfulCount } = this.props;
+    let { rating, summary, recommend, response, body, date, reviewer_name, helpfulness, photos, review_id } = review;
     let modalImage = () => (<img src={currentImage}></img>);
 
     return (
-      <div style={{ borderBottom: '1px solid gray', width: '24em' }}>
-
+      <div className="review-tile">
         {/* STARS USERNAME & DATE */}
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div>
           <Stars rating={rating} />
           {`${reviewer_name}, ${formatDate(date)}`}
         </div>
 
         {/* REVIEW SUMMARY */}
-        <div style={{ fontWeight: 'bold' }}>
-          {summary.length > SUMMARY_CHAR_LIMIT ? `${summary.substring(0, SUMMARY_CHAR_LIMIT)}...` : summary}
+        <div className="review-tile-summary">
+          {summary.length > SUMMARY_CHAR_LIMIT
+            ? `${summary.substring(0, SUMMARY_CHAR_LIMIT)}...`
+            : summary}
         </div>
 
         {/* REVIEW BODY */}
@@ -74,8 +87,7 @@ class ReviewListEntry extends React.Component {
             ? body
             : <span>{body.substring(0, BODY_CHAR_LIMIT)}...
               <a
-                style={{ textDecoration: 'underline', cursor: 'pointer' }}
-                onClick={this.handleShowMoreClick.bind(this)}>
+                onClick={this.handleShowMoreClick(this)}>
                 Show more
               </a>
             </span>}
@@ -97,10 +109,17 @@ class ReviewListEntry extends React.Component {
         </div>
 
         {/* IMAGES */}
-        <div style={{ display: 'flex', flexDirection: 'row', flexShrink: 1 }}>
-          {photos.map((url, idx) => {
+        <div className="review-tile-images">
+          {photos.map((imgData) => {
+            let { url, id } = imgData;
+            let invalidURL = /^http:\/\/[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+$/.test(url);
+            if (invalidURL) {
+              return null;
+            }
             return (
-              <div onClick={() => { this.handleToggleModalClick(url); }} key={idx} style={{ margin: '5px', cursor: 'pointer' }}>
+              <div onClick={() => { this.handleToggleModalClick(url); }}
+                key={`img-${review_id}-${id}`}
+                className="review-tile-image">
                 <img src={url} width='50px' />
               </div>
             );
@@ -112,18 +131,19 @@ class ReviewListEntry extends React.Component {
         <Modal
           show={modalShowing}
           body={modalImage}
-          onClose={this.handleToggleModalClick.bind(this)}/>
+          onClose={this.handleToggleModalClick}/>
 
         {/* HELPFUL? YES REPORT */}
         <span>
           Helpful? &nbsp;
-          <a style={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={this.handleHelpfulClick.bind(this)}>
-            Yes
-          </a>
+          { reviewHelpful
+            ? <span>Yes</span>
+            : <a onClick={()=>{this.handleHelpfulClick(review_id);}}>Yes</a>
+          }
           {` (${helpfulness}) | `}
-          <a style={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={this.handleReportClick.bind(this)}>
-            Report
-          </a>
+          { reviewReported
+            ? <span>Reported</span>
+            : <a onClick={()=>{this.handleReportClick(review_id);}}>Report</a>}
         </span>
       </div>
     );
@@ -137,6 +157,7 @@ class ReviewListEntry extends React.Component {
 
 ReviewListEntry.propTypes = {
   review: PropTypes.object.isRequired,
+  incrementHelpfulCount: PropTypes.func.isRequired
 };
 
 export default ReviewListEntry;

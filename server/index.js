@@ -18,7 +18,7 @@ app.use(express.json());
 
 app.get('/products/:product_id', (req, res) => {
   const { product_id } = req.params;
-  let totalProductInfo = [api.getProductInfo(product_id), api.getProductStyles(product_id), api.getQuestions(product_id), api.getReviews(product_id), api.getReviewsMetadata(product_id)];
+  let totalProductInfo = [api.getProductInfo(product_id), api.getProductStyles(product_id), api.getQuestions(product_id), api.getReviews({product_id}), api.getReviewsMetadata(product_id)];
   Promise.all(totalProductInfo)
     .then(results => {
       res.status(200).send(results);
@@ -64,7 +64,7 @@ app.get('/products/:product_id/related', (req, res) => {
     });
 });
 
-/* R&R POST/PUT HANDLERS */
+/* R&R POST/PUT/GET HANDLERS */
 
 app.post('/reviews', (req, res) => {
   api.postReview(req.body)
@@ -77,11 +77,21 @@ app.post('/reviews', (req, res) => {
 });
 
 app.put('/reviews/:review_id/:type', (req, res) => {
-  const { review_id } = req.params.review_id;
+  const { review_id } = req.params;
   const type = req.params.type;
   api.markReview(review_id, type)
     .then(() => {
       res.status(204).send();
+    })
+    .catch((err) => {
+      res.status(503).send(err);
+    });
+});
+
+app.get('/reviews/', (req, res) => {
+  api.getReviews(req.query)
+    .then((success) => {
+      res.status(201).send(success);
     })
     .catch((err) => {
       res.status(503).send(err);

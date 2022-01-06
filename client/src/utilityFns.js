@@ -13,6 +13,11 @@ const utilityFns = {
     const percentageRecommended = Math.floor(recommendedCount / totalRatings * 100);
     return { totalRatings, averageRating, recommendedCount, percentageRecommended };
   },
+  generateUrlParams: (object) => {
+    return Object.keys(object)
+      .map(key => `${key}=${object[key]}`)
+      .join('&');
+  }
 };
 
 export default utilityFns;

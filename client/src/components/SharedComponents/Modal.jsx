@@ -28,7 +28,7 @@ Modal.propTypes = {
   show: PropTypes.bool.isRequired,
   body: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   subtitle: PropTypes.string,
   position: PropTypes.number
 };
