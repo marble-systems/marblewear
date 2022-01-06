@@ -1,18 +1,25 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+// import PropTypes from 'prop-types';
+// ImageGallery.propTypes = {
+//   productStylesArray: PropTypes.array.isRequired,
+//   currentStyleID: PropTypes.number.isRequired
+// };
 
-function ImageGallery ({productStylesArray, currentStyleID}) {
 
-  const getCurrentStyleObject = (targetStyleId, productStylesArray) => {return productStylesArray.filter((style) => style.style_id === targetStyleId);
-  };
 
-  const currentStyleObject = getCurrentStyleObject(currentStyleID, productStylesArray);
+function ImageGallery ({currentMainImageIndex, imageGallery, currentImage,productStylesArray, currentStyleID}) {
 
-  const imageGallery = currentStyleObject[0].photos.map((photo)=> photo.thumbnail_url);
+  // const getCurrentStyleObject = (targetStyleId, productStylesArray) => {return productStylesArray.filter((style) => style.style_id === targetStyleId);
+  // };
 
-  const [currentImage, updateMainImage] = useState(imageGallery[0]);
+  // const currentStyleObject = getCurrentStyleObject(currentStyleID, productStylesArray);
 
-  const [currentMainImageIndex, updateMainImageIndex] = useState(0);
+  // const imageGallery = currentStyleObject[0].photos.map((photo)=> photo.thumbnail_url);
+
+
+  // const [currentImage, updateMainImage] = useState(imageGallery[0]);
+
+  // const [currentMainImageIndex, updateMainImageIndex] = useState(0);
 
   const setThumbnailClass = (image) => {
     return image === currentImage ? 'imageThumbnailMain' : 'imageThumbnail';
@@ -20,17 +27,17 @@ function ImageGallery ({productStylesArray, currentStyleID}) {
 
   const showNextImage = ()=>{
     if(currentMainImageIndex !== imageGallery.length-1) {
-      updateMainImageIndex(currentMainImageIndex+1);
-      const newImg = imageGallery.filter((image)=> imageGallery.indexOf(image) === currentMainImageIndex+1);
-      updateMainImage(newImg);
+      this.props.updateMainImageIndex(currentMainImageIndex+1);
+      const newImg = this.props.imageGallery.filter((image)=> this.props.imageGallery.indexOf(image) === currentMainImageIndex+1);
+      this.props.updateMainImage(newImg);
     }
   };
 
   const showPreviousImage = ()=>{
     if(currentMainImageIndex > 0) {
-      updateMainImageIndex(currentMainImageIndex-1);
-      const newImg = imageGallery.filter((image)=> imageGallery.indexOf(image) === currentMainImageIndex-1);
-      updateMainImage(newImg);
+      this.props.updateMainImageIndex(currentMainImageIndex-1);
+      const newImg = this.props.imageGallery.filter((image)=> this.props.imageGallery.indexOf(image) === currentMainImageIndex-1);
+      this.props.updateMainImage(newImg);
     }
   };
 
@@ -52,15 +59,15 @@ function ImageGallery ({productStylesArray, currentStyleID}) {
           onClick= { () => showNextImage() }/>
       </div>
 
-      {imageGallery.map((image, idx) =>
+      {this.props.imageGallery.map((image, idx) =>
         <div className="row" key={idx}>
           <img
             className={setThumbnailClass(image)}
             src={image}
             onClick={() => {
-              let indx = imageGallery.indexOf(image);
-              updateMainImageIndex(indx);
-              updateMainImage(image);
+              let indx = this.props.imageGallery.indexOf(image);
+              this.props.updateMainImageIndex(indx);
+              this.props.updateMainImage(image);
             }
             }/>
 
@@ -74,9 +81,6 @@ function ImageGallery ({productStylesArray, currentStyleID}) {
   );
 }
 
-ImageGallery.propTypes = {
-  productStylesArray: PropTypes.array.isRequired,
-  currentStyleID: PropTypes.number.isRequired
-};
+
 
 export default ImageGallery;
