@@ -7,6 +7,12 @@ axios.interceptors.response.use((response) => {
   return response.data;
 });
 
+const generateUrlParams = (object) => {
+  return Object.keys(object)
+    .map(key => `${key}=${object[key]}`)
+    .join('&');
+};
+
 module.exports = {
 
   /* MAIN GET HELPERS */
@@ -25,9 +31,10 @@ module.exports = {
       headers: auth
     });
   },
-  getReviews: (productID) => {
+  getReviews: (params) => {
+    const queryParams = generateUrlParams(params);
     return axios({
-      url: `${url}/reviews?product_id=${productID}`,
+      url: `${url}/reviews?${queryParams}`,
       method: 'get',
       headers: auth
     });

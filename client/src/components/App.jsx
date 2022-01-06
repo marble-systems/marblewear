@@ -5,6 +5,7 @@ import ProductOverview from './ProductDetails/ProductOverview.jsx';
 import QuestionList from './QandA/QuestionList.jsx';
 import RelatedItems from './RelatedItems/RelatedItems.jsx';
 import NavBar from './NavBar.jsx';
+import parserFunctions from '../parserFunctions.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,12 +15,14 @@ class App extends React.Component {
       currentStyleID: 234004,
       productStylesArray: [],
       currentProduct: [],
-      reviews: [],
+      reviews: {},
       questionList: [],
       relatedItems: [],
     };
     this.cachedProducts = {};
     this.changeCurrentStyle = this.changeCurrentStyle.bind(this);
+    this.updateReviewList = this.updateReviewList.bind(this);
+    this.incrementHelpfulCount = this.incrementHelpfulCount.bind(this);
   }
 
   componentDidMount() {
@@ -30,13 +33,17 @@ class App extends React.Component {
     let cachedProduct = this.cachedProducts[productId];
     if (cachedProduct) {
       let {currentProduct, productStylesArray, reviews, questionList} = cachedProduct;
-      this.setState({
-        currentProductID: productId,
-        currentProduct,
-        productStylesArray,
-        reviews,
-        questionList
-      });
+      parserFunctions.getRelatedItems(productId, this.cachedProducts)
+        .then(relatedItems => {
+          this.setState({
+            currentProductID: productId,
+            currentProduct,
+            productStylesArray,
+            reviews,
+            questionList,
+            relatedItems
+          });
+        });
     } else {
       axios.get(`./products/${productId}`)
         .then(({data}) => {
@@ -58,6 +65,21 @@ class App extends React.Component {
     }
   }
 
+  updateReviewList (reviewsList) {
+    let { reviews } = this.state;
+    reviews.reviews = {results: reviewsList};
+    this.setState({ reviews });
+  }
+
+  incrementHelpfulCount (review_id) {
+    let { reviews } = this.state;
+    let idx = reviews.reviews.results.findIndex((review) =>{
+      return review.review_id === review_id;
+    });
+    reviews.reviews.results[idx]['helpfulness'] += 1;
+    this.setState({ reviews });
+  }
+
   changeCurrentStyle(id) {
     this.setState({ currentStyleID: id });
   }
@@ -74,7 +96,7 @@ class App extends React.Component {
             changeCurrentStyle={this.changeCurrentStyle}
           />
           <div className="container">
-            {/* <RelatedItems relatedItemsdata={this.state.relatedItems} /> */}
+            <RelatedItems relatedProductsInfo={this.state.relatedItems} currentProduct={this.state.currentProduct}/>
             <QuestionList
               data={this.state.questionList}
               currentProductID={this.state.currentProductID}
@@ -82,7 +104,9 @@ class App extends React.Component {
             <Reviews
               reviewsData={this.state.reviews}
               currentProductID={this.state.currentProductID}
-            />
+              currentProductName={this.state.currentProduct.name}
+              incrementHelpfulCount={this.incrementHelpfulCount}
+              updateReviewList={this.updateReviewList}/>
           </div>
         </div>
       );
@@ -93,6 +117,5 @@ class App extends React.Component {
     }
   }
 }
-
 
 export default App;
