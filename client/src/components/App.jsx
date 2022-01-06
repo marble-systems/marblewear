@@ -14,12 +14,13 @@ class App extends React.Component {
       currentStyleID: 234004,
       productStylesArray: [],
       currentProduct: [],
-      reviews: [],
+      reviews: {},
       questionList: [],
       relatedItems: [],
     };
     this.cachedProducts = {};
     this.changeCurrentStyle = this.changeCurrentStyle.bind(this);
+    this.updateReviewList = this.updateReviewList.bind(this);
   }
 
   componentDidMount() {
@@ -58,6 +59,12 @@ class App extends React.Component {
     }
   }
 
+  updateReviewList (reviewsList) {
+    let { reviews } = this.state;
+    reviews.reviews = {results: reviewsList};
+    this.setState({ reviews });
+  }
+
   changeCurrentStyle(id) {
     this.setState({ currentStyleID: id });
   }
@@ -82,7 +89,8 @@ class App extends React.Component {
             <Reviews
               reviewsData={this.state.reviews}
               currentProductID={this.state.currentProductID}
-              currentProductName={this.state.currentProduct.name}/>
+              currentProductName={this.state.currentProduct.name}
+              updateReviewList={this.updateReviewList}/>
           </div>
         </div>
       );
