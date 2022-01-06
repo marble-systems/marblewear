@@ -6,7 +6,7 @@ import './relatedItemsStyle.css';
 
 function RelatedProducts({currentProductInfo, relatedProductsInfo}) {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
-  const carrouseLength = relatedProductsInfo.length;
+  const carrouselLength = relatedProductsInfo.length;
 
   let previousButtonOnClick = () => {
     if (currentCardIndex > 0) {
@@ -15,7 +15,7 @@ function RelatedProducts({currentProductInfo, relatedProductsInfo}) {
   };
 
   let nextButtonOnClick = () => {
-    if (currentCardIndex < (carrouseLength - 3)) {
+    if (currentCardIndex < (carrouselLength - 3)) {
       setCurrentCardIndex(currentCardIndex + 1);
     }
   };
@@ -32,12 +32,12 @@ function RelatedProducts({currentProductInfo, relatedProductsInfo}) {
           }
           <div className="carousel-inner">
             <div className="carousel-card" style={{ transform: `translateX(-${currentCardIndex * (100 / 3.81)}%)` }}>
-              {relatedProductsInfo.map((relatedProductInfo, index) => {
-                return (<ProductCard key={index} relatedProductInfo={relatedProductInfo}/>);
+              {relatedProductsInfo.map((relatedProductInfo) => {
+                return (<ProductCard key={relatedProductInfo.id} relatedProductInfo={relatedProductInfo}/>);
               })}
             </div>
           </div>
-          {currentCardIndex < (carrouseLength - 3) &&
+          {currentCardIndex < (carrouselLength - 3) &&
             <button onClick={nextButtonOnClick} className="next-button">
                 &gt;
             </button>
