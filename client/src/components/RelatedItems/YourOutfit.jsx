@@ -6,7 +6,7 @@ import './relatedItemsStyle.css';
 
 function YourOutfit({outfitProductsInfo, addProductToFavorites, removeProductFromFavorites}) {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
-  const carrouseLength = outfitProductsInfo.length;
+  const carrouselLength = outfitProductsInfo.length;
 
   let previousButtonOnClick = () => {
     if (currentCardIndex > 0) {
@@ -15,7 +15,7 @@ function YourOutfit({outfitProductsInfo, addProductToFavorites, removeProductFro
   };
 
   let nextButtonOnClick = () => {
-    if (currentCardIndex < (carrouseLength - 3)) {
+    if (currentCardIndex < (carrouselLength - 3)) {
       setCurrentCardIndex(currentCardIndex + 1);
     }
   };
@@ -33,12 +33,12 @@ function YourOutfit({outfitProductsInfo, addProductToFavorites, removeProductFro
           <div className="carousel-inner">
             <div className="carousel-card" style={{ transform: `translateX(-${currentCardIndex * (100 / 3.81)}%)` }}>
               <AddOutfit addProductToFavorites={addProductToFavorites}/>
-              {outfitProductsInfo.map((outfitProductInfo, index) => {
-                return (<ProductCard key={index} relatedProductInfo={outfitProductInfo} productCardType={'YourOutfit'} removeProductFromFavorites={removeProductFromFavorites}/>);
+              {outfitProductsInfo.map((outfitProductInfo) => {
+                return (<ProductCard key={outfitProductInfo.id} relatedProductInfo={outfitProductInfo} productCardType={'YourOutfit'} removeProductFromFavorites={removeProductFromFavorites}/>);
               })}
             </div>
           </div>
-          {currentCardIndex < (carrouseLength - 3) &&
+          {currentCardIndex < (carrouselLength - 3) &&
             <button onClick={nextButtonOnClick} className="next-button">
                 &gt;
             </button>
