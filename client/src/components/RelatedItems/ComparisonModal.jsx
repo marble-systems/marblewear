@@ -2,21 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function ComparisonModal({currentProductInfo, comparisonRelatedProduct}) {
-  let features = currentProductInfo.features.filter(feature => {
-    return feature.value !== null;
-  }).concat(comparisonRelatedProduct.features.filter(feature => {
-    return feature.value !== null;
-  }));
+  let comparedFeaturesObj = {};
 
-  let comparedFeatures = new Set();
+  let addToComparedFeaturesObj = (productFeatures, product) => {
+    for (var i = 0; i < productFeatures.length; i++) {
+      if (productFeatures[i].value) {
+        let feature = `${productFeatures[i].value} ${productFeatures[i].feature}`;
+        if (!comparedFeaturesObj[feature]) {
+          comparedFeaturesObj[feature] = {feature: feature};
+        }
+        comparedFeaturesObj[feature][product] = true;
+      }
+    }
+  };
 
-  for (var i = 0; i < features.length; i++) {
-    let feature = `${features[i].value} ${features[i].feature}`;
-    comparedFeatures.add(feature);
-  }
+  addToComparedFeaturesObj(currentProductInfo.features, 'current');
+  addToComparedFeaturesObj(comparisonRelatedProduct.features, 'related');
 
-  comparedFeatures = Array.from(comparedFeatures);
-  console.log(comparedFeatures);
+  let comparedFeatures = Object.values(comparedFeaturesObj);
 
   return (
     <div className="modal fade" id="comparisonModal" tabIndex="-1"  aria-hidden="true">
@@ -30,7 +33,8 @@ function ComparisonModal({currentProductInfo, comparisonRelatedProduct}) {
             <h5>{currentProductInfo.name}</h5>
             <h5>{comparisonRelatedProduct.name}</h5>
             {comparedFeatures.map((feature, index) => {
-              return (<p className="text-center" key={index}>{feature}</p>);
+
+              return (<p className="text-center" key={index}>{feature.feature}</p>);
             })}
           </div>
         </div>
