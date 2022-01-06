@@ -33,7 +33,7 @@ function RelatedProducts({currentProductInfo, relatedProductsInfo}) {
           <div className="carousel-inner">
             <div className="carousel-card" style={{ transform: `translateX(-${currentCardIndex * (100 / 3.81)}%)` }}>
               {relatedProductsInfo.map((relatedProductInfo) => {
-                return (<ProductCard key={relatedProductInfo.id} relatedProductInfo={relatedProductInfo}/>);
+                return (<ProductCard key={relatedProductInfo.currentProduct.id} relatedProductInfo={relatedProductInfo}/>);
               })}
             </div>
           </div>
