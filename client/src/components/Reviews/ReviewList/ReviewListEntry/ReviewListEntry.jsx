@@ -17,7 +17,6 @@ const checkmarkIcon = () => {
   </svg>);
 };
 
-
 class ReviewListEntry extends React.Component {
   constructor(props) {
     super(props);
@@ -49,24 +48,21 @@ class ReviewListEntry extends React.Component {
     this.setState({ reviewHelpful });
     axios.put(`/reviews/${review_id}/helpful`)
       .then(res => {
-        //TODO: trigger get request to update
-        // review list tile
+        this.props.incrementHelpfulCount(review_id);
       });
   }
 
   handleReportClick(review_id) {
     let reviewReported = true;
-    this.setState({ reviewReported });
     axios.put(`/reviews/${review_id}/report`)
       .then(res => {
-        //TODO: trigger get request to update
-        // review list tile
+        this.setState({ reviewReported });
       });
   }
 
   render() {
     let { expanded, modalShowing, currentImage, reviewReported, reviewHelpful } = this.state;
-    let { review } = this.props;
+    let { review, incrementHelpfulCount } = this.props;
     let { rating, summary, recommend, response, body, date, reviewer_name, helpfulness, photos, review_id } = review;
     let modalImage = () => (<img src={currentImage}></img>);
 
@@ -161,6 +157,7 @@ class ReviewListEntry extends React.Component {
 
 ReviewListEntry.propTypes = {
   review: PropTypes.object.isRequired,
+  incrementHelpfulCount: PropTypes.func.isRequired
 };
 
 export default ReviewListEntry;

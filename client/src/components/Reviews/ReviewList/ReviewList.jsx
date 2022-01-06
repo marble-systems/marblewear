@@ -54,7 +54,7 @@ class ReviewList extends React.Component {
   }
 
   render() {
-    let { reviews, starFilter, currentProductName } = this.props;
+    let { reviews, starFilter, currentProductName, incrementHelpfulCount } = this.props;
     let { listLength, addReviewModal } = this.state;
     return (
       <div className="review-list-container">
@@ -84,7 +84,10 @@ class ReviewList extends React.Component {
           .filter((review, idx) => { return idx < listLength; })
           .map(review => {
             return (
-              <ReviewListEntry key={review.review_id} review={review} />
+              <ReviewListEntry
+                key={review.review_id}
+                incrementHelpfulCount={incrementHelpfulCount}
+                review={review} />
             );
           })}
         {/* MORE REVIEWS & ADD REVIEW BUTTONS */}
@@ -118,7 +121,8 @@ ReviewList.propTypes = {
   currentProductName: PropTypes.string.isRequired,
   starFilter: PropTypes.array.isRequired,
   currentProductID: PropTypes.string,
-  updateReviewList: PropTypes.func,
+  updateReviewList: PropTypes.func.isRequired,
+  incrementHelpfulCount: PropTypes.func.isRequired
 };
 
 export default ReviewList;
