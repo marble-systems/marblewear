@@ -82,6 +82,19 @@ class App extends React.Component {
     }
   }
 
+  removeProductFromFavorites(productId) {
+    delete this.favorites[productId];
+    let updatedFavoriteProducts = [];
+    for (let favoriteProduct in this.favorites) {
+      let productInfo = this.cachedProducts[favoriteProduct];
+      updatedFavoriteProducts.push(productInfo);
+    }
+    this.setState({
+      favoriteProducts: updatedFavoriteProducts
+    });
+
+  }
+
   render() {
     if (this.state.currentProductID) {
       return (
@@ -94,7 +107,7 @@ class App extends React.Component {
             changeCurrentStyle={this.changeCurrentStyle}
           />
           <div className="container">
-            <RelatedItems relatedProductsInfo={this.state.relatedItems} currentProduct={this.state.currentProduct} favoriteProducts={this.state.favoriteProducts} addProductToFavorites={this.addProductToFavorites.bind(this)}/>
+            <RelatedItems relatedProductsInfo={this.state.relatedItems} currentProduct={this.state.currentProduct} favoriteProducts={this.state.favoriteProducts} addProductToFavorites={this.addProductToFavorites.bind(this)} removeProductFromFavorites={this.removeProductFromFavorites.bind(this)}/>
             <QuestionList
               data={this.state.questionList}
               currentProductID={this.state.currentProductID}
