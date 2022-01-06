@@ -80,8 +80,8 @@ app.put('/reviews/:review_id/:type', (req, res) => {
   const { review_id } = req.params;
   const type = req.params.type;
   api.markReview(review_id, type)
-    .then(() => {
-      res.status(204).send();
+    .then((success) => {
+      res.status(204).send(success);
     })
     .catch((err) => {
       res.status(503).send(err);
@@ -126,8 +126,8 @@ app.put('/qa/questions/:question_id/:type', (req, res) => {
   const { question_id } = req.params;
   const type = req.params.type;
   api.markQuestion(question_id, type)
-    .then(() => {
-      res.status(204).send();
+    .then((success) => {
+      res.status(204).send(success);
     })
     .catch((err) => {
       res.status(503).send(err);
@@ -138,8 +138,8 @@ app.put('/qa/answers/:answer_id/:type', (req, res) => {
   const { answer_id } = req.params;
   const type = req.params.type;
   api.markAnswer(answer_id, type)
-    .then(() => {
-      res.status(204).send();
+    .then((success) => {
+      res.status(204).send(success);
     })
     .catch((err) => {
       res.status(503).send(err);
