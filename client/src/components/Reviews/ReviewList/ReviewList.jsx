@@ -4,6 +4,7 @@ import ReviewListEntry from './ReviewListEntry/ReviewListEntry.jsx';
 import Modal from '../../SharedComponents/Modal.jsx';
 import AddReviewForm from './AddReviewForm/AddReviewForm.jsx';
 import axios from 'axios';
+import utilityFns from '../../../utilityFns.js';
 
 const sortOptions = {relevant: 'Relevant', helpful: 'Helpful', newest: 'Newest'};
 
@@ -22,10 +23,26 @@ class ReviewList extends React.Component {
 
   incrementListLength() {
     let { listLength } = this.state;
+    let { reviews } = this.props;
+    let reviewsCount = reviews.length;
     listLength += 2;
     this.setState({ listLength });
-    // TODO: make GET request for next page of reviews
-    // if listLength >= .75 reviews.length
+    if (listLength > 0.75 * reviewsCount) {
+      let { getReviewsRequestParams } = this.state;
+      getReviewsRequestParams.product_id = this.props.currentProductID;
+      getReviewsRequestParams.page += 2;
+      let qs = utilityFns.generateUrlParams(getReviewsRequestParams);
+      axios.get(`/reviews/?${qs}`)
+        .then(res => {
+          let { count, page, product, results } = res.data;
+          Object.assign(getReviewsRequestParams, { count, page, product_id: product });
+          this.setState({ getReviewsRequestParams });
+          this.props.updateReviewList([...reviews, ...results]);
+        })
+        .catch(err => {
+          console.error(`Error incrementing listLength: ${err}`);
+        });
+    }
   }
 
   handleSelectorChange(e) {
@@ -34,16 +51,16 @@ class ReviewList extends React.Component {
     getReviewsRequestParams.product_id = this.props.currentProductID;
     getReviewsRequestParams.sort = key;
     getReviewsRequestParams.page += 1;
-    const qs = Object.keys(getReviewsRequestParams)
-      .map(key => `${key}=${getReviewsRequestParams[key]}`)
-      .join('&');
+    let qs = utilityFns.generateUrlParams(getReviewsRequestParams);
     axios.get(`/reviews/?${qs}`)
       .then(res => {
         let { count, page, product, results } = res.data;
         Object.assign(getReviewsRequestParams, { count, page, product_id: product });
         this.setState({ getReviewsRequestParams });
-        //TOOD: update props
         this.props.updateReviewList(results);
+      })
+      .catch(err => {
+        console.error(`Error updating sort order: ${err}`);
       });
   }
 
