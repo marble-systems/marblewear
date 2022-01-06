@@ -89,14 +89,11 @@ app.put('/reviews/:review_id/:type', (req, res) => {
 });
 
 app.get('/reviews/', (req, res) => {
-  console.log(req.query);
   api.getReviews(req.query)
     .then((success) => {
-      console.log(success)
       res.status(201).send(success);
     })
     .catch((err) => {
-      console.log(err)
       res.status(503).send(err);
     });
 });
