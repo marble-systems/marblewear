@@ -84,7 +84,6 @@ class App extends React.Component {
   }
 
   updateMainImage(newImg) {
-    console.log('new image', newImg);
     this.setState({ mainImage: newImg });
   }
 
