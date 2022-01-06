@@ -6,7 +6,7 @@ const parserFunctions = {
       .then(({data}) => {
         let relatedProducts = data.map(product => {
           if (cachedProducts[product]) {
-            return ['find'];
+            return cachedProducts[product];
           } else {
             return axios.get(`./products/${product}`)
               .then(({data}) => {
