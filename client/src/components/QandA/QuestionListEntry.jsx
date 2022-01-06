@@ -1,39 +1,61 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import Moment from 'moment';
 import AddAnswer from './AddAnswer.jsx';
+import AnswerListEntry from './AnswerListEntry.jsx';
 
-const QuestionListEntry = ({ data, answers, currentProductName }) => {
-  return (
-    <div className="container">
-      <div className="row pt-3">
-        <div className="col-9">
-          <h5>Q: {data.question_body}</h5>
+class QuestionListEntry extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      answersShown: 2
+    };
+    this.showMoreAnswers = this.showMoreAnswers.bind(this);
+    this.showLessAnswers = this.showLessAnswers.bind(this);
+  }
+
+  showMoreAnswers() {
+    let { answersShown } = this.state;
+    answersShown += 2;
+    this.setState({ answersShown });
+  }
+
+  showLessAnswers() {
+    this.setState({ answersShown: 2 });
+  }
+
+  render() {
+    const { data, answers, currentProductName, handleAnswerInputChange, handleSubmitAnswer, question_id } = this.props;
+    return (
+      <div className="container">
+        <div className="row pt-3">
+          <div className="col-7">
+            <h5>Q: {data.question_body}</h5>
+          </div>
+          <div className="col-5">
+            <div className="row">
+              <span className="text-end">Helpful? Yes ({data.question_helpfulness}) | <AddAnswer currentProductName={currentProductName} currentQuestionBody={data.question_body} handleSubmitAnswer={handleSubmitAnswer} handleAnswerInputChange={handleAnswerInputChange} question_id={question_id} /></span>
+            </div>
+          </div>
         </div>
-        <div className="col-3">
-          <div className="row">
-            <p className="text-end">Helpful? Yes ({data.question_helpfulness}) | <AddAnswer currentProductName={currentProductName} currentQuestionBody={data.question_body} /></p>
+        <div>
+          <h5>A:</h5><div className="row">
+            {answers
+              .filter((a, i) => { return i < this.state.answersShown; })
+              .map((answer, i) => {
+                return i < this.state.answersShown ? <AnswerListEntry key={i} answer={answer} listLength={answers.length} /> : null;
+              })}
+            {this.state.answersShown >= answers.length ? <button onClick={this.showLessAnswers}>
+                Show Less Answers
+            </button> :
+              <button onClick={this.showMoreAnswers}>
+                  Show More Answers
+              </button>
+            }
           </div>
         </div>
       </div>
-      <div>
-        {answers.map((answer, i) => {
-          return answers.length ? <div className="col-9 text-start"><h5>A:</h5>
-            <div key={i}>
-              <div className="row pt-1"><p className="text-wrap">{answer.body}</p></div>
-              <div className="hstack gap-3 fw-light">
-                <div>by {answer.answerer_name}, {Moment(answer.date).format('MMMM Do, YYYY')}</div>
-                <div className="vr"></div>
-                <div>Helpful?</div><div className="text-decoration-underline">Yes</div><div>({answer.helpfulness})</div>
-                <div className="vr"></div>
-                <div className="text-decoration-underline">Report</div>
-              </div>
-            </div>
-          </div> : null;
-        })}
-      </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default QuestionListEntry;

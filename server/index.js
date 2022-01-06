@@ -91,6 +91,7 @@ app.put('/reviews/:review_id/:type', (req, res) => {
 /* Q&A POST/PUT HANDLERS */
 
 app.post('/qa/questions', (req, res) => {
+  req.body.product_id = Number(req.body.product_id);
   api.postQuestion(req.body)
     .then((success) => {
       res.status(201).send(success);
@@ -102,8 +103,7 @@ app.post('/qa/questions', (req, res) => {
 
 app.post('/qa/questions/:question_id/answers', (req, res) => {
   const { question_id } = req.params;
-  const { answerData } = req.body;
-  api.postAnswer(question_id, answerData)
+  api.postAnswer(question_id, req.body)
     .then((success) => {
       res.status(201).send(success);
     })
