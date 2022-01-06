@@ -7,14 +7,14 @@ import React from 'react';
 
 
 
-function ImageGallery ({currentMainImageIndex, imageGallery, currentImage,productStylesArray, currentStyleID}) {
+function ImageGallery ({currentMainImageIndex, currentImage,productStylesArray, currentStyleID}) {
 
-  // const getCurrentStyleObject = (targetStyleId, productStylesArray) => {return productStylesArray.filter((style) => style.style_id === targetStyleId);
-  // };
+  const getCurrentStyleObject = (targetStyleId, productStylesArray) => {return productStylesArray.filter((style) => style.style_id === targetStyleId);
+  };
 
-  // const currentStyleObject = getCurrentStyleObject(currentStyleID, productStylesArray);
+  const currentStyleObject = getCurrentStyleObject(currentStyleID, productStylesArray);
 
-  // const imageGallery = currentStyleObject[0].photos.map((photo)=> photo.thumbnail_url);
+  const imageGallery = currentStyleObject[0].photos.map((photo)=> photo.thumbnail_url);
 
 
   // const [currentImage, updateMainImage] = useState(imageGallery[0]);
