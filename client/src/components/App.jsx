@@ -35,6 +35,9 @@ class App extends React.Component {
       let {currentProduct, productStylesArray, reviews, questionList} = cachedProduct;
       parserFunctions.getRelatedItems(productId, this.cachedProducts)
         .then(relatedItems => {
+          relatedItems.forEach(relatedItem => {
+            this.cachedProducts[relatedItem.currentProduct.id] = relatedItem;
+          });
           this.setState({
             currentProductID: productId,
             currentProduct,
