@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import Stars from '../../../SharedComponents/Stars.jsx';
 import Modal from '../../../SharedComponents/Modal.jsx';
@@ -92,17 +93,21 @@ class AddReviewForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let { overallRating, radioValues, reviewBody, nickname, email } = this.state;
+    let { currentProductID } = this.props;
+    let { overallRating, radioValues, reviewBody, nickname, email, formValidationModal, reviewSummary, images } = this.state;
     let characteristics = Object.keys(CHARACTERISTICS_SCALE);
-    let invalidEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
+    let validEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
     // Check for missing inputs
     let missingInputs = characteristics
-      .filter(characteristic => { return !radioValues[characteristic]; });
+      .filter(characteristic => {
+        let characteristicId = CHARACTERISTICS_SCALE[characteristic]['id'];
+        return !radioValues[characteristicId];
+      });
     let inputsObject = { 'Overall rating': overallRating, 'Review body': reviewBody, 'Nickname': nickname, 'Email': email };
     missingInputs.push(...Object.keys(inputsObject).filter(key => { return !inputsObject[key]; }));
     if (!overallRating || !reviewBody || !nickname || !email) {
       alert(`You must enter: \n${missingInputs.join(', ').replace(/, ([^,]*)$/, ' and $1')}`);
-    } else if (invalidEmail) {
+    } else if (!validEmail) {
       alert('Invalid email format');
     } else if (reviewBody.length > REVIEW_BODY_MAX_LENGTH) {
       alert(`Review body must not exceed ${REVIEW_BODY_MAX_LENGTH} characters in length`);
@@ -112,6 +117,42 @@ class AddReviewForm extends React.Component {
     // TODOs:
     // validate image format and upload
     // make POST request to POST /reviews endpoint
+
+    // get form data from state
+    // and update key names
+    let postBody = {
+      product_id: currentProductID,
+      rating: overallRating,
+      summary: reviewSummary,
+      body: reviewBody,
+      recommend: (radioValues['recommend-product'] === 'yes'),
+      name: nickname,
+      email,
+      photos: images,
+      //todo: check characteristics
+      characteristics: Object.keys(radioValues)
+        .filter(key => key !== 'recommend-product')
+        .reduce((acc, key) => acc[key] = radioValues[key], {})
+    };
+
+    console.log(postBody.characteristics)
+
+    // make POST request to /reviews
+    axios.post('/reviews', postBody)
+      .then(res => {
+        console.log('success: ', res)
+        // close modal
+        formValidationModal.isShowing = false;
+        // clear form data from state
+        this.setState({ overallRating: 0, radioValues: { 'recommend-product': 'yes' },
+          reviewSummary: '', reviewBody: '', nickname: '', email: '', images: [], formValidationModal
+        });
+        alert('Review submitted!');
+      })
+      .catch(err => {
+        console.error(`Error: ${err}`);
+        alert('Unable to submit review. Please try again later.');
+      });
   }
 
   render() {
@@ -293,5 +334,9 @@ class AddReviewForm extends React.Component {
     );
   }
 }
+
+AddReviewForm.propTypes = {
+  currentProductID: PropTypes.string.isRequired,
+};
 
 export default AddReviewForm;
