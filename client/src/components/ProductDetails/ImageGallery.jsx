@@ -11,12 +11,9 @@ function ImageGallery ({productStylesArray, currentStyleID, mainImage, updateMai
   const imageGallery = currentStyleObject[0].photos.map((photo)=> photo.thumbnail_url);
 
 
-
-  // const [currentImage, updateMainImage] = useState(mainImage);
-
   const [currentMainImageIndex, updateMainImageIndex] = useState(0);
 
-  mainImage = imageGallery[0];
+  if (mainImage === '') mainImage = imageGallery[0];
 
   const setThumbnailClass = (image) => {
     return image === mainImage ? 'imageThumbnailMain' : 'imageThumbnail';
