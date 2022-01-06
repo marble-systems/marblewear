@@ -114,10 +114,15 @@ class ReviewListEntry extends React.Component {
 
         {/* IMAGES */}
         <div className="review-tile-images">
-          {photos.map((url, idx) => {
+          {photos.map((imgData) => {
+            let { url, id } = imgData;
+            let invalidURL = /^http:\/\/[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+$/.test(url);
+            if (invalidURL) {
+              return null;
+            }
             return (
               <div onClick={() => { this.handleToggleModalClick(url); }}
-                key={`img-${review_id}-${idx}`}
+                key={`img-${review_id}-${id}`}
                 className="review-tile-image">
                 <img src={url} width='50px' />
               </div>
