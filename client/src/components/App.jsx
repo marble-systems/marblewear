@@ -5,6 +5,7 @@ import ProductOverview from './ProductDetails/ProductOverview.jsx';
 import QuestionList from './QandA/QuestionList.jsx';
 import RelatedItems from './RelatedItems/RelatedItems.jsx';
 import NavBar from './NavBar.jsx';
+import parserFunctions from '../parserFunctions.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -30,13 +31,17 @@ class App extends React.Component {
     let cachedProduct = this.cachedProducts[productId];
     if (cachedProduct) {
       let {currentProduct, productStylesArray, reviews, questionList} = cachedProduct;
-      this.setState({
-        currentProductID: productId,
-        currentProduct,
-        productStylesArray,
-        reviews,
-        questionList
-      });
+      parserFunctions.getRelatedItems(productId, this.cachedProducts)
+        .then(relatedItems => {
+          this.setState({
+            currentProductID: productId,
+            currentProduct,
+            productStylesArray,
+            reviews,
+            questionList,
+            relatedItems
+          });
+        });
     } else {
       axios.get(`./products/${productId}`)
         .then(({data}) => {
@@ -74,7 +79,7 @@ class App extends React.Component {
             changeCurrentStyle={this.changeCurrentStyle}
           />
           <div className="container">
-            {/* <RelatedItems relatedItemsdata={this.state.relatedItems} /> */}
+            <RelatedItems relatedProductsInfo={this.state.relatedItems} currentProduct={this.state.currentProduct}/>
             <QuestionList
               data={this.state.questionList}
               currentProductID={this.state.currentProductID}
