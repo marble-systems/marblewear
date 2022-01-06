@@ -18,7 +18,9 @@ class App extends React.Component {
       reviews: [],
       questionList: [],
       relatedItems: [],
+      favoriteProducts: [],
     };
+    this.favorites = {};
     this.cachedProducts = {};
     this.changeCurrentStyle = this.changeCurrentStyle.bind(this);
   }
@@ -67,6 +69,19 @@ class App extends React.Component {
     this.setState({ currentStyleID: id });
   }
 
+  addProductToFavorites() {
+    let productToAdd = this.state.currentProductID;
+    if (!this.favorites[productToAdd]) {
+      this.favorites[productToAdd] = true;
+      let productInfo = this.cachedProducts[productToAdd];
+      let updatedFavoriteProducts = this.state.favoriteProducts.slice();
+      updatedFavoriteProducts.push(productInfo);
+      this.setState({
+        favoriteProducts: updatedFavoriteProducts
+      });
+    }
+  }
+
   render() {
     if (this.state.currentProductID) {
       return (
@@ -79,7 +94,7 @@ class App extends React.Component {
             changeCurrentStyle={this.changeCurrentStyle}
           />
           <div className="container">
-            <RelatedItems relatedProductsInfo={this.state.relatedItems} currentProduct={this.state.currentProduct}/>
+            <RelatedItems relatedProductsInfo={this.state.relatedItems} currentProduct={this.state.currentProduct} favoriteProducts={this.state.favoriteProducts} addProductToFavorites={this.addProductToFavorites.bind(this)}/>
             <QuestionList
               data={this.state.questionList}
               currentProductID={this.state.currentProductID}
