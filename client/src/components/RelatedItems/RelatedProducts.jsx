@@ -20,6 +20,10 @@ function RelatedProducts({currentProductInfo, relatedProductsInfo, changeCurrent
     }
   };
 
+  let comparisonRelatedProduct = () {
+
+  }
+
   return (
     <div>
       <p>RELATED PRODUCTS</p>
