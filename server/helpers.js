@@ -32,9 +32,9 @@ module.exports = {
     });
   },
   getReviews: (params) => {
-    const qs = generateUrlParams(params);
+    const queryParams = generateUrlParams(params);
     return axios({
-      url: `${url}/reviews?${qs}`,
+      url: `${url}/reviews?${queryParams}`,
       method: 'get',
       headers: auth
     });
