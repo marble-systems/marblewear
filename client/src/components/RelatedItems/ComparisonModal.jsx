@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import checkButton from './images/checkButton.png';
+import './relatedItemsStyle.css';
 
 function ComparisonModal({currentProductInfo, comparisonRelatedProduct}) {
   let comparedFeaturesObj = {};
@@ -30,11 +32,21 @@ function ComparisonModal({currentProductInfo, comparisonRelatedProduct}) {
             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div className="modal-body">
-            <h5>{currentProductInfo.name}</h5>
-            <h5>{comparisonRelatedProduct.name}</h5>
+            <div className="comparison-modal-body">
+              <div style={{width: '40%', textAlign: 'left'}}><h6>{currentProductInfo.name}</h6></div>
+              <div style={{width: '20%'}}></div>
+              <div style={{width: '40%', textAlign: 'right'}}><h6>{comparisonRelatedProduct.name}</h6></div>
+            </div>
             {comparedFeatures.map((feature, index) => {
-
-              return (<p className="text-center" key={index}>{feature.feature}</p>);
+              let checkMark = <input type="image" src={checkButton}></input>;
+              let current = feature.current ? checkMark : null;
+              let related = feature.related ? checkMark : null;
+              return (
+                <div key={index} className="comparison-modal-body">
+                  <div className='comparison-modal-checkmark' style={{width: '10%'}}>{current}</div>
+                  <div className="comparison-modal-feature" style={{width: '80%', textAlign: 'center'}}>{feature.feature}</div>
+                  <div className='comparison-modal-checkmark' style={{width: '10%'}}>{related}</div>
+                </div>);
             })}
           </div>
         </div>
