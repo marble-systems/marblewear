@@ -8,6 +8,8 @@ function RelatedProducts({currentProductInfo, relatedProductsInfo, changeCurrent
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const carrouselLength = relatedProductsInfo.length;
 
+  const [comparisonRelatedProduct, setComparisonRelatedProduct] = useState(relatedProductsInfo[0].currentProduct);
+
   let previousButtonOnClick = () => {
     if (currentCardIndex > 0) {
       setCurrentCardIndex(currentCardIndex - 1);
@@ -20,12 +22,9 @@ function RelatedProducts({currentProductInfo, relatedProductsInfo, changeCurrent
     }
   };
 
-
-  let comparisonRelatedProduct = relatedProductsInfo[0].currentProduct;
-
   let changeComparisonRelatedProduct = (productId) => {
     var updatedComparisonRelatedProduct = relatedProductsInfo.filter(relatedProduct => { return relatedProduct.currentProduct.id === productId;});
-    comparisonRelatedProduct = updatedComparisonRelatedProduct.currentProduct;
+    setComparisonRelatedProduct(comparisonRelatedProduct => updatedComparisonRelatedProduct[0].currentProduct);
   };
 
   return (

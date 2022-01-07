@@ -27,6 +27,7 @@ function DropDownsAndButtons ({productStylesArray, currentStyleID}) {
   for(var i = 1; i <inventory+1; i++){
     inventoryArray.push(i);
   }
+  let currentSize = inventoryArray[0];
 
 
   return (
@@ -34,12 +35,10 @@ function DropDownsAndButtons ({productStylesArray, currentStyleID}) {
       <div className="row">
         <select
           className="select selectSize"
-          name ="size"
           value={skusArray}
-          onChange={e => {
+          onChange={() => {
             updateInventory(8);
-            alert(`Size ${e.target.value} selected`);}
-          }>
+          }}>
           {skusArray.map((sku) => {
             return <option key={sku}> {availableSkus[sku]['size']} </option>;
           })}
@@ -48,7 +47,7 @@ function DropDownsAndButtons ({productStylesArray, currentStyleID}) {
         <select
           className="select quantity"
           name ="quantity"
-          onChange={e => alert(`Quantity of ${e.target.value} selected`)}>
+          value={currentSize}>
           {inventoryArray.map((num, idx)=>
             <option key={idx} value={num}> {num} </option>)}
         </select>
@@ -57,16 +56,14 @@ function DropDownsAndButtons ({productStylesArray, currentStyleID}) {
       <div className="row">
         <button
           type="submit"
-          className = "button cart"
-          onClick={() => alert(`${currentStyleObject.name} added to Favorites`)}>
+          className = "button cart">
         ADD TO BAG
         </button>
 
         <button
           className = "button favorite"
           id="favorite"
-          type="submit"
-          onClick={() => alert(`${currentStyleObject.name} added to Cart`)}>
+          type="submit">
         *
         </button>
       </div>
