@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function StyleSelector ({productStylesArray, currentStyleID, changeCurrentStyle, currentProduct}) {
+function StyleSelector ({productStylesArray, currentStyleID, currentProduct, changeCurrentStyle, updateMainImage}) {
 
   const getCurrentStyleObject = (targetStyleId, stylesArray) => {
     return stylesArray.filter((style) => {
@@ -24,7 +24,10 @@ function StyleSelector ({productStylesArray, currentStyleID, changeCurrentStyle,
           className="flex-item styleThumbnail"
           key={idx}
           src={style.photos[0]['thumbnail_url']}
-          onClick={() => changeCurrentStyle(style.style_id)}
+          onClick={() => {
+            changeCurrentStyle(style.style_id);
+            updateMainImage(style.photos[0]['url']);
+          }}
         />
       )}
     </div>
@@ -35,7 +38,8 @@ StyleSelector.propTypes = {
   productStylesArray: PropTypes.array.isRequired,
   currentStyleID: PropTypes.number.isRequired,
   currentProduct: PropTypes.object.isRequired,
-  changeCurrentStyle: PropTypes.func
+  changeCurrentStyle: PropTypes.func.isRequired,
+  updateMainImage: PropTypes.func.isRequired
 
 };
 export default StyleSelector;
