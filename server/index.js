@@ -9,14 +9,15 @@ const app = express();
 
 /* EXPRESS MIDDLEWARE */
 
-app.use(express.static(__dirname + '/../client/dist/'));
+app.use(express.static(path.join(path.dirname(__dirname), '/client/dist/')));
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
+// app.get('/', function (req, res) {
+//   console.log(__dirname);
+//   res.sendFile(path.join(path.dirname(__dirname), '/client/dist/index.html'));
+// });
 
 /* PRODUCT DATA COMPONENT INITIALIZER */
 
