@@ -20,7 +20,7 @@ class AnswerListEntry extends React.Component {
     const handlerType = e.target.id;
     const { answerHelpfulClicked, answerReportClicked } = this.state;
     handlerType === 'helpful' && answerHelpfulClicked || handlerType === 'report' && answerReportClicked ?
-      console.log('You can only increment once.') :
+      null :
       axios({
         url: `/qa/answers/${answer_id}/${handlerType}`,
         method: 'put'
