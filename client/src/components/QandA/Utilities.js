@@ -4,6 +4,6 @@ module.exports = {
     for (let key in answersObj) {
       resultArr.push(answersObj[key]);
     }
-    return resultArr;
+    return resultArr.sort((prev, next) => {return next.helpfulness - prev.helpfulness});
   }
 };
