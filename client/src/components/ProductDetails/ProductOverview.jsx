@@ -1,17 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './prodStyles.css';
-
 import ImageGallery from './ImageGallery.jsx';
 import StyleSelector from './StyleSelector.jsx';
 import DropDownsAndButtons from './DropDownsAndButtons.jsx';
 import SloganDescription from './SloganDescription.jsx';
 import Features from './Features.jsx';
-
 import utilityFns from '../../utilityFns.js';
-
 import Stars from '../SharedComponents/Stars.jsx';
-
 
 
 function ProductOverview ({currentProduct, productStylesArray, currentStyleID, changeCurrentStyle, updateMainImage, mainImage, reviewsMetadata}) {
