@@ -71,12 +71,20 @@ class ReviewList extends React.Component {
   }
 
   render() {
-    let { reviews, starFilter, currentProductName, incrementHelpfulCount, currentProductID } = this.props;
+    let { reviews, starFilter, currentProductName, incrementHelpfulCount, currentProductID, totalReviews } = this.props;
     let { listLength, addReviewModal } = this.state;
+    let filteredReviews = reviews// FILTER BY STAR COUNT
+      .filter(review => {
+        return (
+          starFilter.length === 0 ||
+          starFilter.includes(review.rating));
+      })
+      // LIMIT/FILTER LIST LENGTH
+      .filter((review, idx) => { return idx < listLength;});
     return (
       <div className="review-list-container">
         <span>
-          {`${reviews.length} reviews, sorted by `}
+          {`${totalReviews} reviews, sorted by `}
           {/* SORT BY DROPDOWN SELECTOR */}
           <select onChange={this.handleSelectorChange}>
             {Object.keys(sortOptions).map((key) => {
@@ -90,15 +98,7 @@ class ReviewList extends React.Component {
             })}
           </select>
         </span>
-        {reviews
-          // FILTER BY STAR COUNT
-          .filter(review => {
-            return (
-              starFilter.length === 0 ||
-              starFilter.includes(review.rating));
-          })
-          // LIMIT/FILTER LIST LENGTH
-          .filter((review, idx) => { return idx < listLength; })
+        {filteredReviews
           .map(review => {
             return (
               <ReviewListEntry
@@ -139,7 +139,8 @@ ReviewList.propTypes = {
   starFilter: PropTypes.array.isRequired,
   currentProductID: PropTypes.string,
   updateReviewList: PropTypes.func.isRequired,
-  incrementHelpfulCount: PropTypes.func.isRequired
+  incrementHelpfulCount: PropTypes.func.isRequired,
+  totalReviews: PropTypes.number
 };
 
 export default ReviewList;

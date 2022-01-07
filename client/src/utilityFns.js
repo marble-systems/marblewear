@@ -9,9 +9,10 @@ const utilityFns = {
         let ratingCount = Number(ratings[key]);
         return rating * ratingCount + prev;
       }, 0) / totalRatings);
+    const characteristics = reviewsMetadata.characteristics;
     const recommendedCount = reviewsMetadata.recommended.true || 0;
     const percentageRecommended = Math.floor(recommendedCount / totalRatings * 100);
-    return { totalRatings, averageRating, recommendedCount, percentageRecommended };
+    return { totalRatings, averageRating, recommendedCount, percentageRecommended, ratings, characteristics };
   },
   generateUrlParams: (object) => {
     return Object.keys(object)
