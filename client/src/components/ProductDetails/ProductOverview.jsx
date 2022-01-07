@@ -8,8 +8,16 @@ import DropDownsAndButtons from './DropDownsAndButtons.jsx';
 import SloganDescription from './SloganDescription.jsx';
 import Features from './Features.jsx';
 
+import utilityFns from '../../utilityFns.js';
 
-function ProductOverview ({currentProduct, productStylesArray, currentStyleID, changeCurrentStyle, updateMainImage, mainImage}) {
+import Stars from '../SharedComponents/Stars.jsx';
+
+
+
+function ProductOverview ({currentProduct, productStylesArray, currentStyleID, changeCurrentStyle, updateMainImage, mainImage, reviewsMetadata}) {
+
+  let {averageRating} = utilityFns.processReviewMetadata(reviewsMetadata);
+
   return (
     <div>
 
@@ -24,7 +32,7 @@ function ProductOverview ({currentProduct, productStylesArray, currentStyleID, c
         </div>
 
         <div className="d-flex flex-column" style={{width: '30em', margin: '1em', position: 'relative'}}>
-          <h4>Read All Reviews ***</h4>
+          <Stars rating={averageRating}/>
           <StyleSelector
             productStylesArray={productStylesArray}
             currentStyleID={currentStyleID}

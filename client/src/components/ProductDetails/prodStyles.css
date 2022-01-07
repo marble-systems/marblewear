@@ -46,6 +46,8 @@
   padding: 0.5em;
 }
 
+
+
 .cart {
   width: 12em;
   padding: 0.5em;
@@ -67,6 +69,14 @@
   width: 5.8em;
   height: 5.8em;
   border-radius: 50%;
+  padding: 0.5em;
+}
+
+.styleThumbnailMain {
+  width: 5.8em;
+  height: 5.8em;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px black;
   padding: 0.5em;
 }
 

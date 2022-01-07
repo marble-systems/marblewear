@@ -145,8 +145,7 @@ class App extends React.Component {
   }
 
   render() {
-    let { currentProduct, productStylesArray, currentStyleID, relatedItems, favoriteProducts, mainImage } = this.state;
-
+    let { currentProduct, productStylesArray, currentStyleID, relatedItems, favoriteProducts, mainImage, reviews } = this.state;
     if (this.state.currentProductID) {
       return (
         <div className="container">
@@ -158,7 +157,8 @@ class App extends React.Component {
             currentStyleID={currentStyleID}
             mainImage={mainImage}
             changeCurrentStyle={this.changeCurrentStyle}
-            updateMainImage={this.updateMainImage}/>
+            updateMainImage={this.updateMainImage}
+            reviewsMetadata={reviews.reviewsMetadata}/>
 
           <div className="container">
             <RelatedItems relatedProductsInfo={relatedItems} currentProduct={currentProduct} favoriteProducts={favoriteProducts} addProductToFavorites={this.addProductToFavorites.bind(this)} removeProductFromFavorites={this.removeProductFromFavorites.bind(this)} changeCurrentProduct={this.changeCurrentProduct.bind(this)}/>
