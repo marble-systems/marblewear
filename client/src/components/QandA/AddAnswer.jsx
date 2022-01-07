@@ -60,16 +60,16 @@ class AddAnswer extends React.Component {
               <div className="modal-body text-start">
                 <div className="mb-3">
                   <label htmlFor="formControlQuestionEntry" className="form-label">Your Answer</label>
-                  <textarea onChange={this.handleAnswerInputChange} className="form-control" id="formControlAnswerEntry" required="true" rows="10" maxLength="1000" placeholder="Type your answer here (max characters: 1000)"></textarea>
+                  <textarea onChange={this.handleAnswerInputChange} className="form-control" id="formControlAnswerEntry" required={true} rows="10" maxLength="1000" placeholder="Type your answer here (max characters: 1000)"></textarea>
                 </div>
                 <div className="mb-3">
                   <label htmlFor="formControlNicknameEntry" className="form-label">What is your nickname</label>
-                  <input onChange={this.handleAnswerInputChange} className="form-control" id="formControlNicknameEntry" required="false" maxLength="60" placeholder="Example: jack543!"></input>
+                  <input onChange={this.handleAnswerInputChange} className="form-control" id="formControlNicknameEntry" maxLength="60" placeholder="Example: jack543!"></input>
                 </div>
                 <p className="fw-light fst-italic">For privacy reasons, do not use your full name or email address</p>
                 <div className="mb-3">
                   <label htmlFor="formControlEmailEntry" className="form-label">Email address</label>
-                  <input onChange={this.handleAnswerInputChange} type="email" className="form-control" id="formControlEmailEntry" required="true" maxLength="60" placeholder="jack@example.com"></input>
+                  <input onChange={this.handleAnswerInputChange} type="email" className="form-control" id="formControlEmailEntry" required={true} maxLength="60" placeholder="jack@example.com"></input>
                 </div>
                 <p className="fw-light fst-italic">For authentication reasons, you will not be emailed</p>
                 <button type="button" className="btn btn-light border-4 border-dark" onClick={() => {console.log('TO BE IMPLEMENTED');}}>Upload your photos</button>
