@@ -139,7 +139,8 @@ class App extends React.Component {
           productStylesArray,
           reviews,
           questionList,
-          relatedItems
+          relatedItems,
+          mainImage: productStylesArray[0].photos[0].url,
         });
       });
   }
