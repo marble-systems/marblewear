@@ -61,7 +61,7 @@ class QuestionList extends React.Component {
             })
           }
         </div>
-        <div className="d-inline-flex">
+        <div className="d-inline-flex pt-3 pb-4">
 
           {/* SHOW MORE/SHOW LESS QUESTIONS BUTTONS */}
 
