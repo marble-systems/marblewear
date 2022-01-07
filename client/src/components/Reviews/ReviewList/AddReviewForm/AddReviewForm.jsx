@@ -134,6 +134,7 @@ class AddReviewForm extends React.Component {
           overallRating: 0, radioValues: { 'recommend-product': 'yes' },
           reviewSummary: '', reviewBody: '', nickname: '', email: '', images: [],
         });
+        // TODO: append new review to the DOM
         alert('Review submitted!');
       })
       .catch(err => {
