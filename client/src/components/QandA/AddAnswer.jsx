@@ -48,7 +48,7 @@ class AddAnswer extends React.Component {
     const { question_id } = this.props;
     return (
       <div className="d-inline-block">
-        <button type="button" className="btn btn-link d-inline-block" data-bs-toggle="modal" data-bs-target={`#p${question_id}`}>Add Answer</button>
+        <div type="button" className="text-decoration-underline text-primary d-inline-block" data-bs-toggle="modal" data-bs-target={`#p${question_id}`}> Add Answer</div>
         <div className="modal fade" id={`p${question_id}`} tabIndex="-1" aria-labelledby="addAnswerModalLabel" aria-hidden="true">
           <div className="modal-dialog modal-dialog-scrollable">
             <div className="modal-content">
