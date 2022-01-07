@@ -21,13 +21,12 @@ class ReviewList extends React.Component {
     this.toggleModalVisibility = this.toggleModalVisibility.bind(this);
   }
 
-  incrementListLength() {
+  incrementListLength(filteredReviewsLength) {
     let { listLength } = this.state;
     let { reviews } = this.props;
-    let reviewsCount = reviews.length;
     listLength += 2;
     this.setState({ listLength });
-    if (listLength > 0.75 * reviewsCount) {
+    if (listLength > 0.75 * filteredReviewsLength) {
       let { getReviewsRequestParams } = this.state;
       getReviewsRequestParams.product_id = this.props.currentProductID;
       getReviewsRequestParams.page += 2;
@@ -112,7 +111,7 @@ class ReviewList extends React.Component {
           {/* MORE REVIEWS BUTTON */}
           {listLength >= reviews.length ? null :
             <button
-              onClick={this.incrementListLength}>
+              onClick={()=> {this.incrementListLength(filteredReviews.length);}}>
               MORE REVIEWS
             </button>
           }
