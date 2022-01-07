@@ -5,7 +5,7 @@ function SloganDescription ({currentProduct}) {
   return (
     <div>
       <h5>{currentProduct.slogan}</h5>
-      <h5>{currentProduct.description}</h5>
+      <p>{currentProduct.description}</p>
     </div>
   );
 }
