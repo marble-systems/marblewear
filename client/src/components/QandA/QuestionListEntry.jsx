@@ -9,23 +9,23 @@ class QuestionListEntry extends React.Component {
     super(props);
     this.state = {
       answersShown: 2,
-      helpfulClicked: false,
-      question_helpfulness: this.props.data.question_helpfulness
+      questionHelpfulClicked: false,
+      questionHelpfulCount: this.props.data.question_helpfulness
     };
     this.showMoreAnswers = this.showMoreAnswers.bind(this);
     this.showLessAnswers = this.showLessAnswers.bind(this);
   }
 
   markQuestionHelpful(question_id) {
-    this.state.helpfulClicked ? console.log('You can only click once') :
+    this.state.questionHelpfulClicked ? console.log('You can only click once') :
       axios({
         url: `/qa/questions/${question_id}/helpful`,
         method: 'put'
       })
         .then(() => {
-          let { question_helpfulness } = this.state;
-          question_helpfulness++;
-          this.setState({question_helpfulness, helpfulClicked: true});
+          let { questionHelpfulCount } = this.state;
+          questionHelpfulCount++;
+          this.setState({questionHelpfulCount, questionHelpfulClicked: true});
         });
   }
 
@@ -50,8 +50,13 @@ class QuestionListEntry extends React.Component {
             <h5>Q: {data.question_body}</h5>
           </div>
           <div className="col-5">
-            <div className="row">
-              <span className="text-end">Helpful? <button className="btn btn-link" onClick={() => {this.markQuestionHelpful(question_id);}}>Yes</button> ({this.state.question_helpfulness}) | <AddAnswer currentProductName={currentProductName} currentQuestionBody={data.question_body} handleSubmitAnswer={handleSubmitAnswer} handleAnswerInputChange={handleAnswerInputChange} question_id={question_id} /></span>
+            <div className="fw-light text-end"><div className="pe-3 d-inline">Helpful?</div>
+              <div className="pe-3 text-decoration-underline text-primary d-inline" type="button" onClick={() => {this.markQuestionHelpful(question_id);}}>Yes </div>
+              <div className="pe-3 d-inline">({this.state.questionHelpfulCount})</div>
+              <div className="vr"></div>
+              <div className="ps-3 d-inline">
+                <AddAnswer currentProductName={currentProductName} currentQuestionBody={data.question_body} handleSubmitAnswer={handleSubmitAnswer} handleAnswerInputChange={handleAnswerInputChange} question_id={question_id} />
+              </div>
             </div>
           </div>
         </div>
@@ -60,14 +65,16 @@ class QuestionListEntry extends React.Component {
             {answers
               .filter((a, i) => { return i < this.state.answersShown; })
               .map((answer, i) => {
-                return i < this.state.answersShown ? <AnswerListEntry key={i} answer={answer} listLength={answers.length} /> : null;
+                return i < this.state.answersShown ? <AnswerListEntry key={i} answer={answer} listLength={answers.length} question_id={question_id} /> : null;
               })}</div>
-          {this.state.answersShown >= answers.length ? <button onClick={this.showLessAnswers}>
-              Show Less Answers
-          </button> :
-            <button onClick={this.showMoreAnswers}>
-                Show More Answers
-            </button>
+          {answers.length > 2 ?
+            this.state.answersShown > answers.length ? <button onClick={this.showLessAnswers}>
+                Show Less Answers
+            </button> :
+              <button onClick={this.showMoreAnswers}>
+                  Show More Answers
+              </button>
+            : null
           }
         </div>
       </div>
