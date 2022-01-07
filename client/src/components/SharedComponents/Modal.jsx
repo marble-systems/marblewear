@@ -30,7 +30,6 @@ Modal.propTypes = {
   onClose: PropTypes.func.isRequired,
   title: PropTypes.string,
   subtitle: PropTypes.string,
-  position: PropTypes.number
 };
 
 export default Modal;

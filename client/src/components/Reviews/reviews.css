@@ -155,6 +155,18 @@ a {
 }
 
 /* Form Component */
+label {
+  font-size: 0.7em;
+}
+
+.checkboxgroup {
+  display: inline-block;
+  text-align: center;
+}
+.check-box-group label {
+  display: block;
+}
+
 .required:after {
   content:" *";
   color: red;

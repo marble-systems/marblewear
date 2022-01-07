@@ -13,8 +13,8 @@ class ReviewList extends React.Component {
     super(props);
     this.state = {
       listLength: 2,
-      getReviewsRequestParams: { page: 0, count: 5, sort: sortOptions.relevant, product_id: null },
-      addReviewModal: {isShowing: false, body: () => { return (<AddReviewForm/>); } },
+      getReviewsRequestParams: { page: 1, count: 100, sort: sortOptions.relevant, product_id: null },
+      addReviewModal: {isShowing: false, body: (productId, toggleModalVisibility) => { return (<AddReviewForm currentProductID={productId} toggleModalVisibility={toggleModalVisibility}/>); } },
     };
     this.incrementListLength = this.incrementListLength.bind(this);
     this.handleSelectorChange = this.handleSelectorChange.bind(this);
@@ -30,7 +30,7 @@ class ReviewList extends React.Component {
     if (listLength > 0.75 * reviewsCount) {
       let { getReviewsRequestParams } = this.state;
       getReviewsRequestParams.product_id = this.props.currentProductID;
-      getReviewsRequestParams.page += 2;
+      getReviewsRequestParams.page += 1;
       let qs = utilityFns.generateUrlParams(getReviewsRequestParams);
       axios.get(`/reviews/?${qs}`)
         .then(res => {
@@ -46,18 +46,18 @@ class ReviewList extends React.Component {
   }
 
   handleSelectorChange(e) {
-    let key = e.target.value;
+    let sortOrder = e.target.value;
     let { getReviewsRequestParams } = this.state;
     getReviewsRequestParams.product_id = this.props.currentProductID;
-    getReviewsRequestParams.sort = key;
-    getReviewsRequestParams.page += 1;
+    getReviewsRequestParams.sort = sortOrder;
     let qs = utilityFns.generateUrlParams(getReviewsRequestParams);
+    let context = this;
     axios.get(`/reviews/?${qs}`)
       .then(res => {
         let { count, page, product, results } = res.data;
-        Object.assign(getReviewsRequestParams, { count, page, product_id: product });
-        this.setState({ getReviewsRequestParams });
-        this.props.updateReviewList(results);
+        Object.assign(getReviewsRequestParams, { count, page: page + 1, product_id: product });
+        context.setState({ getReviewsRequestParams });
+        context.props.updateReviewList(results);
       })
       .catch(err => {
         console.error(`Error updating sort order: ${err}`);
@@ -71,7 +71,7 @@ class ReviewList extends React.Component {
   }
 
   render() {
-    let { reviews, starFilter, currentProductName, incrementHelpfulCount, totalReviews } = this.props;
+    let { reviews, starFilter, currentProductName, incrementHelpfulCount, currentProductID, totalReviews } = this.props;
     let { listLength, addReviewModal } = this.state;
     let filteredReviews = reviews// FILTER BY STAR COUNT
       .filter(review => {
@@ -125,7 +125,7 @@ class ReviewList extends React.Component {
             subtitle={`About the ${currentProductName}`}
             show={addReviewModal.isShowing}
             onClose={this.toggleModalVisibility}
-            body={addReviewModal.body}
+            body={addReviewModal.body.bind(null, currentProductID, this.toggleModalVisibility)}
           />
         </div>
       </div>
