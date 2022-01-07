@@ -10,16 +10,23 @@ class QuestionList extends React.Component {
     this.state = {
       questionsShown: 2,
       searchBarInput: '',
-      questionList: this.props.data
+      questionList: this.props.data,
     };
-    this.loadMoreQuestions = this.loadMoreQuestions.bind(this);
+    this.showMoreQuestions = this.showMoreQuestions.bind(this);
+    this.showLessQuestions = this.showLessQuestions.bind(this);
     this.handleSearchBarInputChange = this.handleSearchBarInputChange.bind(this);
   }
 
-  loadMoreQuestions() {
+  /* QUESTIONLIST LENGTH ALTERING FUNCTIONS */
+
+  showMoreQuestions() {
     let { questionsShown } = this.state;
     questionsShown += 2;
     this.setState({questionsShown});
+  }
+
+  showLessQuestions() {
+    this.setState({ questionsShown: 2 });
   }
 
   handleSearchBarInputChange(e) {
@@ -29,7 +36,7 @@ class QuestionList extends React.Component {
   render() {
     const questions = this.state.questionList.results;
     return (
-      <div className="container" maxHeight="vh-100">
+      <div className="container" maxheight="vh-100">
         <p className="text-start fs-5 fw-light">
         Questions and Answers
         </p>
@@ -50,24 +57,28 @@ class QuestionList extends React.Component {
             .filter((q, i) => { return i < this.state.questionsShown; })
             .filter((q) => { return this.state.searchBarInput.length >= 3 ? q.question_body.includes(this.state.searchBarInput) : q; })
             .map((question, index) => {
-              return <QuestionListEntry key={index} data={question} currentProductName={this.props.currentProductName} answers={answerFormatter(question.answers)}/>;
+              return <QuestionListEntry key={index} question_id={question.question_id} data={question} currentProductName={this.props.currentProductName} answers={answerFormatter(question.answers)} handleAnswerInputChange={this.handleAnswerInputChange} handleSubmitAnswer={this.handleSubmitAnswer} />;
             })
           }
         </div>
         <div className="d-inline-flex">
 
-          {/* MORE ANSWERED QUESTIONS BUTTON (INCREMENTS 'QUESTIONSSHOWN') */}
+          {/* SHOW MORE/SHOW LESS QUESTIONS BUTTONS */}
 
           <div className="inline-flex">
-            {this.state.questionsShown >= questions.length ? null :
-              <button className="btn btn-light border-4 border-dark" id="loadMoreQuestionsButton" onClick={this.loadMoreQuestions}>Load More Questions</button>
+            {this.state.questionsShown >= questions.length ? <button className="btn btn-light border-4 border-dark" id="showLessQuestionsButton" onClick={this.showLessQuestions}>
+              Show Less Questions
+            </button> :
+              <button className="btn btn-light border-4 border-dark" id="showMoreQuestionsButton" onClick={this.showMoreQuestions}>
+                Show More Questions
+              </button>
             }
           </div>
 
           {/* ADD QUESTION BUTTON */}
 
           <div className="inline-flex">
-            <AddQuestion currentProductName={this.props.currentProductName} />
+            <AddQuestion currentProductName={this.props.currentProductName} currentProductID={this.props.currentProductID} />
           </div>
         </div>
       </div>

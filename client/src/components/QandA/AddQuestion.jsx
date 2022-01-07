@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+const axios = require('axios');
 
 class AddQuestion extends React.Component {
   constructor(props) {
@@ -9,26 +10,36 @@ class AddQuestion extends React.Component {
       nicknameEntry: '',
       emailEntry: '',
     };
-    this.handleChange = this.handleChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(e) { // this function is not yet implemented FIX ME
-    if (e.target === 'question') { // determine distinguishing target value for corresponding input -> use getElementById?
+  handleInputChange(e) {
+    if (e.target.id === 'formControlQuestionEntry') {
       this.setState({questionEntry: e.target.value});
     }
-    if (e.target === 'nickname') {
+    if (e.target.id === 'formControlNicknameEntry') {
       this.setState({nicknameEntry: e.target.value});
     }
-    if (e.target === 'email') {
+    if (e.target.id === 'formControlEmailEntry') {
       this.setState({emailEntry: e.target.value});
     }
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    // ensure that both question and email fields have been filled out and are valid formats via helper functions
-    // when API is implemented, use axios POST request to submit data to API
+    const { questionEntry, nicknameEntry, emailEntry } = this.state;
+    axios({
+      url: '/qa/questions/',
+      method: 'post',
+      data: {
+        body: questionEntry,
+        name: nicknameEntry,
+        email: emailEntry,
+        product_id: this.props.currentProductID
+      }
+    });
+    this.setState({questionEntry: '', nicknameEntry: '', emailEntry: ''});
   }
 
   render() {
@@ -45,23 +56,23 @@ class AddQuestion extends React.Component {
               </div>
               <div className="modal-body">
                 <div className="mb-3">
-                  <label htmlFor="formControlQuestionEntry" className="form-label">Your Question (mandatory)</label>
-                  <textarea onChange={this.handleChange} className="form-control" id="formControlQuestionEntry" rows="10" maxLength="1000" placeholder="Type your question here (max characters: 1000)"></textarea>
+                  <label htmlFor="formControlQuestionEntry" className="form-label">Your Question</label>
+                  <textarea onChange={this.handleInputChange} className="form-control" id="formControlQuestionEntry" required="true" rows="10" maxLength="1000" placeholder="Type your question here (max characters: 1000)"></textarea>
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="formControlNicknameEntry" className="form-label">What is your nickname (optional)</label>
-                  <input onChange={this.handleChange} className="form-control" id="formControlNicknameEntry" placeholder="Example: jackson11!"></input>
+                  <label htmlFor="formControlNicknameEntry" className="form-label">What is your nickname</label>
+                  <input onChange={this.handleInputChange} className="form-control" id="formControlNicknameEntry" maxLength="60" required="false" placeholder="Example: jackson11!"></input>
                 </div>
                 <p className="fw-light fst-italic">For privacy reasons, do not use your full name or email address</p>
                 <div className="mb-3">
-                  <label htmlFor="formControlEmailEntry" className="form-label">Email address (mandatory)</label>
-                  <input onChange={this.handleChange} type="email" className="form-control" id="formControlEmailEntry" placeholder="name@example.com"></input>
+                  <label htmlFor="formControlEmailEntry" className="form-label">Email address</label>
+                  <input onChange={this.handleInputChange} type="email" className="form-control" id="formControlEmailEntry" maxLength="60" required="true" placeholder="name@example.com"></input>
                 </div>
                 <p className="fw-light fst-italic">For authentication reasons, you will not be emailed</p>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-light border-4 border-dark" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" className="btn btn-light border-4 border-dark" onSubmit={this.handleSubmit}>Submit</button>
+                <button type="button" className="btn btn-light border-4 border-dark" onClick={(e) => {this.handleSubmit(e);}}>Submit</button>
               </div>
             </div>
           </div>
