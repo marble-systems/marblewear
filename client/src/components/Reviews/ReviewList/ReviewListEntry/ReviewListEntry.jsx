@@ -62,7 +62,7 @@ class ReviewListEntry extends React.Component {
 
   render() {
     let { expanded, modalShowing, currentImage, reviewReported, reviewHelpful } = this.state;
-    let { review, incrementHelpfulCount } = this.props;
+    let { review } = this.props;
     let { rating, summary, recommend, response, body, date, reviewer_name, helpfulness, photos, review_id } = review;
     let modalImage = () => (<img src={currentImage}></img>);
 
@@ -87,7 +87,7 @@ class ReviewListEntry extends React.Component {
             ? body
             : <span>{body.substring(0, BODY_CHAR_LIMIT)}...
               <a
-                onClick={this.handleShowMoreClick(this)}>
+                onClick={this.handleShowMoreClick}>
                 Show more
               </a>
             </span>}
