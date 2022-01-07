@@ -7,27 +7,25 @@ h3 {
   font-size: 2em;
 }
 
-.button {
-  background: #428bca;
-  padding: 1em 2em;
-  color: #fff;
-  border: 0;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.button:hover {
-  background: #3876ac;
-}
-
 /* Reviews Component */
 .main-component {
   margin-bottom: 12vh;
   margin-top: 12vh;
 }
 
+.component-header {
+  font-weight: 300;
+  font-size: 1.24rem;
+  margin-bottom: 1rem;
+}
+
+.review-summary-container {
+  width: 33%;
+}
+
 /* ReviewList Component */
 .review-list-container {
+  width: 66%;
   flex-direction: column;
   margin: 10px;
 }
@@ -41,7 +39,7 @@ h3 {
 /* ReviewListEntry Component */
 .review-tile {
   border-bottom: 1px solid gray;
-  width: 30em;
+
   display: flex;
   flex-direction: column;
 }

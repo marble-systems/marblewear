@@ -14,7 +14,7 @@ const ReviewSummary = ({ reviewsMetadata, updateFilters }) => {
     ratings,
     characteristics } = reviewsMetadata;
   return (
-    <div style={{width: '5 em'}}>
+    <div className="review-summary-container">
       <AverageRating
         ratingsCount={totalRatings}
         averageRating={averageRating} />

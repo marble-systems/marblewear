@@ -111,12 +111,13 @@ class ReviewList extends React.Component {
           {/* MORE REVIEWS BUTTON */}
           {listLength >= reviews.length ? null :
             <button
+              className="btn btn-light border-1 border-dark p-2 rounded-0"
               onClick={()=> {this.incrementListLength(filteredReviews.length);}}>
               MORE REVIEWS
             </button>
           }
           {/* ADD REVIEW BUTTON */}
-          <button onClick={this.toggleModalVisibility}>
+          <button className="btn btn-light border-1 border-dark p-2 rounded-0" onClick={this.toggleModalVisibility}>
           ADD A REVIEW  +
           </button>
           <Modal
