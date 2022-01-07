@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import checkButton from './images/checkButton.png';
+import checkButtonImg from './images/checkButton.png';
 import './relatedItemsStyle.css';
 
 function ComparisonModal({currentProductInfo, comparisonRelatedProduct}) {
@@ -38,7 +38,7 @@ function ComparisonModal({currentProductInfo, comparisonRelatedProduct}) {
               <div style={{width: '40%', textAlign: 'right'}}><h6>{comparisonRelatedProduct.name}</h6></div>
             </div>
             {comparedFeatures.map((feature, index) => {
-              let checkMark = <input type="image" src={checkButton}></input>;
+              let checkMark = <input type="image" src={checkButtonImg}></input>;
               let current = feature.current ? checkMark : null;
               let related = feature.related ? checkMark : null;
               return (
