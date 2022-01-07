@@ -14,7 +14,7 @@ class ReviewList extends React.Component {
     this.state = {
       listLength: 2,
       getReviewsRequestParams: { page: 0, count: 5, sort: sortOptions.relevant, product_id: null },
-      addReviewModal: {isShowing: false, body: (productId) => { return (<AddReviewForm currentProductID={productId}/>); } },
+      addReviewModal: {isShowing: false, body: (productId, toggleModalVisibility) => { return (<AddReviewForm currentProductID={productId} toggleModalVisibility={toggleModalVisibility}/>); } },
     };
     this.incrementListLength = this.incrementListLength.bind(this);
     this.handleSelectorChange = this.handleSelectorChange.bind(this);
@@ -125,7 +125,7 @@ class ReviewList extends React.Component {
             subtitle={`About the ${currentProductName}`}
             show={addReviewModal.isShowing}
             onClose={this.toggleModalVisibility}
-            body={addReviewModal.body.bind(null, currentProductID)}
+            body={addReviewModal.body.bind(null, currentProductID, this.toggleModalVisibility)}
           />
         </div>
       </div>
