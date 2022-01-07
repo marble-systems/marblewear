@@ -4,7 +4,7 @@ import AddOutfit from './AddOutfit.jsx';
 import ProductCard from './ProductCard.jsx';
 import './relatedItemsStyle.css';
 
-function YourOutfit({outfitProductsInfo}) {
+function YourOutfit({outfitProductsInfo, addProductToFavorites, removeProductFromFavorites}) {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const carrouselLength = outfitProductsInfo.length;
 
@@ -32,9 +32,9 @@ function YourOutfit({outfitProductsInfo}) {
           }
           <div className="carousel-inner">
             <div className="carousel-card" style={{ transform: `translateX(-${currentCardIndex * (100 / 3.81)}%)` }}>
-              <AddOutfit />
+              <AddOutfit addProductToFavorites={addProductToFavorites}/>
               {outfitProductsInfo.map((outfitProductInfo) => {
-                return (<ProductCard key={outfitProductInfo.id} outfitProductInfo={outfitProductInfo} />);
+                return (<ProductCard key={outfitProductInfo.id} relatedProductInfo={outfitProductInfo} productCardType={'YourOutfit'} removeProductFromFavorites={removeProductFromFavorites}/>);
               })}
             </div>
           </div>
@@ -50,7 +50,9 @@ function YourOutfit({outfitProductsInfo}) {
 }
 
 YourOutfit.propTypes = {
-  outfitProductsInfo: PropTypes.array
+  outfitProductsInfo: PropTypes.array,
+  addProductToFavorites: PropTypes.func,
+  removeProductFromFavorites: PropTypes.func,
 };
 
 export default YourOutfit;

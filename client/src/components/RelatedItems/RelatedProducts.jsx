@@ -4,7 +4,7 @@ import ProductCard from './ProductCard.jsx';
 import ComparisonModal from './ComparisonModal.jsx';
 import './relatedItemsStyle.css';
 
-function RelatedProducts({currentProductInfo, relatedProductsInfo}) {
+function RelatedProducts({currentProductInfo, relatedProductsInfo, changeCurrentProduct}) {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const carrouselLength = relatedProductsInfo.length;
 
@@ -33,7 +33,7 @@ function RelatedProducts({currentProductInfo, relatedProductsInfo}) {
           <div className="carousel-inner">
             <div className="carousel-card" style={{ transform: `translateX(-${currentCardIndex * (100 / 3.81)}%)` }}>
               {relatedProductsInfo.map((relatedProductInfo) => {
-                return (<ProductCard key={relatedProductInfo.id} relatedProductInfo={relatedProductInfo}/>);
+                return (<ProductCard key={relatedProductInfo.currentProduct.id} relatedProductInfo={relatedProductInfo} changeCurrentProduct={changeCurrentProduct} productCardType={'RelatedProducts'} />);
               })}
             </div>
           </div>
@@ -51,7 +51,8 @@ function RelatedProducts({currentProductInfo, relatedProductsInfo}) {
 
 RelatedProducts.propTypes = {
   currentProductInfo: PropTypes.object,
-  relatedProductsInfo: PropTypes.array
+  relatedProductsInfo: PropTypes.array,
+  changeCurrentProduct: PropTypes.func,
 };
 
 export default RelatedProducts;
