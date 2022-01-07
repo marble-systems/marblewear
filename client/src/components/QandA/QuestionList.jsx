@@ -10,7 +10,6 @@ class QuestionList extends React.Component {
     this.state = {
       questionsShown: 2,
       searchBarInput: '',
-      questionList: this.props.data,
     };
     this.showMoreQuestions = this.showMoreQuestions.bind(this);
     this.showLessQuestions = this.showLessQuestions.bind(this);
@@ -34,7 +33,7 @@ class QuestionList extends React.Component {
   }
 
   render() {
-    const questions = this.state.questionList.results;
+    let questions = this.props.data.results;
     return (
       <div className="container" maxheight="vh-100">
         <p className="text-start fs-5 fw-light">
