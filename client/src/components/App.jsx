@@ -18,7 +18,9 @@ class App extends React.Component {
       reviews: {},
       questionList: [],
       relatedItems: [],
+      favoriteProducts: [],
     };
+    this.favorites = {};
     this.cachedProducts = {};
     this.changeCurrentStyle = this.changeCurrentStyle.bind(this);
     this.updateReviewList = this.updateReviewList.bind(this);
@@ -35,6 +37,9 @@ class App extends React.Component {
       let {currentProduct, productStylesArray, reviews, questionList} = cachedProduct;
       parserFunctions.getRelatedItems(productId, this.cachedProducts)
         .then(relatedItems => {
+          relatedItems.forEach(relatedItem => {
+            this.cachedProducts[relatedItem.currentProduct.id] = relatedItem;
+          });
           this.setState({
             currentProductID: productId,
             currentProduct,
@@ -84,19 +89,70 @@ class App extends React.Component {
     this.setState({ currentStyleID: id });
   }
 
+  addProductToFavorites() {
+    let productToAdd = this.state.currentProductID;
+    if (!this.favorites[productToAdd]) {
+      this.favorites[productToAdd] = true;
+      let productInfo = this.cachedProducts[productToAdd];
+      let updatedFavoriteProducts = this.state.favoriteProducts.slice();
+      updatedFavoriteProducts.push(productInfo);
+      this.setState({
+        favoriteProducts: updatedFavoriteProducts
+      });
+    }
+  }
+
+  removeProductFromFavorites(productId) {
+    delete this.favorites[productId];
+    let updatedFavoriteProducts = [];
+    for (let favoriteProduct in this.favorites) {
+      let productInfo = this.cachedProducts[favoriteProduct];
+      updatedFavoriteProducts.push(productInfo);
+    }
+    this.setState({
+      favoriteProducts: updatedFavoriteProducts
+    });
+  }
+
+  changeCurrentProduct(productId) {
+    let updatedProductInfo = this.cachedProducts[productId];
+    let {currentProduct, productStylesArray, reviews, questionList} = updatedProductInfo;
+    parserFunctions.getRelatedItems(productId, this.cachedProducts)
+      .then(relatedItems => {
+        relatedItems.filter(relatedItem => {
+          return !this.cachedProducts[relatedItem.currentProduct.id];
+        })
+          .forEach(relatedItem => {
+            this.cachedProducts[relatedItem.currentProduct.id] = relatedItem;
+          });
+        this.setState({
+          currentProductID: productId,
+          currentStyleID: productStylesArray[0].style_id,
+          currentProduct,
+          productStylesArray,
+          reviews,
+          questionList,
+          relatedItems
+        });
+      });
+  }
+
   render() {
+    let { currentProduct, productStylesArray, currentStyleID, relatedItems, favoriteProducts } = this.state;
+
     if (this.state.currentProductID) {
       return (
-        <div>
+        <div className="container">
+
           <NavBar />
           <ProductOverview
-            currentProduct={this.state.currentProduct}
-            productStylesArray={this.state.productStylesArray}
-            currentStyleID={this.state.currentStyleID}
+            currentProduct={currentProduct}
+            productStylesArray={productStylesArray}
+            currentStyleID={currentStyleID}
             changeCurrentStyle={this.changeCurrentStyle}
           />
           <div className="container">
-            <RelatedItems relatedProductsInfo={this.state.relatedItems} currentProduct={this.state.currentProduct}/>
+            <RelatedItems relatedProductsInfo={relatedItems} currentProduct={currentProduct} favoriteProducts={favoriteProducts} addProductToFavorites={this.addProductToFavorites.bind(this)} removeProductFromFavorites={this.removeProductFromFavorites.bind(this)} changeCurrentProduct={this.changeCurrentProduct.bind(this)}/>
             <QuestionList
               data={this.state.questionList}
               currentProductID={this.state.currentProductID}
