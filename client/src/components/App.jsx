@@ -145,7 +145,7 @@ class App extends React.Component {
   }
 
   render() {
-    let { currentProduct, productStylesArray, currentStyleID, relatedItems, favoriteProducts } = this.state;
+    let { currentProduct, productStylesArray, currentStyleID, relatedItems, favoriteProducts, mainImage } = this.state;
 
     if (this.state.currentProductID) {
       return (
