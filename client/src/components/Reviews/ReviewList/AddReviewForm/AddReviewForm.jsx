@@ -192,16 +192,19 @@ class AddReviewForm extends React.Component {
                       flexDirection: 'row'
                     }}>
                       {Array(5).fill(0).map((val, idx) => {
+                        let elementId = `option-${optionId}-${idx}`;
                         return (
-                          <input
-                            required
-                            style={{ marginRight: '10px' }}
-                            key={`selector-${optionId}-${idx}`}
-                            type="radio"
-                            name={optionId}
-                            value={idx}
-                            checked={idx === Number(radioValues[optionId])}
-                            onChange={this.handleRadioSelectorChange} />
+                          <div className="check-box-group" key={`selector-${optionId}-${idx}`}>
+                            <input
+                              id={elementId}
+                              required
+                              type="radio"
+                              name={optionId}
+                              value={idx}
+                              checked={idx === Number(radioValues[optionId])}
+                              onChange={this.handleRadioSelectorChange} />
+                            <label htmlFor={elementId}>{CHARACTERISTICS_SCALE[characteristic]['options'][idx]}</label>
+                          </div>
                         );
                       })}
                     </div>
@@ -210,8 +213,6 @@ class AddReviewForm extends React.Component {
                       justifyContent: 'space-between',
                       fontSize: '0.5em', flexDirection: 'row'
                     }}>
-                      <div>{CHARACTERISTICS_SCALE[characteristic]['options'][0]}</div>
-                      <div>{CHARACTERISTICS_SCALE[characteristic]['options'][4]}</div>
                     </div>
                   </div>
                 );
