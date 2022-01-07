@@ -46,3 +46,8 @@
 .next-button {
     right: 24px;
 }
+
+.comparison-modal-body {
+  display: flex;
+  justify-content: space-between;
+}

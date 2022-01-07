@@ -7,6 +7,7 @@ import RelatedItems from './RelatedItems/RelatedItems.jsx';
 import NavBar from './NavBar.jsx';
 import parserFunctions from '../parserFunctions.js';
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -14,6 +15,7 @@ class App extends React.Component {
       currentProductID: '',
       currentStyleID: 234004,
       productStylesArray: [],
+      mainImage: '',
       currentProduct: [],
       reviews: {},
       questionList: [],
@@ -23,6 +25,7 @@ class App extends React.Component {
     this.favorites = {};
     this.cachedProducts = {};
     this.changeCurrentStyle = this.changeCurrentStyle.bind(this);
+    this.updateMainImage = this.updateMainImage.bind(this);
     this.updateReviewList = this.updateReviewList.bind(this);
     this.incrementHelpfulCount = this.incrementHelpfulCount.bind(this);
   }
@@ -85,6 +88,10 @@ class App extends React.Component {
     this.setState({ reviews });
   }
 
+  updateMainImage(newImg) {
+    this.setState({ mainImage: newImg });
+  }
+
   changeCurrentStyle(id) {
     this.setState({ currentStyleID: id });
   }
@@ -138,7 +145,7 @@ class App extends React.Component {
   }
 
   render() {
-    let { currentProduct, productStylesArray, currentStyleID, relatedItems, favoriteProducts } = this.state;
+    let { currentProduct, productStylesArray, currentStyleID, relatedItems, favoriteProducts, mainImage } = this.state;
 
     if (this.state.currentProductID) {
       return (
@@ -149,8 +156,10 @@ class App extends React.Component {
             currentProduct={currentProduct}
             productStylesArray={productStylesArray}
             currentStyleID={currentStyleID}
+            mainImage={mainImage}
             changeCurrentStyle={this.changeCurrentStyle}
-          />
+            updateMainImage={this.updateMainImage}/>
+
           <div className="container">
             <RelatedItems relatedProductsInfo={relatedItems} currentProduct={currentProduct} favoriteProducts={favoriteProducts} addProductToFavorites={this.addProductToFavorites.bind(this)} removeProductFromFavorites={this.removeProductFromFavorites.bind(this)} changeCurrentProduct={this.changeCurrentProduct.bind(this)}/>
             <QuestionList
