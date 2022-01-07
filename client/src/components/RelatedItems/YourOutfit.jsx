@@ -34,7 +34,7 @@ function YourOutfit({outfitProductsInfo, addProductToFavorites, removeProductFro
             <div className="carousel-card" style={{ transform: `translateX(-${currentCardIndex * (100 / 3.81)}%)` }}>
               <AddOutfit addProductToFavorites={addProductToFavorites}/>
               {outfitProductsInfo.map((outfitProductInfo) => {
-                return (<ProductCard key={outfitProductInfo.id} relatedProductInfo={outfitProductInfo} productCardType={'YourOutfit'} removeProductFromFavorites={removeProductFromFavorites}/>);
+                return (<ProductCard key={outfitProductInfo.currentProduct.id} relatedProductInfo={outfitProductInfo} productCardType={'YourOutfit'} removeProductFromFavorites={removeProductFromFavorites}/>);
               })}
             </div>
           </div>
