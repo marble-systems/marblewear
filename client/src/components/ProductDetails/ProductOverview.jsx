@@ -9,7 +9,7 @@ import SloganDescription from './SloganDescription.jsx';
 import Features from './Features.jsx';
 
 
-function ProductOverview ({currentProduct, productStylesArray, currentStyleID, changeCurrentStyle}) {
+function ProductOverview ({currentProduct, productStylesArray, currentStyleID, changeCurrentStyle, updateMainImage, mainImage}) {
   return (
     <div>
 
@@ -18,7 +18,9 @@ function ProductOverview ({currentProduct, productStylesArray, currentStyleID, c
         <div className="flex-column" style={{width: '50em', margin: '1em', position: 'relative'}}>
           <ImageGallery
             productStylesArray={productStylesArray}
-            currentStyleID={currentStyleID}/>
+            currentStyleID={currentStyleID}
+            mainImage={mainImage}
+            updateMainImage={updateMainImage}/>
         </div>
 
         <div className="d-flex flex-column" style={{width: '30em', margin: '1em', position: 'relative'}}>
@@ -26,8 +28,9 @@ function ProductOverview ({currentProduct, productStylesArray, currentStyleID, c
           <StyleSelector
             productStylesArray={productStylesArray}
             currentStyleID={currentStyleID}
+            currentProduct={currentProduct}
             changeCurrentStyle={changeCurrentStyle}
-            currentProduct={currentProduct}/>
+            updateMainImage={updateMainImage}/>
           <DropDownsAndButtons
             productStylesArray={productStylesArray}
             currentStyleID={currentStyleID}/>
@@ -58,7 +61,9 @@ ProductOverview.propTypes = {
   productStylesArray: PropTypes.array.isRequired,
   currentStyleID: PropTypes.number.isRequired,
   currentProduct: PropTypes.object.isRequired,
-  changeCurrentStyle: PropTypes.func
+  changeCurrentStyle: PropTypes.func,
+  updateMainImage: PropTypes.func.isRequired,
+  mainImage: PropTypes.string.isRequired,
 };
 
 export default ProductOverview;
