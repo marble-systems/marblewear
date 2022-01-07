@@ -17,7 +17,7 @@ class QuestionListEntry extends React.Component {
   }
 
   markQuestionHelpful(question_id) {
-    this.state.questionHelpfulClicked ? console.log('You can only click once') :
+    this.state.questionHelpfulClicked ? null :
       axios({
         url: `/qa/questions/${question_id}/helpful`,
         method: 'put'
