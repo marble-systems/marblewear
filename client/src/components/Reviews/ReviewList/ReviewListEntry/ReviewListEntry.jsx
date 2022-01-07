@@ -69,9 +69,11 @@ class ReviewListEntry extends React.Component {
     return (
       <div className="review-tile">
         {/* STARS USERNAME & DATE */}
-        <div>
+        <div className="review-tile-header">
           <Stars rating={rating} />
-          {`${reviewer_name}, ${formatDate(date)}`}
+          <div className="secondary-text">
+            {`${reviewer_name}, ${formatDate(date)}`}
+          </div>
         </div>
 
         {/* REVIEW SUMMARY */}
@@ -134,7 +136,7 @@ class ReviewListEntry extends React.Component {
           onClose={this.handleToggleModalClick}/>
 
         {/* HELPFUL? YES REPORT */}
-        <span>
+        <span className="secondary-text">
           Helpful? &nbsp;
           { reviewHelpful
             ? <span>Yes</span>
@@ -152,7 +154,6 @@ class ReviewListEntry extends React.Component {
 
 /* TODO:
  if user made transaction -> Verified purchaser (pending transaction API)
- prevent users from clicking buttons more than once (pending cookie/token implementation)
 */
 
 ReviewListEntry.propTypes = {

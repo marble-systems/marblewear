@@ -7,26 +7,25 @@ h3 {
   font-size: 2em;
 }
 
-a {
-  text-decoration: underline;
-  cursor: pointer;
+/* Reviews Component */
+.main-component {
+  margin-bottom: 12vh;
+  margin-top: 12vh;
 }
 
-.button {
-  background: #428bca;
-  padding: 1em 2em;
-  color: #fff;
-  border: 0;
-  border-radius: 5px;
-  cursor: pointer;
+.component-header {
+  font-weight: 300;
+  font-size: 1.24rem;
+  margin-bottom: 1rem;
 }
 
-.button:hover {
-  background: #3876ac;
+.review-summary-container {
+  width: 33%;
 }
 
 /* ReviewList Component */
 .review-list-container {
+  width: 66%;
   flex-direction: column;
   margin: 10px;
 }
@@ -40,7 +39,23 @@ a {
 /* ReviewListEntry Component */
 .review-tile {
   border-bottom: 1px solid gray;
-  width: 24em;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.review-tile a {
+  text-decoration: underline!important;
+  cursor: pointer;
+}
+
+.review-tile button {
+  /* TODO: MATCH SAM'S */
+}
+
+.secondary-text {
+  color:rgb(75, 74, 74);
+  font-size: 0.8em;
 }
 
 .review-tile-header {
@@ -133,7 +148,7 @@ a {
   margin-right: 1%;
   height: 90%;
   width: 30%;
-  background-color: gray;
+  background-color: rgba(128, 128, 128, 0.568);
   margin: 1;
 }
 
