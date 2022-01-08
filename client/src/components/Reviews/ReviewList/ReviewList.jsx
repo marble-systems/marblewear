@@ -29,11 +29,12 @@ class ReviewList extends React.Component {
     if (listLength > 0.75 * filteredReviewsLength) {
       let { getReviewsRequestParams } = this.state;
       getReviewsRequestParams.product_id = this.props.currentProductID;
-      getReviewsRequestParams.page += 1;
+      getReviewsRequestParams.page = 1;
       let qs = utilityFns.generateUrlParams(getReviewsRequestParams);
       axios.get(`/reviews/?${qs}`)
         .then(res => {
           let { count, page, product, results } = res.data;
+          page = Number(page) === 0 ? 1 : Number(page);
           Object.assign(getReviewsRequestParams, { count, page, product_id: product });
           this.setState({ getReviewsRequestParams });
           this.props.updateReviewList([...reviews, ...results]);
@@ -49,12 +50,14 @@ class ReviewList extends React.Component {
     let { getReviewsRequestParams } = this.state;
     getReviewsRequestParams.product_id = this.props.currentProductID;
     getReviewsRequestParams.sort = sortOrder;
+    getReviewsRequestParams.page = 1;
     let qs = utilityFns.generateUrlParams(getReviewsRequestParams);
     let context = this;
     axios.get(`/reviews/?${qs}`)
       .then(res => {
         let { count, page, product, results } = res.data;
-        Object.assign(getReviewsRequestParams, { count, page: page + 1, product_id: product });
+        page = Number(page) === 0 ? 1 : Number(page);
+        Object.assign(getReviewsRequestParams, { count, page, product_id: product });
         context.setState({ getReviewsRequestParams });
         context.props.updateReviewList(results);
       })
@@ -81,7 +84,7 @@ class ReviewList extends React.Component {
       // LIMIT/FILTER LIST LENGTH
       .filter((review, idx) => { return idx < listLength;});
     return (
-      <div className="review-list-container">
+      <div className="review-list-component">
         <span>
           {`${totalReviews} reviews, sorted by `}
           {/* SORT BY DROPDOWN SELECTOR */}
@@ -97,19 +100,21 @@ class ReviewList extends React.Component {
             })}
           </select>
         </span>
-        {filteredReviews
-          .map(review => {
-            return (
-              <ReviewListEntry
-                key={review.review_id}
-                incrementHelpfulCount={incrementHelpfulCount}
-                review={review} />
-            );
-          })}
+        <div className="review-list-container">
+          {filteredReviews
+            .map(review => {
+              return (
+                <ReviewListEntry
+                  key={review.review_id}
+                  incrementHelpfulCount={incrementHelpfulCount}
+                  review={review} />
+              );
+            })}
+        </div>
         {/* MORE REVIEWS & ADD REVIEW BUTTONS */}
         <div className="button-container">
           {/* MORE REVIEWS BUTTON */}
-          {listLength >= reviews.length ? null :
+          {listLength >= totalReviews.length ? null :
             <button
               className="btn btn-light border-1 border-dark p-2 rounded-0"
               onClick={()=> {this.incrementListLength(filteredReviews.length);}}>
