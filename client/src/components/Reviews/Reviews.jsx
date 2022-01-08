@@ -24,9 +24,9 @@ class Reviews extends React.Component {
     let { reviewsMetadata, reviews } = reviewsData;
     let processedReviewMetadata = utilityFns.processReviewMetadata(reviewsMetadata);
     return (
-      <div id="reviews-component" className="main-component">
+      <div id="reviews" className="main-component">
         <p className="component-header">RATINGS &#38; REVIEWS</p>
-        <div style={{display: 'flex', flexDirection: 'row'}}>
+        <div className="reviews-component">
           <ReviewSummary
             reviewsMetadata={processedReviewMetadata}
             updateFilters={this.updateFilters.bind(this)}/>

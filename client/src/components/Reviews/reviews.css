@@ -8,8 +8,13 @@ h3 {
 }
 
 /* Reviews Component */
+.reviews-component {
+  display: flex;
+  flex-direction: row;
+}
+
 .main-component {
-  margin-bottom: 12vh;
+  margin-bottom: 6em;
 }
 
 .component-header {
@@ -23,10 +28,20 @@ h3 {
 }
 
 /* ReviewList Component */
+.review-list-component {
+  display: flex;
+  flex-direction: column;
+  max-height: 70vh;
+  max-width: 100%;
+  overflow: hidden;
+}
+
 .review-list-container {
   width: 66%;
   flex-direction: column;
   margin: 10px;
+  overflow-y: auto;
+  overflow-x: visible;
 }
 
 .button-container {
@@ -38,9 +53,12 @@ h3 {
 /* ReviewListEntry Component */
 .review-tile {
   border-bottom: 1px solid gray;
-
   display: flex;
   flex-direction: column;
+  background-color: rgba(138, 138, 138, 0.027);
+  margin: 1px 0 1px 0;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .review-tile a {
@@ -139,7 +157,7 @@ h3 {
 
 /* ProductBreakdown Component */
 .product-breakdown {
-  width: 14em;
+  width: 100%;
   position: relative;
 }
 
@@ -153,7 +171,7 @@ h3 {
 
 .subtext-container {
   display : flex;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 100%;
   font-size: 0.6em;
 }
