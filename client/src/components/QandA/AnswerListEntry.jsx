@@ -9,9 +9,9 @@ class AnswerListEntry extends React.Component {
     const { answer } = this.props;
     this.state = {
       answerHelpfulClicked: false,
-      answerHelpfulCount: answer.helpfulness,
+      answerHelpfulCount: answer.helpful,
       answerReportClicked: false,
-      reportType: 'button'
+      reportStyle: { 'text-decoration': 'none' }
     };
     this.markAnswer = this.markAnswer.bind(this);
   }
@@ -23,6 +23,7 @@ class AnswerListEntry extends React.Component {
       null :
       axios({
         url: `/qa/answers/${answer_id}/${handlerType}`,
+        body: { question_id: this.props.question_id },
         method: 'put'
       })
         .then(() => {
@@ -31,7 +32,7 @@ class AnswerListEntry extends React.Component {
             answerHelpfulCount++;
             this.setState({ answerHelpfulCount, answerHelpfulClicked: true });
           } else if (handlerType === 'report') {
-            this.setState({ answerReportClicked: true, reportType: 'text'});
+            this.setState({ answerReportClicked: true, reportStyle: { 'color': 'red' } });
           }
         });
   }
@@ -48,7 +49,7 @@ class AnswerListEntry extends React.Component {
           <div className="pe-3 text-decoration-underline text-primary d-inline ps-3" id="helpful" type="button" onClick={(e) => { this.markAnswer(e, answer.id); }}>Yes </div>
           <div className="d-inline pe-3">({this.state.answerHelpfulCount})</div>
           <div className="vr"></div>
-          <div className="text-decoration-underline text-primary d-inline ps-3" id="report" type={this.state.reportType} onClick={(e) => { this.markAnswer(e, answer.id); }}>Report</div>
+          <div className="text-decoration-underline text-primary d-inline ps-3" id="report" type="button" style={this.state.reportStyle} onClick={(e) => { this.markAnswer(e, answer.id); }}>Report</div>
         </div>
       </div>
     </div>

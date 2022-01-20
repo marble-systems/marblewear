@@ -33,7 +33,7 @@ class QuestionList extends React.Component {
   }
 
   render() {
-    let questions = this.props.data.results;
+    let questions = this.props.data;
     return (
       <div className="container" maxheight="vh-100">
         <p className="text-start fs-5 fw-light">
@@ -54,7 +54,7 @@ class QuestionList extends React.Component {
         <div className="row">
           {questions
             .filter((q, i) => { return i < this.state.questionsShown; })
-            .filter((q) => { return this.state.searchBarInput.length >= 3 ? q.question_body.includes(this.state.searchBarInput) : q; })
+            .filter((q) => { return this.state.searchBarInput.length >= 3 ? q.body.includes(this.state.searchBarInput) : q; })
             .map((question, index) => {
               return <QuestionListEntry key={index} question_id={question.question_id} data={question} currentProductName={this.props.currentProductName} answers={answerFormatter(question.answers)} handleAnswerInputChange={this.handleAnswerInputChange} handleSubmitAnswer={this.handleSubmitAnswer} />;
             })

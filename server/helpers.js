@@ -48,7 +48,7 @@ module.exports = {
   },
   getQuestions: (productID) => {
     return axios({
-      url: `${url}/qa/questions?product_id=${productID}`,
+      url: `http://127.0.0.1:3001/qa/questions?product_id=${productID}`,
       method: 'get',
       headers: auth
     });
@@ -79,15 +79,16 @@ module.exports = {
 
   markQuestion: (question_id, putType) => {
     return axios({
-      url: `${url}/qa/questions/${question_id}/${putType}`,
+      url: `http://localhost:3001/qa/questions/${question_id}/${putType}`,
       method: 'put',
       headers: auth
     });
   },
 
-  markAnswer: (answer_id, putType) => {
+  markAnswer: (question_id, answer_id, putType) => {
     return axios({
-      url: `${url}/qa/answers/${answer_id}/${putType}`,
+      url: `http://localhost:3001/qa/answers/${answer_id}/${putType}`,
+      body: question_id,
       method: 'put',
       headers: auth
     });
@@ -95,7 +96,7 @@ module.exports = {
 
   postQuestion: (questionParams) => {
     return axios({
-      url: `${url}/qa/questions`,
+      url: 'http://localhost:3001/qa/questions',
       method: 'post',
       data: questionParams,
       headers: auth
@@ -104,7 +105,7 @@ module.exports = {
 
   postAnswer: (question_id, answerParams) => {
     return axios({
-      url: `${url}/qa/questions/${question_id}/answers`,
+      url: `http://localhost:3001/qa/questions/${question_id}/answers`,
       method: 'post',
       data: answerParams,
       headers: auth

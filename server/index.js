@@ -123,8 +123,7 @@ app.post('/qa/questions/:question_id/answers', (req, res) => {
 });
 
 app.put('/qa/questions/:question_id/:type', (req, res) => {
-  const { question_id } = req.params;
-  const type = req.params.type;
+  const { question_id, type } = req.params;
   api.markQuestion(question_id, type)
     .then((success) => {
       res.status(204).send(success);
@@ -135,9 +134,9 @@ app.put('/qa/questions/:question_id/:type', (req, res) => {
 });
 
 app.put('/qa/answers/:answer_id/:type', (req, res) => {
-  const { answer_id } = req.params;
-  const type = req.params.type;
-  api.markAnswer(answer_id, type)
+  const { answer_id, type } = req.params;
+  const question_id = req.body;
+  api.markAnswer(question_id, answer_id, type)
     .then((success) => {
       res.status(204).send(success);
     })

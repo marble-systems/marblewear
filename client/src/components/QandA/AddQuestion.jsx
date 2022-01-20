@@ -33,10 +33,15 @@ class AddQuestion extends React.Component {
       url: '/qa/questions/',
       method: 'post',
       data: {
+        answers: [],
+        asker_email: emailEntry,
+        asker_name: nicknameEntry,
         body: questionEntry,
-        name: nicknameEntry,
-        email: emailEntry,
-        product_id: this.props.currentProductID
+        date_written: new Date(),
+        helpful: 0,
+        id: null,
+        product_id: this.props.currentProductID,
+        reported: false,
       }
     });
     this.setState({questionEntry: '', nicknameEntry: '', emailEntry: ''});

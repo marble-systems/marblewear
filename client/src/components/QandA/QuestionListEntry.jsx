@@ -10,7 +10,7 @@ class QuestionListEntry extends React.Component {
     this.state = {
       answersShown: 2,
       questionHelpfulClicked: false,
-      questionHelpfulCount: this.props.data.question_helpfulness
+      questionHelpfulCount: this.props.data.helpful
     };
     this.showMoreAnswers = this.showMoreAnswers.bind(this);
     this.showLessAnswers = this.showLessAnswers.bind(this);
@@ -42,20 +42,20 @@ class QuestionListEntry extends React.Component {
   }
 
   render() {
-    const { data, answers, currentProductName, handleAnswerInputChange, handleSubmitAnswer, question_id } = this.props;
+    const { data, answers, currentProductName, handleAnswerInputChange, handleSubmitAnswer } = this.props;
     return (
       <div className="container">
         <div className="row pt-3">
           <div className="col-7">
-            <h5>Q: {data.question_body}</h5>
+            <h5>Q: {data.body}</h5>
           </div>
           <div className="col-5">
             <div className="fw-light text-end"><div className="pe-3 d-inline">Helpful?</div>
-              <div className="pe-3 text-decoration-underline text-primary d-inline" type="button" onClick={() => {this.markQuestionHelpful(question_id);}}>Yes </div>
+              <div className="pe-3 text-decoration-underline text-primary d-inline" type="button" onClick={() => {this.markQuestionHelpful(data.id);}}>Yes </div>
               <div className="pe-3 d-inline">({this.state.questionHelpfulCount})</div>
               <div className="vr"></div>
               <div className="ps-3 d-inline">
-                <AddAnswer currentProductName={currentProductName} currentQuestionBody={data.question_body} handleSubmitAnswer={handleSubmitAnswer} handleAnswerInputChange={handleAnswerInputChange} question_id={question_id} />
+                <AddAnswer currentProductName={currentProductName} currentQuestionBody={data.body} handleSubmitAnswer={handleSubmitAnswer} handleAnswerInputChange={handleAnswerInputChange} question_id={data.id} />
               </div>
             </div>
           </div>
@@ -66,7 +66,7 @@ class QuestionListEntry extends React.Component {
             {answers
               .filter((a, i) => { return i < this.state.answersShown; })
               .map((answer, i) => {
-                return i < this.state.answersShown ? <AnswerListEntry key={i} answer={answer} listLength={answers.length} question_id={question_id} /> : null;
+                return i < this.state.answersShown ? <AnswerListEntry key={i} answer={answer} listLength={answers.length} question_id={data.id} /> : null;
               })}
           </div>
         </div>

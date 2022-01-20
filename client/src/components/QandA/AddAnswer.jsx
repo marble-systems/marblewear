@@ -24,9 +24,13 @@ class AddAnswer extends React.Component {
       method: 'post',
       data: {
         body: answerEntry,
-        name: nicknameEntry,
-        email: emailEntry,
-        photos: []
+        answerer_name: nicknameEntry,
+        answerer_email: emailEntry,
+        date_written: new Date(),
+        helpful: 0,
+        photos: [],
+        question_id: currentQuestionID,
+        reported: false
       }
     });
     this.setState({ answerEntry: '', nicknameEntry: '', emailEntry: '', addedPhotos: [] });
